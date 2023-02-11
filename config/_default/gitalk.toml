@@ -2,8 +2,8 @@
 src = "https://giscus.app/client.js"
 repo = "kurisaW/Gitalk"
 repo_id = "Gitalk"
-category = "[Blog_disscussion]"
-category_id = "[2]"
+category = "[General]"
+category_id = "[Blog_disscussion]"
 mapping = "pathname"
 strict = false
 reactions_enabled = true

@@ -75,7 +75,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "gitalk"
+provider = "giscus"
 
 [comments.disqusjs]
 shortname = ""
@@ -126,13 +126,13 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
+repo = "kurisaW/Gitalk"
+repoID = "Gitalk"
+category = "General"
+categoryID = "Blog_disscussion"
+mapping = "pathname"
+lightTheme = "preferred_color_scheme"
+darkTheme = "preferred_color_scheme"
 reactionsEnabled = 1
 emitMetadata = 0
 
