@@ -1,0 +1,14 @@
+[gitalk]
+src = "https://giscus.app/client.js"
+repo = "kurisaW/Gitalk"
+repo_id = "Gitalk"
+category = "[Blog_disscussion]"
+category_id = "[2]"
+mapping = "pathname"
+strict = false
+reactions_enabled = true
+emit_metadata = false
+input_position = "bottom"
+theme = "preferred_color_scheme"
+lang = "zh-CN"
+crossorigin = "anonymous"
