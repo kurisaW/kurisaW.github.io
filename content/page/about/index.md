@@ -11,7 +11,7 @@ menu:
         params:
             icon: about_us
 
-comments: false
+comments: true
 ---
 
 ## Hi there!👋
