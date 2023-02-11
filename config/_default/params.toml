@@ -132,7 +132,7 @@ category = "General"
 categoryID = "DIC_kwDOI7omFs4CUI55"
 mapping = "pathname"
 lightTheme = "light_high_contrast"
-darkTheme = "preferred_color_scheme"
+darkTheme = "dark_high_contrast"
 reactionsEnabled = 1
 emitMetadata = 0
 
