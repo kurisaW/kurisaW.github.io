@@ -126,7 +126,7 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = "kurisaW/Gitalk"
+repo = "https://github.com/kurisaW/Gitalk"
 repoID = "Gitalk"
 category = "General"
 categoryID = "Blog_disscussion"

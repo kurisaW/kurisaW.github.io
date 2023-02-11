@@ -1,5 +1,5 @@
 [gitalk]
-src = "https://giscus.app/client.js"
+src = "https://github.com/kurisaW/Gitalk"
 repo = "kurisaW/Gitalk"
 repo_id = "Gitalk"
 category = "[General]"
