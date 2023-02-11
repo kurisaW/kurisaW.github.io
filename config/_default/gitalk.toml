@@ -1,9 +1,9 @@
 [gitalk]
-src = "https://github.com/kurisaW/Gitalk"
+src = "https://giscus.app/client.js"
 repo = "kurisaW/Gitalk"
-repo_id = "Gitalk"
+repo_id = "R_kgDOI7omFg"
 category = "[General]"
-category_id = "[2]"
+category_id = "[DIC_kwDOI7omFs4CUI55]"
 mapping = "pathname"
 strict = false
 reactions_enabled = true

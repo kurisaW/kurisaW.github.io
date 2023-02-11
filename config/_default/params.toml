@@ -126,10 +126,10 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = "https://github.com/kurisaW/Gitalk"
-repoID = "Gitalk"
+repo = "kurisaW/Gitalk"
+repoID = "R_kgDOI7omFg"
 category = "General"
-categoryID = "2"
+categoryID = "DIC_kwDOI7omFs4CUI55"
 mapping = "pathname"
 lightTheme = "light_high_contrast"
 darkTheme = "preferred_color_scheme"
