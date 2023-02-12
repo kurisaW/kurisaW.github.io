@@ -21,7 +21,7 @@ local = false
 src = "https://user-images.githubusercontent.com/98592772/209311311-e9871047-67d5-479c-99d9-3b88e87c9947.png"
 
 [article]
-math = false
+math = true
 readingTime = true
 
 [article.license]
@@ -68,6 +68,13 @@ default = "auto"
 
 [imageProcessing.cover]
 enabled = true
+width = 200
+height = 200
+scale = 0.5
+watermark = "kurisaW"
+fontSize = 20
+fontColor = "White"
+position = "bottom-right"
 
 [imageProcessing.content]
 enabled = true
