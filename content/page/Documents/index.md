@@ -41,3 +41,10 @@ comments: true
 ### RT-Thread专栏
 
 * [RTThread_manual.zh.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RTThread_manual.zh.pdf)
+
+# 联系我
+如果你有相关资源想要集合到一个网站以便随时访问而又拘于时间问题没法搭建网站的话，可以与我取得联系，我将帮助你整理好资源，以此为你提供更加便利的阅读！
+
+欢迎你的来访，期待与你有更好的合作！
+
+[联系我请移步](https://kurisaw.github.io/about/)
