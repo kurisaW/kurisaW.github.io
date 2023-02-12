@@ -38,4 +38,4 @@ I'm KurisaW,or you can call me yifang.
 `You can also choose to get in touch with me by adding wechat!`
 
 
-![c1a53b590a100a7e1d1184588fb7d0a](https://user-images.githubusercontent.com/98592772/218298721-e0a626f2-858f-4862-a75a-6d2eb1fb9ab1.jpg)
+<img src="https://user-images.githubusercontent.com/98592772/218298721-e0a626f2-858f-4862-a75a-6d2eb1fb9ab1.jpg" width="600x600">
