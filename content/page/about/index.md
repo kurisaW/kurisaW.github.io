@@ -4,7 +4,7 @@ links:
   - title: KurisaW
     description: Tomorrow is gone!
     website: https://kurisaw.github.io/
-    image: ![4180b6eae2652411ebc35ce013b6720](https://user-images.githubusercontent.com/98592772/218291910-234a5de9-0d91-4901-882f-2360e8e55db7.png)
+    image: https://user-images.githubusercontent.com/98592772/218291910-234a5de9-0d91-4901-882f-2360e8e55db7.png
 
 menu:
     main: 
