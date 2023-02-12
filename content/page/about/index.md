@@ -9,7 +9,7 @@ menu:
     main: 
         weight: 4
         params:
-            icon: About
+            icon: about_us
 
 comments: true
 ---
