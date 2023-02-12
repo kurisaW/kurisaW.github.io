@@ -38,3 +38,11 @@ url = "mailto:yifang.wangyq@foxmail.com"
 
 [social.params]
 icon = "brand-email"
+
+[[social]]
+identifier = "Wechat"
+name = "wechat"
+url = "https://github.com/kurisaW/kurisaW.github.io/blob/master/assets/figures/Wechat.png"
+
+[social.params]
+icon = "brand-wechat"
