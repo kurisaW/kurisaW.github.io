@@ -42,7 +42,7 @@ icon = "brand-email"
 [[social]]
 identifier = "Wechat"
 name = "wechat"
-url = "https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302121535058.jpg"
+url = "https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302121550487.png"
 
 [social.params]
 icon = "brand-wechat"
