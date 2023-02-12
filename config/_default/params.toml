@@ -68,13 +68,6 @@ default = "auto"
 
 [imageProcessing.cover]
 enabled = true
-width = 200
-height = 200
-scale = 0.5
-watermark = "kurisaW"
-fontSize = 20
-fontColor = "White"
-position = "bottom-right"
 
 [imageProcessing.content]
 enabled = true

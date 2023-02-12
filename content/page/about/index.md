@@ -4,12 +4,12 @@ links:
   - title: KurisaW
     description: Tomorrow is gone!
     website: https://kurisaw.github.io/
-    image: https://user-images.githubusercontent.com/98592772/209311311-e9871047-67d5-479c-99d9-3b88e87c9947.png
+    image: .\assets\figures\Wechat.png
 menu:
     main: 
         weight: 4
         params:
-            icon: about_us
+            icon: About
 
 comments: true
 ---
