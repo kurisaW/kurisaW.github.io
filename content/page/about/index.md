@@ -4,7 +4,7 @@ links:
   - title: KurisaW
     description: Tomorrow is gone!
     website: https://kurisaw.github.io/
-    image: https://user-images.githubusercontent.com/98592772/218291910-234a5de9-0d91-4901-882f-2360e8e55db7.png
+    image: https://user-images.githubusercontent.com/98592772/209311311-e9871047-67d5-479c-99d9-3b88e87c9947.png
 
 menu:
     main: 
@@ -34,4 +34,3 @@ I'm KurisaW,or you can call me yifang.
 * [Github Address :https://github.com/kurisaW](https://github.com/kurisaW)
 * [Email :yifang.wangyq@foxmail.com](mailto:yifang.wangyq@foxmail.com)
 * [My Website :https://kurisaw.github.io/](https://kurisaw.github.io/)
-
