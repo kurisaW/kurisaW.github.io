@@ -1,7 +1,7 @@
 ---
-title: 【数据结构与算法】二分查找 & 移除元素
+title: 【数据结构与算法】数组：二分查找 & 移除元素
 description: 算法任务：数组理论基础、leetcode704.二分查找、leetcode27.移除元素
-slug: 【数据结构与算法】二分查找 & 移除元素
+slug: 【数据结构与算法】数组：二分查找 & 移除元素
 date: 2023-02-15 00:00:00+0000
 image: cover.jpg
 categories:
