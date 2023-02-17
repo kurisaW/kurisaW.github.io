@@ -76,8 +76,6 @@ enabled = true
 [params]
   [params.imageProcessing]
     enableWebp = true
-    resizeWidth = 1920
-    quality = 1080
     smartCrop = true
     anchor = "smart"
     upscale = false
