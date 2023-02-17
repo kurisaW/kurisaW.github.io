@@ -42,13 +42,13 @@ limit = 5
 type = "categories"
 
 [widgets.homepage.params]
-limit = 10
+limit = 100
 
 [[widgets.homepage]]
 type = "tag-cloud"
 
 [widgets.homepage.params]
-limit = 10
+limit = 100
 
 [[widgets.page]]
 type = "toc"
@@ -66,11 +66,15 @@ src = ""
 toggle = true
 default = "auto"
 
-[imageProcessing.cover]
-enabled = true
 
-[imageProcessing.content]
-enabled = true
+[params]
+  [params.imageProcessing]
+    enableWebp = true
+    resizeWidth = 800
+    quality = 600
+    smartCrop = true
+    anchor = "smart"
+    upscale = true
 
 ## Comments
 [comments]
