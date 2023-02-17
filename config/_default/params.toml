@@ -67,14 +67,20 @@ toggle = true
 default = "auto"
 
 
+[imageProcessing.cover]
+enabled = true
+
+[imageProcessing.content]
+enabled = true
+
 [params]
   [params.imageProcessing]
     enableWebp = true
-    resizeWidth = 800
-    quality = 600
+    resizeWidth = 1200
+    quality = 1080
     smartCrop = true
     anchor = "smart"
-    upscale = true
+    upscale = false
 
 ## Comments
 [comments]
