@@ -73,7 +73,7 @@ comments: true
 
 * [操作系统概念.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=操作系统概念.pdf)
 * [计算机系统要素-从零开始构建现代计算机.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=计算机系统要素-从零开始构建现代计算机.pdf)
-* [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统 第3版.pdf)
+* [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统-第3版.pdf)
 * [自己动手写操作系统.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=自己动手写操作系统.pdf)
 * [RTThread_manual.zh.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RTThread_manual.zh.pdf)
 
