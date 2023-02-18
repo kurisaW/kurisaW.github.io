@@ -349,3 +349,8 @@ public:
 };
 ```
 
+## 4.总结
+
+![img](https://code-thinking-1253855093.file.myqcloud.com/pics/%E6%95%B0%E7%BB%84%E6%80%BB%E7%BB%93.png)
+
+图片来源： [代码随想录知识星球](https://programmercarl.com/other/kstar.html)成员：[海螺人](https://wx.zsxq.com/dweb2/index/footprint/844412858822412)
