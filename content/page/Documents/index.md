@@ -35,13 +35,13 @@ comments: true
 ### C++专栏
 
 * [Google.CPlusPlus-Style-Guide.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Google.CPlusPlus-Style-Guide.pdf)
-* [C++编程规范-101条规则准则与最佳实践.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++编程规范-101条规则准则与最佳实践.pdf)
-* [C++标准程序库.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++标准程序库.pdf)
-* [C++对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++对象模型.pdf)
+* [CPlusPlus编程规范-101条规则准则与最佳实践.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus编程规范-101条规则准则与最佳实践.pdf)
+* [CPlusPlus标准程序库.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus标准程序库.pdf)
+* [CPlusPlus对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus对象模型.pdf)
 * [Effective_STL中文版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Effective_STL中文版.pdf)
 * [STL源码剖析.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=STL源码剖析.pdf)
 * [跟我一起写makefile.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=跟我一起写makefile.pdf)
-* [深度探索C++对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深度探索C++对象模型.pdf)
+* [深度探索CPlusPlus对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深度探索CPlusPlus对象模型.pdf)
 
 
 ### Linux专栏
@@ -65,8 +65,8 @@ comments: true
 
 ### 笔试面试专题
 
-* [c++面经总结.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=c++面经总结.pdf)
-* [C++牛客大佬总结面试经验.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++牛客大佬总结面试经验.pdf)
+* [CPlusPlus面经总结.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus面经总结.pdf)
+* [CPlusPlus牛客大佬总结面试经验.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus牛客大佬总结面试经验.pdf)
 * [程序员面试宝典.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=程序员面试宝典.pdf)
 
 ### 操作系统专栏
@@ -82,8 +82,8 @@ comments: true
 * [编程之美-完整版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=编程之美-完整版.pdf)
 * [剑指offer.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指Offer.pdf)
 * [剑指offer_名企面试官精讲典型编程题-第2版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指offer_名企面试官精讲典型编程题-第2版.pdf)
-* [数据结构与算法分析C++描述.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=数据结构与算法分析C++描述.pdf)
-* [严蔚敏：数据结构题集(C语言版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=严蔚敏：数据结构题集(C语言版).pdf)
+* [数据结构与算法分析CPlusPlus描述.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=数据结构与算法分析CPlusPlus描述.pdf)
+* [严蔚敏-数据结构题集(C语言版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=严蔚敏-数据结构题集(C语言版).pdf)
 * [「代码随想录」贪心算法专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」贪心算法专题精讲（v2.0）.pdf)
 * [「代码随想录」回溯算法精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」回溯算法精讲（v2.0）.pdf)
 * [「代码随想录」动态规划专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」动态规划专题精讲（v2.0）.pdf)
