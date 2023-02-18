@@ -29,7 +29,7 @@ comments: true
 * [C陷阱与缺陷.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C陷阱与缺陷.pdf)
 * [C语言常见问题集（问题提高版）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言常见问题集（问题提高版）.pdf)
 * [C语言函数大全.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言函数大全.pdf)
-* [C语言深度解剖 解开程序员面试笔试的秘密.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言深度解剖 解开程序员面试笔试的秘密.pdf)
+* [C语言深度解剖-解开程序员面试笔试的秘密.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言深度解剖-解开程序员面试笔试的秘密.pdf)
 * [C语言指针经验总结.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言指针经验总结.pdf)
 
 ### C++专栏
@@ -38,23 +38,23 @@ comments: true
 * [C++编程规范-101条规则准则与最佳实践.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++编程规范-101条规则准则与最佳实践.pdf)
 * [C++标准程序库.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++标准程序库.pdf)
 * [C++对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C++对象模型.pdf)
-* [Effective STL中文版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Effective STL中文版.pdf)
-* [STL源码剖析(中文完整版带书签).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=STL源码剖析(中文完整版带书签).pdf)
+* [Effective_STL中文版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Effective_STL中文版.pdf)
+* [STL源码剖析.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=STL源码剖析.pdf)
 * [跟我一起写makefile.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=跟我一起写makefile.pdf)
-* [深度探索C++对象模型 PDF中文清晰版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深度探索C++对象模型 PDF中文清晰版.pdf)
+* [深度探索C++对象模型.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深度探索C++对象模型.pdf)
 
 
 ### Linux专栏
 * [Linux-series-summary-manual.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux-series-summary-manual.pdf)
 * [Linux_UNIX系统编程手册（上）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（上）.pdf)
 * [Linux_UNIX系统编程手册（下）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（下）.pdf)
-* [Linux 内核设计与实现.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux 内核设计与实现.pdf)
+* [Linux内核设计与实现.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux内核设计与实现.pdf)
 * [linux常用命令大全.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=linux常用命令大全.pdf)
 * [linux内核完全注释.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=linux内核完全注释.pdf)
 * [Linux系统命令及shell脚本实践指南linuxunix技术丛书.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux系统命令及shell脚本实践指南linuxunix技术丛书.pdf)
 * [鸟哥的LINUX私房菜_基础学习篇(第三版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的LINUX私房菜_基础学习篇(第三版).pdf)
-* [鸟哥的Linux私房菜服务器架设篇 第三版 .pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的Linux私房菜服务器架设篇 第三版 .pdf)
-* [深入Linux内核架构 (图灵程序设计丛书·LinuxUNIX系列).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入Linux内核架构 (图灵程序设计丛书·LinuxUNIX系列).pdf)
+* [鸟哥的Linux私房菜服务器架设篇(第三版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的Linux私房菜服务器架设篇(第三版).pdf)
+* [深入Linux内核架构(图灵程序设计丛书·LinuxUNIX系列).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入Linux内核架构(图灵程序设计丛书·LinuxUNIX系列).pdf)
 
 ### Git专题
 
@@ -72,22 +72,22 @@ comments: true
 ### 操作系统专栏
 
 * [操作系统概念.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=操作系统概念.pdf)
-* [计算机系统要素 - 从零开始构建现代计算机.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=计算机系统要素 - 从零开始构建现代计算机.pdf)
-* [深入理解计算机系统 第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统 第3版.pdf)
+* [计算机系统要素-从零开始构建现代计算机.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=计算机系统要素-从零开始构建现代计算机.pdf)
+* [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统 第3版.pdf)
 * [自己动手写操作系统.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=自己动手写操作系统.pdf)
 * [RTThread_manual.zh.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RTThread_manual.zh.pdf)
 
 ### 数据结构与算法专栏
 
+* [编程之美-完整版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=编程之美-完整版.pdf)
+* [剑指offer.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指Offer.pdf)
+* [剑指offer_名企面试官精讲典型编程题-第2版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指offer_名企面试官精讲典型编程题-第2版.pdf)
+* [数据结构与算法分析C++描述.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=数据结构与算法分析C++描述.pdf)
+* [严蔚敏：数据结构题集(C语言版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=严蔚敏：数据结构题集(C语言版).pdf)
 * [「代码随想录」贪心算法专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」贪心算法专题精讲（v2.0）.pdf)
 * [「代码随想录」回溯算法精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」回溯算法精讲（v2.0）.pdf)
 * [「代码随想录」动态规划专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」动态规划专题精讲（v2.0）.pdf)
 * [「代码随想录」二叉树专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」二叉树专题精讲（v2.0）.pdf)
-* [编程之美-完整版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=编程之美-完整版.pdf)
-* [剑指 Offer.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指 Offer.pdf)
-* [剑指OFFER  名企面试官精讲典型编程题  第2版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=剑指OFFER  名企面试官精讲典型编程题  第2版.pdf)
-* [数据结构与算法分析C++描述.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=数据结构与算法分析C++描述.pdf)
-* [严蔚敏：数据结构题集(C语言版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=严蔚敏：数据结构题集(C语言版).pdf)
 
 # 联系我
 
