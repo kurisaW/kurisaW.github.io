@@ -1,6 +1,6 @@
 ---
 title: 【数据结构与算法】链表1：移除链表 &设计链表&链表反转（双指针法、递归法）
-description: 算法任务：数组理论基础、leetcode704.二分查找、leetcode27.移除元素
+description: 算法任务：链表理论基础、leetcode203.移除链表元素、leetcode707.设计链表、leetcode206.反转链表
 slug: 【数据结构与算法】链表1：移除链表 &设计链表&链表反转（双指针法、递归法）
 date: 2023-02-17 00:00:00+0000
 image: cover.jpg
