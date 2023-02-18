@@ -1,6 +1,6 @@
 ---
 title: 【数据结构与算法】链表2：节点交换与删除 & 链表相交 & 环形链表
-description: 算法任务：链表总结、leetcode24.两两交换链表中的节点、leetcode19.删除链表的倒数第N个节点、Leetcode面试题02.07.链表相交、Leetcode* 142.环形链表II 
+description: 算法任务：链表总结、leetcode24.两两交换链表中的节点、leetcode19.删除链表的倒数第N个节点、Leetcode面试题02.07.链表相交、Leetcode142.环形链表II 
 slug: 【数据结构与算法】链表2：节点交换与删除 & 链表相交 & 环形链表
 date: 2023-02-18 00:00:00+0000
 image: cover.jpg
@@ -390,7 +390,7 @@ public:
 
 由于fast指针走两步，slow指针走一步，那么理论上讲，如果存在环形链表的话是一定存在相遇机会的，动画如下，选自carl大神制作：
 
-![141.环形链表](https://code-thinking.cdn.bcebos.com/gifs/141.环形链表.gif)
+![141.环形链表](https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302181832989.gif)
 
 **<2>如果有环，怎么找到这个环的入口**
 
@@ -416,7 +416,7 @@ public:
 
 动画如下：
 
-![142.环形链表II（求入口）](https://code-thinking.cdn.bcebos.com/gifs/142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II%EF%BC%88%E6%B1%82%E5%85%A5%E5%8F%A3%EF%BC%89.gif)
+![142.环形链表II（求入口）](https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302181833824.gif)
 
 上面分析的结论是基于n等于1的，那么当循环此处大于1该如何分析呢？
 
