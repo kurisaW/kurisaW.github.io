@@ -46,13 +46,13 @@ comments: true
 
 ### Linux专栏
 * [Linux-series-summary-manual.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux-series-summary-manual.pdf)
-* [Linux_UNIX系统编程手册（上）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（上）.pdf)
-* [Linux_UNIX系统编程手册（下）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（下）.pdf)
+* [Linux_UNIX系统编程手册（上）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（上）.pdf) *
+* [Linux_UNIX系统编程手册（下）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux_UNIX系统编程手册（下）.pdf) *
 * [Linux内核设计与实现.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux内核设计与实现.pdf)
 * [linux常用命令大全.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=linux常用命令大全.pdf)
 * [linux内核完全注释.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=linux内核完全注释.pdf)
 * [Linux系统命令及shell脚本实践指南linuxunix技术丛书.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Linux系统命令及shell脚本实践指南linuxunix技术丛书.pdf)
-* [鸟哥的LINUX私房菜_基础学习篇(第三版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的LINUX私房菜_基础学习篇(第三版).pdf)
+* [鸟哥的LINUX私房菜_基础学习篇(第三版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的LINUX私房菜_基础学习篇(第三版).pdf) *
 * [鸟哥的Linux私房菜服务器架设篇(第三版).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=鸟哥的Linux私房菜服务器架设篇(第三版).pdf)
 * [深入Linux内核架构(图灵程序设计丛书·LinuxUNIX系列).pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入Linux内核架构(图灵程序设计丛书·LinuxUNIX系列).pdf)
 
@@ -71,9 +71,9 @@ comments: true
 
 ### 操作系统专栏
 
-* [操作系统概念.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=操作系统概念.pdf)
+* [操作系统概念.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=操作系统概念.pdf) *
 * [计算机系统要素-从零开始构建现代计算机.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=计算机系统要素-从零开始构建现代计算机.pdf)
-* [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统-第3版.pdf)
+* [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统-第3版.pdf) *
 * [自己动手写操作系统.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=自己动手写操作系统.pdf)
 * [RTThread_manual.zh.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RTThread_manual.zh.pdf)
 
