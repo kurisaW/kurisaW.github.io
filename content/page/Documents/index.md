@@ -34,7 +34,7 @@ comments: true
 
 ### C++专栏
 
-* [从放弃C语⾔到使⽤C++刷算法的简明教程.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=从放弃C语⾔到使⽤C++刷算法的简明教程.pdf)
+* [从放弃C语言到使用CPlusPlus刷算法的简明教程.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=从放弃C语言到使用CPlusPlus刷算法的简明教程.pdf)
 * [Google.CPlusPlus-Style-Guide.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=Google.CPlusPlus-Style-Guide.pdf)
 * [CPlusPlus编程规范-101条规则准则与最佳实践.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus编程规范-101条规则准则与最佳实践.pdf)
 * [CPlusPlus标准程序库.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=CPlusPlus标准程序库.pdf)
