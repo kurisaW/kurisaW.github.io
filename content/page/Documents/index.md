@@ -77,6 +77,7 @@ comments: true
 * [深入理解计算机系统-第3版.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=深入理解计算机系统-第3版.pdf) *
 * [自己动手写操作系统.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=自己动手写操作系统.pdf)
 * [RTThread_manual.zh.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RTThread_manual.zh.pdf)
+* [RT-Thread编程指南.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=RT-Thread编程指南.pdf)
 
 ### 数据结构与算法专栏
 
