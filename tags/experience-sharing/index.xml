@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>experience sharing on kurisaW</title><link>https://kurisaw.github.io/tags/experience-sharing/</link><description>Recent content in experience sharing on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/experience-sharing/index.xml" rel="self" type="application/rss+xml"/><item><title>Microsoft Visual C++ 14.0 安装及Pycocotools2.0版本安装教学（防踩坑）</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/cover.jpg" alt="Featured image of post Microsoft Visual C++ 14.0 安装及Pycocotools2.0版本安装教学（防踩坑）" />&lt;h2 id="1microsoft-visual-c-140安装">1、Microsoft Visual C++ 14.0安装&lt;/h2>
+&lt;p>这里附上百度网盘下载链接：
+链接: &lt;a class="link" href="https://pan.baidu.com/s/1t5GWGymN6mFHDNlgrmD0yw?pwd=ec88" target="_blank" rel="noopener"
+>https://pan.baidu.com/s/1t5GWGymN6mFHDNlgrmD0yw?pwd=ec88&lt;/a> 提取码: ec88&lt;/p>
+&lt;p>下载完成后双击打开
+&lt;img src="https://img-blog.csdnimg.cn/04150c3c158c4baab13f0646ab6bb578.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>默认下载方式即可&lt;/p>
+&lt;hr>
+&lt;h2 id="2pycocotools20版本安装">2、Pycocotools2.0版本安装&lt;/h2>
+&lt;h4 id="1准备材料">（1）准备材料：&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/cocodataset/cocoapi" target="_blank" rel="noopener"
+>下载pycocotools安装包&lt;/a>（可直接git拉取到本地文件夹）&lt;/li>
+&lt;/ul>
+&lt;h4 id="2源码配置">（2）源码配置&lt;/h4>
+&lt;p>打开下载好的pycocotools，双击打开&lt;code>setup.py&lt;/code>（文件路径：\cocoapi\PythonAPI\setup.py）&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/985a37a42b1043bc9dc87d3c3e4e1d0f.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>这里&lt;code>将蓝色部分删除，只保留红色部分&lt;/code>(切记需要执行这一步！！！)&lt;/p>
+&lt;p>开始界面找到所有应用并打开&lt;code>Anaconda Powershell Prompt&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/9ad6e210127c49c9bfb16f9fd9b65968.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>先打开自己创建的虚拟环境，这里我的虚拟环境为python_env，可供参考。&lt;/p>
+&lt;p>如上图所示进入到&lt;code>\cocoapi\PythonAPI&lt;/code>该目录下&lt;/p>
+&lt;p>分别执行以下两个命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">py&lt;/span> &lt;span class="n">build_ext&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">inplace&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">py&lt;/span> &lt;span class="n">build_ext&lt;/span> &lt;span class="n">install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://img-blog.csdnimg.cn/02ec23e44b3848609cc74c8c28368a0f.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>执行pip list查看&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/642adca979d64daba7f8d2164e88443c.png"
+loading="lazy"
+>
+此时回到&lt;code>\cocoapi\PythonAPI&lt;/code>目录下，可以看到生成了相关文件
+&lt;img src="https://img-blog.csdnimg.cn/bdde5563cb794cf1962800f4656b71f5.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>
+将&lt;code>pycocotools&lt;/code>和&lt;code>pycocotools.egg-info&lt;/code>文件夹复制到你所创建的虚拟环境中（位置：Anaconda3-&amp;gt;envs-&amp;gt;python_env-&amp;gt;Lib-&amp;gt;site-packages）
+&lt;img src="https://img-blog.csdnimg.cn/8dd05ee9c4724de4a2ba536ad84aec81.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>至此所有问题解决！&lt;/p></description></item><item><title>总结：开发板挂载根文件系统遇到的一些问题</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</link><pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/cover.jpg" alt="Featured image of post 总结：开发板挂载根文件系统遇到的一些问题" />&lt;h2 id="一桥接网络">一、桥接网络&lt;/h2>
+&lt;h4 id="1简介">1、简介&lt;/h4>
+&lt;p>是指需手动配置虚拟机的IP地址（IP地址可自定义，但要和主机在同一个网段下）子网掩码，网关，此时虚拟机相当于局域网的另一台电脑，占用一个IP地址&lt;/p>
+&lt;h4 id="注意避坑">注意避坑：&lt;/h4>
+&lt;p>如果你的虚拟机选择了桥接模式，那么建议最好是不要使用校园网，因为一般校园网会需要验证登录，但是在虚拟机中好像并不会弹出登录界面（个人理解），因此你的网络在虚拟机中是无法运行的。&lt;/p>
+&lt;h4 id="2解决办法">2、解决办法：&lt;/h4>
+&lt;p>&amp;lt;1&amp;gt;选择直接使用网线连接到电脑，然后在虚拟机中桥接选择自己对应的网卡即可，博主自己是没有连接网线的，所以我自己是没有采取这个办法的。&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/7167af1edaa64e2da1d357d70c1f2b75.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/2464ef833a5f44cc857003eea990b847.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>&amp;lt;2&amp;gt;无线网卡连接&lt;/p>
+&lt;p>考虑到生活的便捷性，大多数人一般都是使用的无线网卡上网，所以这里我们采用连接自己的个人热点进行网络桥接(当然也可以选择WiFi热点，此处为个人热点指南，WiFi连接可同样参考)&lt;/p>
+&lt;p>如下配置：&lt;/p>
+&lt;ul>
+&lt;li>主机配置&lt;/li>
+&lt;/ul>
+&lt;p>首先电脑win+R，输入&lt;code>cmd&lt;/code>进入终端，然后输入命令：&lt;code>ipconfig&lt;/code>，找到自己的热点网络信息&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/e8696623357746ff88e5c21a6a2f2a38.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/5574394acfd04750ab469dde635794ff.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/838f45e5c87a4d388f7988c0fbfac8f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;ul>
+&lt;li>虚拟机配置&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/1ef17e5bffa644d9901a99cddd829509.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/f913337e07084f8ca7e4b45ef6c0e3c1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ctrl+alt+T打开终端，输入命令:vi /etc/network/interfaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://img-blog.csdnimg.cn/7ecb691179304cb5b85f0a906248de63.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">保存退出后，再次输入命令：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">首先将网卡关闭：ifdown eth0(一般桥接默认为eth0网卡)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">然后启用网卡：ifup eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="二开发板端测试">二、开发板端测试：&lt;/h2>
+&lt;p>&lt;code>以下内容为开发板挂载根文件系统，感兴趣的可以动手实践一下借鉴下面这篇博客&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.csdn.net/qq_56914146/article/details/124407302?spm=1001.2014.3001.5502" target="_blank" rel="noopener"
+>【Linux系统开发】x210开发板根目录文件系统构建&lt;/a>&lt;/p>
+&lt;p>我们打开secureCRT：&lt;/p>
+&lt;p>开机先ping下虚拟机网络：&lt;code>ping '虚拟机IP'&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>注意：此处如果无法ping通虚拟机，一般是自己的虚拟机网络有问题，可以尝试输入以下命令解决&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">方法一：打开命令：sudo gedit /etc/NetworkManager/nm-system-settings.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">出现文件内容：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># This file is installed into /etc/NetworkManager, and is loaded by
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># NetworkManager by default. To override, specify: &amp;#39;--config file&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># during NM startup. This can be done by appending to DAEMON_OPTS in
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># the file:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># /etc/default/NetworkManager
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[main]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">plugins=ifupdown,keyfile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[ifupdown]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">managed=true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">（这里false改成true）
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">方法二：虚拟机重置网卡
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking restart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifdown eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifup eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当开发板ping通虚拟机后，我们在secureCRT控制台输入&lt;code>reset&lt;/code>命令重启开发板&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/44ed871d254047618d4b116007408f0e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>这里的内核加载过程中再次出现了问题，显示我nfs服务端无回应&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/c6e42fcd827b48f89c479f34e45f6767.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>解决：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mount -t nfs -o nolock &amp;#39;开发板ipaddr ip&amp;#39;:/root/rootfs/x210_rootfs //再次重新挂载根文件系统
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//NFC网络重启
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/etc/init.d/nfs-kernel-server restart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://img-blog.csdnimg.cn/350f40f5e7134ccca7657925ed590139.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+>&lt;/p>
+&lt;p>问题解决！&lt;/p></description></item></channel></rss>

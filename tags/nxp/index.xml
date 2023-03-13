@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NXP on kurisaW</title><link>https://kurisaw.github.io/tags/nxp/</link><description>Recent content in NXP on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 06 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/nxp/index.xml" rel="self" type="application/rss+xml"/><item><title>【NXP】LPC55S69-Micropython移植日志</title><link>https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/</link><pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/</guid><description>&lt;img src="https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/cover.jpg" alt="Featured image of post 【NXP】LPC55S69-Micropython移植日志" />&lt;h2 id="简单了解micropython">简单了解Micropython&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>MicroPython 是 Python 3 编程语言的一种精简而高效的实现，它包含 Python 标准库的一个子集，并被优化为在微控制器和受限环境中运行。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>RT-Thread MicroPython 可以运行在任何搭载了 RT-Thread 操作系统并且有一定资源的嵌入式平台上。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 可以运行在有一定资源的开发板上，给你一个低层次的 Python 操作系统，可以用来控制各种电子系统。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 富有各种高级特性，比如交互式提示、任意精度整数、闭包函数、列表解析、生成器、异常处理等等。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 的目标是尽可能与普通 Python 兼容，使开发者能够轻松地将代码从桌面端转移到微控制器或嵌入式系统。程序可移植性很强，因为不需要考虑底层驱动，所以程序移植变得轻松和容易。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="开发环境">开发环境&lt;/h2>
+&lt;ul>
+&lt;li>VScode&lt;/li>
+&lt;li>Keil（v5.38.0.0）&lt;/li>
+&lt;li>RT-Thread MicroPython IDE（VScode插件搜索）&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/RT-Thread/env-windows/tree/v1.3.5" target="_blank" rel="noopener"
+>ENV v1.4.0（可点击链接下载）&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="初步移植">初步移植&lt;/h2>
+&lt;p>首先从RT-Thread官方仓库克隆master分支的仓库到本地&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061052497.png"
+loading="lazy"
+alt="image-20230206105228123"
+>&lt;/p>
+&lt;p>来到该目录：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk&lt;/code>，鼠标右键打开ENV工具，首先打开命令行菜单&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">menuconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>使能添加&lt;code>Micropython软件包&lt;/code>：&lt;code>RT-Thread Online Packages---&amp;gt;launage packages---&amp;gt;Micropython&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061100977.png"
+loading="lazy"
+alt="image-20230206110054882"
+>&lt;/p>
+&lt;p>&lt;code>Heap size&lt;/code>修改为&lt;code>20480&lt;/code>（初次分配20K，后续用户可根据需求修改），同时版本选择最新版(这里由于我选择版本时没有注意到最下方的latest版本，但是经测试并于多出的报错问题，相关的报错也可参考该文章)&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061103056.png"
+loading="lazy"
+alt="image-20230206110338978"
+>&lt;/p>
+&lt;p>进入&lt;code>Hardware Module&lt;/code>，使能&lt;code>machine uart&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061107994.png"
+loading="lazy"
+alt="image-20230206110701904"
+>&lt;/p>
+&lt;p>同时我们回到主菜单界面，进入&lt;code>Hardware Drives config---&amp;gt;on-chip Peripheral Drivers&lt;/code>，使能UART0和UART2&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061109036.png"
+loading="lazy"
+alt="image-20230206110948958"
+>&lt;/p>
+&lt;p>由于后续需要在main线程中启动Micropython运行时环境，需要增大main线程的栈大小，这里我们选择栈大小修改为8k：回到主界面&lt;code>RT-Thread Components---&amp;gt;set main thread stack size&lt;/code>修改为8192&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061151008.png"
+loading="lazy"
+alt="image-20230206115128667"
+>&lt;/p>
+&lt;p>保存退出，并使用命令下载软件包：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pkgs --update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061153317.png"
+loading="lazy"
+alt="image-20230206115308233"
+>&lt;/p>
+&lt;p>使用ENV生成MDK工程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons --target=mdk5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061155767.png"
+loading="lazy"
+alt="image-20230206115527689"
+>&lt;/p>
+&lt;h2 id="bug修复">BUG修复&lt;/h2>
+&lt;p>双击打开&lt;code>project.uvprojx&lt;/code>，进行编译&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061157814.png"
+loading="lazy"
+alt="image-20230206115702684"
+>&lt;/p>
+&lt;p>这里由于我们的keil工程为AC6版本（如果您的编译器版本为AC5，应该不需要修改，仅猜测），需要将软件包进行修改：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk\packages\micropython-v1.13.0\SConscript&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061204757.png"
+loading="lazy"
+alt="image-20230206120429651"
+>&lt;/p>
+&lt;p>切记此时需要回到bsp目录下，重新使用ENV工具生成MDK文件，然后再回到keil重新编译工程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons --target=mdk5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时编译错误大大减少，只剩下三个错误：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061212323.png"
+loading="lazy"
+alt="image-20230206120743700"
+>&lt;/p>
+&lt;p>第一个错误需要在菜单中使能&lt;code>Support legacy version for compatibility&lt;/code>（目前该问题以推送至官方仓库，已被修复此问题），并重新使用ENV生成MDK工程文件&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061111567.png"
+loading="lazy"
+alt="image-20230206111143483"
+>&lt;/p>
+&lt;p>重新编译继续有报错，这里我们找不到该函数的定义，先在头文件中进行外部声明&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061212175.png"
+loading="lazy"
+alt="image-20230206121231129"
+>&lt;/p>
+&lt;p>找到头文件所在位置：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk\packages\micropython-v1.13.0\port\mpgetcharport.h&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061215795.png"
+loading="lazy"
+alt="image-20230206121521727"
+>&lt;/p>
+&lt;p>此时就剩下最后一个错误啦，这里报错是说这个宏没有定义，通过翻阅RT-Thread库函数，确定该宏是文件系统的一个宏，且定义为整型3，具体作用可查看此&lt;a class="link" href="https://github.com/RT-Thread/rt-thread/pull/2100" target="_blank" rel="noopener"
+>PR&lt;/a>，所以解决该问题就是重新定义一下&lt;code>DFS_FD_OFFSET&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061216368.png"
+loading="lazy"
+alt="image-20230206121656320"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061220316.png"
+loading="lazy"
+alt="image-20230206122027240"
+>&lt;/p>
+&lt;p>想不到编译之后居然还有一个错误，这里参考这位开发者的&lt;a class="link" href="https://github.com/RT-Thread/rt-thread/issues/6657" target="_blank" rel="noopener"
+>issue&lt;/a>，将&lt;code>list_mem();&lt;/code>注释（此处可能是个官方BUG，后续尝试修复）&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061221642.png"
+loading="lazy"
+alt="image-20230206122146590"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061227108.png"
+loading="lazy"
+alt="image-20230206122748054"
+>&lt;/p>
+&lt;p>最后发现，终于没有错误啦！！！&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061228418.png"
+loading="lazy"
+alt="image-20230206122817350"
+>&lt;/p>
+&lt;h2 id="rt-thread-micropython环境搭建">RT-Thread Micropython环境搭建&lt;/h2>
+&lt;p>VScode扩展搜索下载RT-Thread Micropython&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061236343.png"
+loading="lazy"
+alt="image-20230206123632247"
+>&lt;/p>
+&lt;h4 id="创建工程">创建工程&lt;/h4>
+&lt;p>vscode下方导航栏点击&lt;code>创建Micropython工程&lt;/code>，创建一个新的MicroPython工程，并选择工程存放路径&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061519616.png"
+loading="lazy"
+alt="image-20230206151916502"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061521140.png"
+loading="lazy"
+alt="image-20230206152143031"
+>&lt;/p>
+&lt;h4 id="上电测试micropython">上电测试Micropython&lt;/h4>
+&lt;p>点击下方工具栏连接开发板，打开串口设备后点击复位，此时出现RT-Thread官方LOGO&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061523214.png"
+loading="lazy"
+alt="image-20230206152315131"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061524180.png"
+loading="lazy"
+>&lt;/p>
+&lt;h4 id="测试示例">测试示例&lt;/h4>
+&lt;p>LPC55S69也成功移植了RT-Thread的FINSH组件，点击TAB键可查看Finsh控制台命令，我们可以看到有一个python命令行&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061541861.png"
+loading="lazy"
+alt="image-20230206154101713"
+>&lt;/p>
+&lt;h2 id="micropython测试">Micropython测试&lt;/h2>
+&lt;p>Finsh控制台输入python，转到python控制台，同时还支持&lt;code>quit()&lt;/code>、&lt;code>exit()&lt;/code>命令退回Finsh控制台&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061543769.png"
+loading="lazy"
+alt="image-20230206154310678"
+>&lt;/p>
+&lt;p>简单测试下micropython，下面使用python命令运行脚本时给了一个提示说未使能uos module&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061606460.png"
+loading="lazy"
+alt="image-20230206160622977"
+>&lt;/p>
+&lt;p>打开图形化菜单进入该路径下：&lt;code>RT-Thread online packages--&amp;gt;launage packages---&amp;gt;system module&lt;/code>，使能&lt;code>uos:basic 'operating system' services &lt;/code>&lt;/p>
+&lt;p>同时更新软件包，并使用env工具重新生成MDK，再进行编译下载，成功解决问题！&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061627396.png"
+loading="lazy"
+alt="image-20230206162718225"
+>&lt;/p>
+&lt;h2 id="结语">结语&lt;/h2>
+&lt;p>搭建好Micropython后，那么就可以自由发挥才能去创作自己的作品啦！&lt;/p>
+&lt;h2 id="联系">联系&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="mailto:yifang.wangyq@foxmail.com" >Email :yifang.wangyq@foxmail.com&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/kurisaW" target="_blank" rel="noopener"
+>Github Address :https://github.com/kurisaW&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://kurisaw.github.io/" target="_blank" rel="noopener"
+>My Website :https://kurisaw.github.io&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【NXP】LPC55S69初上手</title><link>https://kurisaw.github.io/p/nxplpc55s69%E5%88%9D%E4%B8%8A%E6%89%8B/</link><pubDate>Sun, 05 Feb 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/nxplpc55s69%E5%88%9D%E4%B8%8A%E6%89%8B/</guid><description>&lt;img src="https://kurisaw.github.io/p/nxplpc55s69%E5%88%9D%E4%B8%8A%E6%89%8B/cover.jpg" alt="Featured image of post 【NXP】LPC55S69初上手" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>前段时间看到恩智浦社区有一个LPC55S69的开发板测评活动，很荣幸能通过报名，第二天也是成功的收到的板子，本次作为开箱测评。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="开始测试">开始测试&lt;/h2>
+&lt;p>首先从RT-Thread仓库的master分支克隆整个仓库，进入目录：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk&lt;/code>，首先使用RT-Thread的ENV工具生成MDK工程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">scons&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">mdk5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051135725.png"
+loading="lazy"
+alt="image-20230205113527665"
+>&lt;/p>
+&lt;p>这里建议大家使用最新版ENV工具。然后双击打开&lt;code>project.uvprojx&lt;/code>工程，点击重新编译。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051137011.png"
+loading="lazy"
+alt="image-20230205113758912"
+>&lt;/p>
+&lt;p>但是编译之后发现会有报错，找了很久都没解决，后来经过RTT社区的满老师提示成功解决BUG，下面是解决过程与分析。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051140994.png"
+loading="lazy"
+alt="6d869b905839641fa60aadb8d2a6a9d"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051140331.png"
+loading="lazy"
+alt="dd1f984d7543997e5fa6fa50aee36c7"
+>&lt;/p>
+&lt;h2 id="bug分析与解决">BUG分析与解决&lt;/h2>
+&lt;p>首先先看一下我的keil版本为V5.25：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051141382.png"
+loading="lazy"
+alt="4b368869fbf8077591b20eccbd05ef8"
+>&lt;/p>
+&lt;p>听满老师讲LPC55S69的工程可能是使用的AC6编译器，但是Keil的V5.25的AC6可能存在问题，所以解决办法就是更新下Keil的版本（建议最新版）&lt;/p>
+&lt;blockquote>
+&lt;p>此处附上Keil&lt;a class="link" href="https://www.keil.com/update/check.asp?P=MDK&amp;amp;V=5.38.0.0&amp;amp;S=" target="_blank" rel="noopener"
+>最新版下载官网&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>下载好最新版本后，前面的步骤重复，然后重新编译下载即可。&lt;/p>
+&lt;h2 id="项目演示">项目演示&lt;/h2>
+&lt;p>下面是RT-Thread成功在LPC55S69的示例,可以看到LED灯以500ms进行闪烁：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051354900.gif"
+loading="lazy"
+alt="video"
+>&lt;/p>
+&lt;h2 id="结语">结语&lt;/h2>
+&lt;p>本博客仅作为开箱测试，后续会继续上传相关测试用例，欢迎讨论交流。&lt;/p>
+&lt;h2 id="联系">联系&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="mailto:yifang.wangyq@foxmail.com" >Email :yifang.wangyq@foxmail.com&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/kurisaW" target="_blank" rel="noopener"
+>Github Address :https://github.com/kurisaW&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://kurisaw.github.io/" target="_blank" rel="noopener"
+>My Website :https://kurisaw.github.io/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【NXP】LPC55S69开发环境搭建</title><link>https://kurisaw.github.io/p/nxplpc55s69%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/nxplpc55s69%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid><description>&lt;img src="https://kurisaw.github.io/p/nxplpc55s69%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/cover.jpg" alt="Featured image of post 【NXP】LPC55S69开发环境搭建" />&lt;h2 id="前期准备">前期准备&lt;/h2>
+&lt;p>资料：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.nxp.com.cn/docs/zh/user-guide/MCUXpresso_IDE_User_Guide.pdf" target="_blank" rel="noopener"
+>MCUXpresso_IDE_User_Guide.pdf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>开发环境(官方直链)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-config-tools-pins-clocks-peripherals:MCUXpresso-Config-Tools" target="_blank" rel="noopener"
+>&lt;strong>MCUXpresso Config Tools&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://nxp.flexnetoperations.com/control/frse/download?agree=Accept&amp;amp;element=13944367" target="_blank" rel="noopener"
+>&lt;strong>MCUXpresso IDE&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://mcuxpresso.nxp.com/zh/welcome" target="_blank" rel="noopener"
+>&lt;strong>SDK代码包&lt;/strong>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>MCUXpresso Config Tools&lt;/code>和&lt;code>MCUXpresso IDE&lt;/code>的安装不再赘述，下面是&lt;code>SDK代码包&lt;/code>的安装教学&lt;/p>
+&lt;p>1.选择开发板&amp;ndash;&amp;gt;&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051333457.png"
+loading="lazy"
+alt="image-20230205133247352"
+>&lt;/p>
+&lt;p>2.这里我们选择处理器为LPC55S69（选择自己所需的处理器型号），点击构建MCUXpresso SDK v2.13.0（默认最新即可）&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302051334372.png"
+loading="lazy"
+alt="image-20230205133458266"
+>&lt;/p>
+&lt;p>3.根据自己的开发需求进行组件及中间件等，同时选择需要的工具链，这里我们全选，包括工具链和IDE，并点击&lt;code>下载SDK&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302031122007.png"
+loading="lazy"
+alt="img-202302031122007"
+>&lt;/p>
+&lt;p>4.等待构建完成，这里我们选择我们刚刚生成的档案，点击下载软件包&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041022034.png"
+loading="lazy"
+alt="image-20230204102200685"
+>&lt;/p>
+&lt;p>5.直接选择点击下载SDK档案，包括文档。当然这里也提供了单独的示例工程和API参考手册，需要的朋友也可根据需求下载&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041028831.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="ide配置">IDE配置&lt;/h2>
+&lt;p>完成IDE软件、配置工具的安装还有SDK代码包的下载后，我们打开&lt;code>MCUXpresso IDE&lt;/code>，在主界面的下方栏可以看到有一个&lt;code>Installed SDKs&lt;/code>，准备好刚刚下载的SDK代码包，导入其中&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041103892.png"
+loading="lazy"
+alt="image-20230204105301726"
+>&lt;/p>
+&lt;p>之后我们就可以使用这个SDK代码包去创建一个新的工程了。&lt;/p>
+&lt;h2 id="工程导入">工程导入&lt;/h2>
+&lt;p>这里我们简单做个示范，选择导入示例工程&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041103834.png"
+loading="lazy"
+alt="image-20230204105601052"
+>&lt;/p>
+&lt;p>选择指定的开发板后点击下一步&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041106647.png"
+loading="lazy"
+alt="image-20230204110547819"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041109611.png"
+loading="lazy"
+alt="image-20230204110900541"
+>&lt;/p>
+&lt;p>在下一步这里，就主要是一些Memory的分散加载问题，还有就是编译器语言的标准问题，一般来讲我们默认不做更改，点击完成即可&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041114568.png"
+loading="lazy"
+alt="image-20230204111200845"
+>&lt;/p>
+&lt;p>工程的用户代码是存放在source目录下的，我们这时候就可以给开发板上电，然后点击编译&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041115091.png"
+loading="lazy"
+alt="image-20230204111519951"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041120134.png"
+loading="lazy"
+alt="image-20230204111803236"
+>&lt;/p>
+&lt;p>&lt;code>MCUXpresso IDE&lt;/code>有两个地方都可以启动调试，选择一个习惯的即可&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041120777.png"
+loading="lazy"
+alt="image-20230204112026675"
+>&lt;/p>
+&lt;h2 id="配置工具使用">配置工具使用&lt;/h2>
+&lt;p>和&lt;code>MCUXpresso IDE&lt;/code>配套的还有&lt;code>MCUXpresso Config Tools&lt;/code>，打开&lt;code>MCUXpresso IDE&lt;/code>，找到配置工具按钮打开&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041133492.png"
+loading="lazy"
+alt="image-20230204113350126"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302041138433.png"
+loading="lazy"
+alt="image-20230204113817301"
+>&lt;/p>
+&lt;h2 id="结语">结语&lt;/h2>
+&lt;p>到这里就是LPC55S69基本的开发环境的配置及测试了，欢迎大家合作交流！&lt;/p>
+&lt;h2 id="联系">联系&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="mailto:yifang.wangyq@foxmail.com" >Email :yifang.wangyq@foxmail.com&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/kurisaW" target="_blank" rel="noopener"
+>Github Address :https://github.com/kurisaW&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://kurisaw.github.io/" target="_blank" rel="noopener"
+>My Website :https://kurisaw.github.io/&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
