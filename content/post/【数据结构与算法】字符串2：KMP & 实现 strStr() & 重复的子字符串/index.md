@@ -1,7 +1,7 @@
 ---
 title: 【数据结构与算法】字符串2：KMP & 实现 strStr() & 重复的子字符串
 description: 算法任务：KMP算法详解、Leetcode28实现 strStr()、Leetcode459.重复的子字符串
-slug: 【数据结构与算法】字符串1：反转字符串I & 反转字符串II &反转字符串里的单词 & 剑指offer（替换空格、左旋转字符串）
+slug: 【数据结构与算法】字符串2：KMP & 实现 strStr() & 重复的子字符串
 date: 2023-03-13 00:00:00+0000
 image: cover.jpg
 categories:
