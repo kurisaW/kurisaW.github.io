@@ -45,7 +45,7 @@ name = "wechat"
 url = "https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302121550487.png"
 
 [social.params]
-icon = "brand-chatbot"
+icon = "brand-wechat"
 
 [[social]]
 identifier = "Chatbot"
