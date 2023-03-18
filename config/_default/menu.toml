@@ -45,4 +45,12 @@ name = "wechat"
 url = "https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302121550487.png"
 
 [social.params]
-icon = "brand-wechat"
+icon = "brand-chatbot"
+
+[[social]]
+identifier = "Chatbot"
+name = "chatbot"
+url = "https://heybot.thesamur.ai/heybot/embed?id=KJOTl99PQ51EgoOPDa9h9buZpBHzCtQI"
+
+[social.params]
+icon = "brand-chatbot"
