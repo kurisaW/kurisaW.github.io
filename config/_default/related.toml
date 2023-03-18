@@ -10,3 +10,7 @@ weight = 100
 [[indices]]
 name = "categories"
 weight = 200
+
+[[indices]]
+name = "Chatbot"
+weight = 300
