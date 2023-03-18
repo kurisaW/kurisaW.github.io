@@ -48,7 +48,13 @@ limit = 100
 type = "tag-cloud"
 
 [widgets.homepage.params]
-limit = 100
+limit = 20
+
+[[widgets.homepage]]
+type = "Chatbot"
+
+[widgets.homepage.params]
+limit = 20
 
 [[widgets.page]]
 type = "toc"
