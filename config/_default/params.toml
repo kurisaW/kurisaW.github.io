@@ -103,6 +103,8 @@ enabled = true
   # m-instagram = "http://localhost:1313"
   # n-gitlab = "http://localhost:1313"
   o-bilibili = "https://space.bilibili.com/697497581?spm_id_from=333.1007.0.0"
+[params]
+  googleAd = "ca-pub-3278455919544481"      # Google Ad
 
 ## Comments
 [comments]
