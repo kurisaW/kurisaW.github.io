@@ -155,3 +155,27 @@ accessToken = "https://curious-torrone-9db935.netlify.app/github_access_token"
 [comments.cusdis]
 host = ""
 id = ""
+
+[params.busuanzi]         # count web traffic by busuanzi                             # 是否使用不蒜子统计站点访问量
+  enable = true
+  siteUV = true
+  sitePV = true
+  pagePV = true
+  
+[params.social]                                         # 社交链接
+  a-email = "yifang.wangyq@foxmail.com"
+  g-github = "https://github.com/left-pocket"
+  #i-zhihu = "https://www.zhihu.com/people/left-pocket"
+    
+  # b-stack-overflow = "http://localhost:1313"
+  c-twitter = "https://twitter.com/KurisaWhh"
+  # d-facebook = "http://localhost:1313"
+  # e-linkedin = "http://localhost:1313"
+  # f-google = "http://localhost:1313"
+  h-weibo = "https://weibo.com/u/7395766312"
+  # j-douban = "http://localhost:1313"
+  # k-pocket = "http://localhost:1313"
+  # l-tumblr = "http://localhost:1313"
+  # m-instagram = "http://localhost:1313"
+  # n-gitlab = "http://localhost:1313"
+  o-bilibili = "https://space.bilibili.com/697497581?spm_id_from=333.1007.0.0"
