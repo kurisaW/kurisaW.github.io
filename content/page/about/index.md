@@ -38,3 +38,10 @@ I'm KurisaW,or you can call me yifang.
 `You can also choose to get in touch with me by adding wechat!`
 
 ![Wechat](https://user-images.githubusercontent.com/98592772/218299666-0cb3baea-a528-4216-99bd-06806149aaa9.png)
+
+## `Sponsor`
+
+If you like what I do, maybe consider buying me a coffee/tea 
+
+<a href="https://www.buymeacoffee.com/kurisaW" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
+</div>
