@@ -46,3 +46,11 @@ url = "https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302121550487
 
 [social.params]
 icon = "brand-wechat"
+
+[[social]]
+identifier = "Chatbot"
+name = "chatbot"
+url = "https://chat-gpt-next-jmpp1eq0d-kurisaw.vercel.app/"
+
+[social.params]
+icon = "brand-chatbot"
