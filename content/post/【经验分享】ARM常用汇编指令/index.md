@@ -1,6 +1,6 @@
 ---
 title: 【经验分享】ARM常用汇编指令
-description: 桥接网络、开发板端测
+description: ARM常用汇编指令
 slug: 【经验分享】ARM常用汇编指令
 date: 2023-03-29 00:00:00+0000
 image: cover.jpg
