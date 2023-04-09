@@ -1,6 +1,6 @@
 ---
 title: 【Linux系统开发】Ubuntu配置SFTP服务
-description: Linux多线程概念、inux线程实现、线程同步的方法、线程的互斥、互斥PK信号量、信号量操作、互斥操作、条件变量
+description: SFTP是指Secure File Transfer Protocol，即安全文件传输协议。它提供了一种安全的网络加密方法来传输文件。SFTP与FTP具有几乎相同的语法和功能，是SSH的其中一部分，可安全地将文件传输到服务器。
 slug: 【Linux系统开发】Ubuntu配置SFTP服务
 date: 2023-04-07 00:00:00+0000
 image: cover.jpg
