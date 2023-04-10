@@ -1,3 +1,5 @@
+[![Deploy to Github Pages](https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml/badge.svg?branch=gh-pages&event=workflow_run)](https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml)
+
 # Hi there!👋
 
 I'm KurisaW,or you can call me yifang.
