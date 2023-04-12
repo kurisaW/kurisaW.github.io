@@ -1,27 +1,12 @@
 # Configure main menu and social menu
-[menu]
-  [[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
-    [menu.main.params]
-      icon = "home"
-      newtab = true
+[[main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  [main.params]
+    icon = "home"
+    newtab = true
 
-  [[menu.main]]
-    name = "Explore"
-    url = "/explore/"
-    weight = 2
-
-  [[menu.main]]
-    name = "Video"
-    url = "/explore/video/"
-    weight = 3
-
-[[social]]
-identifier = "github"
-name = "GitHub"
-url = "https://github.com/kurisaW/kurisaW.github.io"
 
 [social.params]
 icon = "brand-github"
