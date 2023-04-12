@@ -3,12 +3,12 @@ title: Explore
 links:
   - title: video
     description: Here are some online movie viewing websites collected from the Internet, some of which provide APP download, and those who are interested can choose to browse
-    website: https://maxlay.github.io
-    image: https://avatars.githubusercontent.com/u/37836995?v=4
+    website: https://kurisaw.github.io/explore/video
+    image: https://raw.githubusercontent.com/kurisaW/kurisaW.github.io/master/assets/figures/video.jpg
   - title: chatgpt
     description: Here is a combination of some bloggers and web searchable domestic chatgpt access sites
-    website: https://maxlay.github.io
-    image: https://avatars.githubusercontent.com/u/37836995?v=4
+    website: https://kurisaw.github.io/explore/chatgpt
+    image: https://raw.githubusercontent.com/kurisaW/kurisaW.github.io/master/assets/figures/chatbot.jpg
 menu:
     main: 
         weight: 4
