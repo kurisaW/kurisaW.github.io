@@ -1,6 +1,6 @@
 ---
 title: "Video"
-url: "/explore/video/"
+slug: explore
 ---
 
 # 推荐一些看电影的网站
