@@ -7,7 +7,7 @@
     icon = "home"
     newtab = false
 
-[[menu.explore]]
+[[menu.main]]
   name = "Video"
   url = "/explore/video/"
   weight = 2
