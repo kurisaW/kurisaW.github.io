@@ -15,9 +15,4 @@ hasCJKLanguage = false
 # Change it to your Disqus shortname before using
 disqusShortname = "kurisaW"
 
-[[pages]]
-  title = "Video"
-  identifier = "video"
-  url = "/explore/video/"
-  template = "page"
 
