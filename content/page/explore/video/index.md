@@ -1,17 +1,6 @@
 ---
 title: Video
-links:
-  - title: video
-    description: Recommend some online movie watching websites, some support APP download
-    website: https://kurisaw.github.io/explore/video
-    image: https://raw.githubusercontent.com/kurisaW/kurisaW.github.io/master/assets/figures/video.jpg
-menu:
-    main: 
-        weight: 5
-        params:
-            icon: resources
-
-comments: true
+description: Recommend some online movie watching websites, some support APP download
 ---
 
 # 推荐一些看电影的网站
