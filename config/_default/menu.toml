@@ -7,7 +7,6 @@
 #    icon = "home"
 #    newtab = true
 
-
 [[social]]
 identifier = "github"
 name = "GitHub"
