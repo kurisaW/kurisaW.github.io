@@ -1,6 +1,6 @@
 ---
-title = "Video"
-url = "/explore/video"
+title = Video
+url = /explore/video/
 description: Recommend some online movie watching websites, some support APP download
 ---
 
