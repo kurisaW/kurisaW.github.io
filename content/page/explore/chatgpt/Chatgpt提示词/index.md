@@ -1,9 +1,9 @@
 ---
-title: Chatgpt提示词
+title: Chatgpt_prompt
 links:
   - title: Chatgpt提示词
-    description: I’m PADI No.1409AZ6094
-    website: https://maxlay.github.io
+    description: Chatgpt提示词&快捷指令
+    website: https://kurisaw.github.io/explore/chatgpt/chatgpt_prompt
     image: https://avatars.githubusercontent.com/u/37836995?v=4
 menu:
     main: 

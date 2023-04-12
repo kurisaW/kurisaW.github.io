@@ -1,9 +1,9 @@
 ---
-title: Chatgpt国内版
+title: Chatgpt_National_Desk
 links:
   - title: Chatgpt国内版
-    description: I’m PADI No.1409AZ6094
-    website: https://maxlay.github.io
+    description: Chatgpt国内版免翻墙
+    website: https://kurisaw.github.io/explore/chatgpt/chatgpt_national_desk
     image: https://avatars.githubusercontent.com/u/37836995?v=4
 menu:
     main: 
