@@ -7,6 +7,18 @@
 #icon = "home"
 #newtab = true
 
+[[menu.main]]
+    identifier = "explore"
+    name = "Explore"
+    url = "/explore/"
+    weight = 2
+
+[[menu.main]]
+    identifier = "video"
+    name = "Video"
+    url = "/explore/video/"
+    weight = 3
+
 [[social]]
 identifier = "github"
 name = "GitHub"
