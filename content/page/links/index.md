@@ -1,10 +1,6 @@
 ---
 title: Links
 links:
-  - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
-    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
   - title: HuangLei
     description: I’m PADI No.1409AZ6094
     website: https://maxlay.github.io
