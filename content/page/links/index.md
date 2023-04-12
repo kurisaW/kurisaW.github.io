@@ -7,7 +7,7 @@ links:
     image: https://avatars.githubusercontent.com/u/37836995?v=4
 menu:
     main: 
-        weight: 5
+        weight: 4
         params:
             icon: link
 
