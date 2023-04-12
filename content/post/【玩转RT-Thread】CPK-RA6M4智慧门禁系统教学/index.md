@@ -557,3 +557,4 @@ INIT_APP_EXPORT(oled_init);
 
 （3）对于每次的settings设置，其实都会生成相关的宏和定义在rtconfig.h文件中，所以每次更行settings时都会将用户在rtconfig.h中添加的代码删除，这时候需要重新添加，否则会生成一些宏未定义的错误。
 
+{{< bilibili BV1Ld4y1N7eo 1.8 >}}
