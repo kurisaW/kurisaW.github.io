@@ -4,10 +4,10 @@
   url = "/explore/"
   weight = 2
 
-[[menu.main]]
+[[menu.explore]]
   name = "Video"
   url = "/explore/video/"
-  weight = 3
+  weight = 2
 
 [[social]]
 identifier = "github"
