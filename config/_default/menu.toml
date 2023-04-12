@@ -1,21 +1,13 @@
 # Configure main menu and social menu
-[[main]]
-  identifier = "home"
-  name = "Home"
-  url = "/"
-  [main.params]
-    icon = "home"
-    newtab = false
-
-[[main]]
-  identifier = "explore"
+[[menu.main]]
   name = "Explore"
   url = "/explore/"
+  weight = 2
 
-[[main]]
-  identifier = "video"
+[[menu.main]]
   name = "Video"
   url = "/explore/video/"
+  weight = 3
 
 [[social]]
 identifier = "github"
