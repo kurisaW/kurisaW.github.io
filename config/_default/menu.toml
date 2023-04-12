@@ -7,6 +7,22 @@
     icon = "home"
     newtab = false
 
+[[main]]
+  identifier = "explore"
+  name = "Explore"
+  url = "/explore/"
+  [main.params]
+    icon = "resources"
+    newtab = false
+
+[[main]]
+  identifier = "video"
+  name = "Video"
+  url = "/explore/video/"
+  [main.params]
+    icon = "resources"
+    newtab = false
+
 [[social]]
 identifier = "github"
 name = "GitHub"
