@@ -1,8 +1,11 @@
 # Configure main menu and social menu
-[[menu.main]]
-  name = "Explore"
-  url = "/explore/"
-  weight = 2
+[[main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  [main.params]
+    icon = "home"
+    newtab = false
 
 [[menu.explore]]
   name = "Video"
