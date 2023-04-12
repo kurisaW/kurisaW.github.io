@@ -1,13 +1,5 @@
 # Configure main menu and social menu
 [[main]]
-  identifier = "home"
-  name = "Home"
-  url = "/"
-  [main.params]
-    icon = "home"
-    newtab = false
-
-[[main]]
   identifier = "explore"
   name = "Explore"
   url = "/explore/"
