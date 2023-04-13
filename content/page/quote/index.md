@@ -13,7 +13,7 @@ comments: true
 
 ---
 
-{{< video src="./travel.mp4" autoplay="true" > loop="true" controls="false" width="70%" heigh="auto"}}
+{{< video src="./travel.mp4" autoplay="true" > loop="true" controls="false" width="70%" heigh="auto >"}}
 
 {{< quote author="星野道夫" source="《在漫长的旅途中》" url="https://kurisaw.github.io/quote/">}}
 每个人手上都拿着一张随时可能会输的牌，在人生中寻找补救的方法。
