@@ -11,7 +11,7 @@ links:
     image: https://raw.githubusercontent.com/kurisaW/kurisaW.github.io/master/assets/figures/chatbot.jpg
 menu:
     main: 
-        weight: 4
+        weight: 5
         params:
             icon: resources
 
