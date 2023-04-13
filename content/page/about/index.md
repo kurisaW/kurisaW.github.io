@@ -8,7 +8,7 @@ links:
 
 menu:
     main: 
-        weight: 4
+        weight: 7
         params:
             icon: about_us
 
