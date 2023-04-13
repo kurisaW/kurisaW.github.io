@@ -15,7 +15,7 @@ menu:
         params:
             icon: resources
 
-comments: true
+comments: false
 ---
 
 If you have resources or tools that you recommend, you can contribute in the format below

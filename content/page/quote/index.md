@@ -6,7 +6,7 @@ menu:
         params:
             icon: quote
 
-comments: true
+comments: false
 ---
 
 # 📑读书 学习 去更远的地方
