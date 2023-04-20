@@ -94,7 +94,6 @@ comments: true
 ### 历年软考嵌入式系统设计师真题及答案
 
 * [嵌入式系统设计师教程.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=嵌入式系统设计师教程.pdf)
-
 * [2006年下半年嵌入式系统设计师上午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师上午试题.pdf)
 * [2006年下半年嵌入式系统设计师上午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师上午试题答案.pdf)
 * [2006年下半年嵌入式系统设计师下午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师下午试题.pdf)
