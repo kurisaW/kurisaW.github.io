@@ -91,6 +91,32 @@ comments: true
 * [「代码随想录」动态规划专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」动态规划专题精讲（v2.0）.pdf)
 * [「代码随想录」二叉树专题精讲（v2.0）.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=「代码随想录」二叉树专题精讲（v2.0）.pdf)
 
+### 历年软考嵌入式系统设计师真题及答案
+
+* [2006年下半年嵌入式系统设计师上午试题.pdf](https://localhost/Npdf//web/viewer.html?file=\2006年下半年嵌入式系统设计师上午试题.pdf)
+* [2006年下半年嵌入式系统设计师上午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2006年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2006年下半年嵌入式系统设计师下午试题.pdf](https://localhost/Npdf//web/viewer.html?file=\2006年下半年嵌入式系统设计师下午试题.pdf)
+* [2006年下半年嵌入式系统设计师下午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2006年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2007年下半年嵌入式系统设计师上午试题.pdf](https://localhost/Npdf//web/viewer.html?file=\2007年下半年嵌入式系统设计师上午试题.pdf)
+* [2007年下半年嵌入式系统设计师上午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2007年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2007年下半年嵌入式系统设计师下午试题及答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2007年下半年嵌入式系统设计师下午试题及答案.pdf)
+* [2008年下半年嵌入式系统设计师上午试卷.pdf](https://localhost/Npdf//web/viewer.html?file=\2008年下半年嵌入式系统设计师上午试卷.pdf)
+* [2008年下半年嵌入式系统设计师上午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2008年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2008年下半年嵌入式系统设计师下午试题.pdf](https://localhost/Npdf//web/viewer.html?file=\2008年下半年嵌入式系统设计师下午试题.pdf)
+* [2008年下半年嵌入式系统设计师下午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2008年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2009下半年嵌入式系统设计师上午试题分析与解答.pdf](https://localhost/Npdf//web/viewer.html?file=\2009下半年嵌入式系统设计师上午试题分析与解答.pdf)
+* [2009下半年嵌入式系统设计师下午试题分析与解答.pdf](https://localhost/Npdf//web/viewer.html?file=\2009下半年嵌入式系统设计师下午试题分析与解答.pdf)
+* [2010年下半年嵌入式系统设计师上午试题及答案解析.pdf](https://localhost/Npdf//web/viewer.html?file=\2010年下半年嵌入式系统设计师上午试题及答案解析.pdf)
+* [2010年下半年嵌入式系统设计师下午试题.pdf](https://localhost/Npdf//web/viewer.html?file=\2010年下半年嵌入式系统设计师下午试题.pdf)
+* [2010年下半年嵌入式系统设计师下午试题答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2010年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2011年下半年嵌入式系统设计师上午试题与答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2011年下半年嵌入式系统设计师上午试题与答案.pdf)
+* [2011年下半年嵌入式系统设计师下午试题分析与解答.pdf](https://localhost/Npdf//web/viewer.html?file=\2011年下半年嵌入式系统设计师下午试题分析与解答.pdf)
+* [2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf](https://localhost/Npdf//web/viewer.html?file=\2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf)
+* [2014年下半年嵌入式系统设计师上午试题分析与解答.pdf](https://localhost/Npdf//web/viewer.html?file=\2014年下半年嵌入式系统设计师上午试题分析与解答.pdf)
+* [2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](https://localhost/Npdf//web/viewer.html?file=\2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
+* [2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](https://localhost/Npdf//web/viewer.html?file=\2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
+
+
 # 联系我
 
 如果你有相关资源想要集合到一个网站以便随时访问而又拘于时间问题没法搭建网站的话，可以与我取得联系，我将帮助你整理好资源，以此为你提供更加便利的阅读！
