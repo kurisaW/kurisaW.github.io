@@ -28,10 +28,10 @@ tags:
 
 <1>选择直接使用网线连接到电脑，然后在虚拟机中桥接选择自己对应的网卡即可，博主自己是没有连接网线的，所以我自己是没有采取这个办法的。
 
-![](https://img-blog.csdnimg.cn/7167af1edaa64e2da1d357d70c1f2b75.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424131854375](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241318456.png)
 
 
-![](https://img-blog.csdnimg.cn/2464ef833a5f44cc857003eea990b847.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424131957782](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241319850.png)
 
 
 <2>无线网卡连接
@@ -44,28 +44,28 @@ tags:
 
 首先电脑win+R，输入`cmd`进入终端，然后输入命令：`ipconfig`，找到自己的热点网络信息
 
-![](https://img-blog.csdnimg.cn/e8696623357746ff88e5c21a6a2f2a38.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132028276](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241320409.png)
 
 
-![](https://img-blog.csdnimg.cn/5574394acfd04750ab469dde635794ff.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132041431](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241320692.png)
 
 
-![](https://img-blog.csdnimg.cn/838f45e5c87a4d388f7988c0fbfac8f9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132117501](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241321679.png)
 
 
 * 虚拟机配置
 
-![](https://img-blog.csdnimg.cn/1ef17e5bffa644d9901a99cddd829509.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132214739](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322849.png)
 
 
-![](https://img-blog.csdnimg.cn/f913337e07084f8ca7e4b45ef6c0e3c1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132233318](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322385.png)
 
 
 ```
 ctrl+alt+T打开终端，输入命令:vi /etc/network/interfaces
 ```
 
-![](https://img-blog.csdnimg.cn/7ecb691179304cb5b85f0a906248de63.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132250210](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322519.png)
 
 
 ```
@@ -120,14 +120,14 @@ ifup eth0
 
 当开发板ping通虚拟机后，我们在secureCRT控制台输入`reset`命令重启开发板
 
-![](https://img-blog.csdnimg.cn/44ed871d254047618d4b116007408f0e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132308595](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323671.png)
 
 
 
 
 这里的内核加载过程中再次出现了问题，显示我nfs服务端无回应
 
-![](https://img-blog.csdnimg.cn/c6e42fcd827b48f89c479f34e45f6767.png)
+![image-20230424132323723](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323776.png)
 
 
 
@@ -142,7 +142,7 @@ mount -t nfs -o nolock '开发板ipaddr ip':/root/rootfs/x210_rootfs   //再次�
 sudo /etc/init.d/networking start
 ```
 
-![](https://img-blog.csdnimg.cn/350f40f5e7134ccca7657925ed590139.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![image-20230424132335917](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323050.png)
 
 
 问题解决！
