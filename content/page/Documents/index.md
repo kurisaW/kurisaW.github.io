@@ -115,10 +115,10 @@ comments: true
 * [2010年下半年嵌入式系统设计师下午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2010年下半年嵌入式系统设计师下午试题答案.pdf)
 * [2011年下半年嵌入式系统设计师上午试题与答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2011年下半年嵌入式系统设计师上午试题与答案.pdf)
 * [2011年下半年嵌入式系统设计师下午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2011年下半年嵌入式系统设计师下午试题分析与解答.pdf)
-* [2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf)
+* [2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2012-2013年下半年嵌入式系统设计师上午下午试题及答案.pdf)
 * [2014年下半年嵌入式系统设计师上午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2014年下半年嵌入式系统设计师上午试卷综合知识.pdf)
-* [2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
-* [2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
+* [2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2015年下半年嵌入式系统设计师上午下午真题答案+解析.pdf)
+* [2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2016年下半年嵌入式系统设计师上午下午真题答案+解析.pdf)
 
 # 联系我
 
