@@ -31,7 +31,7 @@ comments: true
 * [C语言函数大全.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言函数大全.pdf)
 * [C语言深度解剖-解开程序员面试笔试的秘密.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言深度解剖-解开程序员面试笔试的秘密.pdf)
 * [C语言指针经验总结.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言指针经验总结.pdf)
-* [C语言规范标准-C99.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言规范标准-C99.pdf)
+* [C语言规范标准-C99.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/C语言规范标准-C99.pdf)
 
 ### C++专栏
 
