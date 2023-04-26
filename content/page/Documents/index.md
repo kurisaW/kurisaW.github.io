@@ -21,6 +21,8 @@ comments: true
 
 配置仓库入口：[https://github.com/kurisaW/Npdf](https://github.com/kurisaW/Npdf)
 
+**注：目前本博客的pdf资源已部分上传至infinityfree服务器，较之pdf.js有更快响应速度，后续考虑国内CDN加速，当然想要学习和了解pdf.js的构建方式也可参考此仓库[Npdf](https://github.com/kurisaW/Npdf)；由于部分pdf文件较大，反应速度慢属于正常现象。**
+
 # 目前上传的PDF资源如下：
 
 ### C语言专栏
