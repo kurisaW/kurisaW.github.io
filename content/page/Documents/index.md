@@ -21,6 +21,8 @@ comments: true
 
 配置仓库入口：[https://github.com/kurisaW/Npdf](https://github.com/kurisaW/Npdf)
 
+**注：目前本博客的pdf资源已部分上传至infinityfree服务器，较之pdf.js有更快响应速度，后续考虑国内CDN加速，当然想要学习和了解pdf.js的构建方式也可参考此仓库[Npdf](https://github.com/kurisaW/Npdf)；由于部分pdf文件较大，反应速度慢属于正常现象。**
+
 # 目前上传的PDF资源如下：
 
 ### C语言专栏
@@ -31,6 +33,7 @@ comments: true
 * [C语言函数大全.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言函数大全.pdf)
 * [C语言深度解剖-解开程序员面试笔试的秘密.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言深度解剖-解开程序员面试笔试的秘密.pdf)
 * [C语言指针经验总结.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=C语言指针经验总结.pdf)
+* [C语言规范标准-C99.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/C语言规范标准-C99.pdf)
 
 ### C++专栏
 
@@ -93,29 +96,29 @@ comments: true
 
 ### 历年软考嵌入式系统设计师真题及答案
 
-* [嵌入式系统设计师教程.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=嵌入式系统设计师教程.pdf)
-* [2006年下半年嵌入式系统设计师上午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师上午试题.pdf)
-* [2006年下半年嵌入式系统设计师上午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师上午试题答案.pdf)
-* [2006年下半年嵌入式系统设计师下午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师下午试题.pdf)
-* [2006年下半年嵌入式系统设计师下午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2006年下半年嵌入式系统设计师下午试题答案.pdf)
-* [2007年下半年嵌入式系统设计师上午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2007年下半年嵌入式系统设计师上午试题.pdf)
-* [2007年下半年嵌入式系统设计师上午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2007年下半年嵌入式系统设计师上午试题答案.pdf)
-* [2007年下半年嵌入式系统设计师下午试题及答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2007年下半年嵌入式系统设计师下午试题及答案.pdf)
-* [2008年下半年嵌入式系统设计师上午试卷.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2008年下半年嵌入式系统设计师上午试卷.pdf)
-* [2008年下半年嵌入式系统设计师上午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2008年下半年嵌入式系统设计师上午试题答案.pdf)
-* [2008年下半年嵌入式系统设计师下午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2008年下半年嵌入式系统设计师下午试题.pdf)
-* [2008年下半年嵌入式系统设计师下午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2008年下半年嵌入式系统设计师下午试题答案.pdf)
-* [2009下半年嵌入式系统设计师上午试题分析与解答.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2009下半年嵌入式系统设计师上午试题分析与解答.pdf)
-* [2009下半年嵌入式系统设计师下午试题分析与解答.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2009下半年嵌入式系统设计师下午试题分析与解答.pdf)
-* [2010年下半年嵌入式系统设计师上午试题及答案解析.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2010年下半年嵌入式系统设计师上午试题及答案解析.pdf)
-* [2010年下半年嵌入式系统设计师下午试题.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2010年下半年嵌入式系统设计师下午试题.pdf)
-* [2010年下半年嵌入式系统设计师下午试题答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2010年下半年嵌入式系统设计师下午试题答案.pdf)
-* [2011年下半年嵌入式系统设计师上午试题与答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2011年下半年嵌入式系统设计师上午试题与答案.pdf)
-* [2011年下半年嵌入式系统设计师下午试题分析与解答.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2011年下半年嵌入式系统设计师下午试题分析与解答.pdf)
-* [2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf)
-* [2014年下半年嵌入式系统设计师上午试题分析与解答.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2014年下半年嵌入式系统设计师上午试题分析与解答.pdf)
-* [2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
-* [2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf)
+* [嵌入式系统设计师教程.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/嵌入式系统设计师教程.pdf)
+* [2006年下半年嵌入式系统设计师上午试题.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2006年下半年嵌入式系统设计师上午试题.pdf)
+* [2006年下半年嵌入式系统设计师上午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2006年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2006年下半年嵌入式系统设计师下午试题.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2006年下半年嵌入式系统设计师下午试题.pdf)
+* [2006年下半年嵌入式系统设计师下午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2006年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2007年下半年嵌入式系统设计师上午试题.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2007年下半年嵌入式系统设计师上午试题.pdf)
+* [2007年下半年嵌入式系统设计师上午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2007年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2007年下半年嵌入式系统设计师下午试题及答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2007年下半年嵌入式系统设计师下午试题及答案.pdf)
+* [2008年下半年嵌入式系统设计师上午试卷.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2008年下半年嵌入式系统设计师上午试卷.pdf)
+* [2008年下半年嵌入式系统设计师上午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2008年下半年嵌入式系统设计师上午试题答案.pdf)
+* [2008年下半年嵌入式系统设计师下午试题.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2008年下半年嵌入式系统设计师下午试题.pdf)
+* [2008年下半年嵌入式系统设计师下午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2008年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2009下半年嵌入式系统设计师上午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2009下半年嵌入式系统设计师上午试题分析与解答.pdf)
+* [2009下半年嵌入式系统设计师下午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2009下半年嵌入式系统设计师下午试题分析与解答.pdf)
+* [2010年下半年嵌入式系统设计师上午试题及答案解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2010年下半年嵌入式系统设计师上午试题及答案解析.pdf)
+* [2010年下半年嵌入式系统设计师下午试题.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2010年下半年嵌入式系统设计师下午试题.pdf)
+* [2010年下半年嵌入式系统设计师下午试题答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2010年下半年嵌入式系统设计师下午试题答案.pdf)
+* [2011年下半年嵌入式系统设计师上午试题与答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2011年下半年嵌入式系统设计师上午试题与答案.pdf)
+* [2011年下半年嵌入式系统设计师下午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2011年下半年嵌入式系统设计师下午试题分析与解答.pdf)
+* [2012-2013年下半年嵌入式系统设计师上午+下午试题及答案.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2012-2013年下半年嵌入式系统设计师上午下午试题及答案.pdf)
+* [2014年下半年嵌入式系统设计师上午试题分析与解答.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2014年下半年嵌入式系统设计师上午试卷综合知识.pdf)
+* [2015年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2015年下半年嵌入式系统设计师上午下午真题答案解析.pdf)
+* [2016年下半年嵌入式系统设计师上午+下午真题答案+解析.pdf](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/04/2016年下半年嵌入式系统设计师上午下午真题答案解析.pdf)
 
 # 联系我
 
