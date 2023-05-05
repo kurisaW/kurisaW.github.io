@@ -146,133 +146,23 @@ git clone --recursive https://github.com/espressif/esp-matter.git
 git submodule update --init --recursive
 ```
 
+安装matter所需的依赖项：
+
+```c
+sudo apt install git gcc g++ pkg-config libssl-dev libdbus-1-dev
+sudo apt-get install libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev
+sudo apt-get python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
+```
+
 执行安装命令：
 
 ```c
 ./install.sh
 ```
 
-![image-20230504132930088](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041329542.png)
-
-本以为到这就结束了，但不出意外的话意外发生了，在安装过程中发生了报错...
-
-```c
-  Building wheel for pycryptodome (setup.py): started
-  error: subprocess-exited-with-error
-  
-  × python setup.py bdist_wheel did not run successfully.
-  │ exit code: 1
-  ╰─> See above for output.
-  
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-  Building wheel for pycryptodome (setup.py): finished with status 'error'
-  ERROR: Failed building wheel for pycryptodome
-  Running setup.py clean for pycryptodome
-  Building wheel for gevent (pyproject.toml): started
-  
-  ......
-```
-
-我们查看`install.sh`文件
-
-```c
-#!/usr/bin/env bash
-
-set -e
-
-basedir=$(dirname "$0")
-ESP_MATTER_PATH=$(cd "${basedir}"; pwd)
-MATTER_PATH=${ESP_MATTER_PATH}/connectedhomeip/connectedhomeip
-export ESP_MATTER_PATH
-
-echo ""
-echo "Running Matter Setup"
-echo ""
-source ${MATTER_PATH}/scripts/bootstrap.sh
-
-echo ""
-echo "Installing zap-cli"
-echo ""
-# Run the zap_download.py and extract the path of installed binary
-# eg output before cut: "export ZAP_INSTALL_PATH=zap/zap-v2023.03.06-nightly"
-# output after cut: zap/zap-v2023.03.06-nightly
-# TODO: Remove the zap-version after https://github.com/project-chip/connectedhomeip/pull/25727 merged
-zap_path=`python3 ${ESP_MATTER_PATH}/connectedhomeip/connectedhomeip/scripts/tools/zap/zap_download.py \
-    --sdk-root ${ESP_MATTER_PATH}/connectedhomeip/connectedhomeip --zap RELEASE --zap-version v2023.03.27-nightly \
-    --extract-root .zap 2>/dev/null | cut -d= -f2`
-# Check whether the download is successful.
-if [ -z $zap_path ]; then
-    echo "Failed to install zap-cli"
-    deactivate
-    exit 1
-fi
-
-# Move files to one directory up, so that binaries will be in $ESP_MATTER_PATH/.zap/ directory and export.sh can leverage the fixed path
-if [ -d "${ESP_MATTER_PATH}/.zap" ]; then
-    rm -r ${ESP_MATTER_PATH}/.zap
-fi
-mkdir ${ESP_MATTER_PATH}/.zap
-mv $zap_path/* ${ESP_MATTER_PATH}/.zap/
-rm -r $zap_path
-chmod +x ${ESP_MATTER_PATH}/.zap/zap-cli
-
-echo ""
-echo "Building host tools"
-echo ""
-gn --root="${MATTER_PATH}" gen ${MATTER_PATH}/out/host
-ninja -C ${MATTER_PATH}/out/host
-echo ""
-echo "Host tools built at: ${MATTER_PATH}/out/host"
-echo ""
-
-echo ""
-echo "Exit Matter environment"
-echo ""
-deactivate
-
-echo ""
-echo "Installing python dependencies for mfg_tool"
-echo ""
-python3 -m pip install -r ${ESP_MATTER_PATH}/tools/mfg_tool/requirements.txt
-
-echo ""
-echo "Installing python dependencies for Matter"
-echo ""
-python3 -m pip install -r ${ESP_MATTER_PATH}/requirements.txt
-
-echo "All done! You can now run:"
-echo ""
-echo "  . ${basedir}/export.sh"
-echo ""
-```
-
-发现问题出在第10到13行，我尝试安装系统必要的依赖项来解决这个问题，成功解决！命令如下：
-
-```c
-sudo apt install build-essential python3-dev
-
-sudo apt-get install pkg-config
-
-sudo apt-get install libglib2.0-dev libglib2.0-dev-bin libgio2.0-cil-dev
-```
-
-![image-20230504145216015](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041452447.png)
-
-接着在安装`zap-cli`的时候再次发生报错，需要安装以下依赖库，并再次运行安装脚本命令，等待编译
-
-```c
-sudo apt-get install libssl-dev
-
-sudo apt-get install pip
-
-./install.sh
-```
-
-![image-20230504150238105](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041502605.png)
-
 最后看到`All done!`即代表环境安装成功！
 
-![image-20230504153243388](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041535612.png)
+![image-20230505105924550](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305051059941.png)
 
 至此，esp-matter开发环境搭建成功！
 
