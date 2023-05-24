@@ -25,6 +25,10 @@ comments: true
 
 # 目前上传的PDF资源如下：
 
+### 精品专栏
+
+* [30天自制操作系统-图灵程序设计丛书](http://kurisaw-pdf-build.epizy.com/wp-content/uploads/2023/05/30天自制操作系统-图灵程序设计丛书.pdf)
+
 ### C语言专栏
 
 * [GCC.chinese-manual.pdf](https://kurisaw.github.io/Npdf//web/viewer.html?file=GCC.chinese-manual.pdf)
