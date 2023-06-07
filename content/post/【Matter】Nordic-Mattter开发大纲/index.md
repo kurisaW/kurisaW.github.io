@@ -1,6 +1,6 @@
 ---
 title: 【Matter】Nordic-Mattter开发大纲
-description: 使用chip tool在ESP32-C3上进行matter开发
+description: 这部分仅作为开发大纲，后面会出一系列系统教程，以 Matter over Thread：在一台设备上配置边界路由器和控制器 为例。
 slug: 【Matter】Nordic-Mattter开发大纲
 date: 2023-06-07 00:00:00+0000
 image: cover.jpg
