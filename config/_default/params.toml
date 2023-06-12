@@ -18,7 +18,7 @@ subtitle = "Tomorrow is gone！"
 [sidebar.avatar]
 enabled = true
 local = false
-src = "https://raw.githubusercontent.com/kurisaW/kurisaW.github.io/master/assets/figures/profile_photo.jpg"
+src = "https://github-production-user-asset-6210df.s3.amazonaws.com/98592772/244980789-b2218986-a065-4391-8db6-621f5ca75f82.png"
 
 [article]
 math = true
