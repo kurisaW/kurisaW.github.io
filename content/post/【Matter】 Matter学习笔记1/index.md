@@ -62,18 +62,7 @@ IPv6（Internet Protocol version 6）是互联网协议的一种，它是 IPv4 �
 
 Matter 旨在为智能家居设备构建一个通用的基于 IPv6 的通信协议。该协议定义了将部署在设备上的应用层和不同的链路层，以帮助维护互操作性。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121952614.png" width = "60%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Matter、OSI 和 TCP/IP 层
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121952614.png)
 
 
 为了解决网络通信壁垒，Matter网络层本身基于 IPV6，因此**天生具备IP连接能力**，可以与WIFI、Thread、以太网等通讯协议配合使用，而蓝牙则仅在配网过程使用；
@@ -84,18 +73,7 @@ Matter 还支持**桥接**等其他智能家居技术（例如 Zigbee、Bluetoot
 
 ### 3.Matter标准协议架构
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121138795.png" width = "110%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Matter标准协议架构总体流程
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121138795.png)
 
 
 **Matter标准协议架构总体流程分析：**
@@ -122,50 +100,17 @@ Matter协议还可以在没有公网IPv6基础设施的情况下运行，经资�
 
 无线Mesh网络是一种新无线局域网类型，与传统WLAN不同的是，**无线Mesh网络**中的**AP**可以采用**无线连接**的方式进行互连，并且**AP间可以建立多跳的无线链路**。简单来说，就是当WIFI覆盖不了的时候，在有WIFI信号的时候放置一个路由器，可以作为Mesh路由的中继节点，透过这个节点，将WIFI信号覆盖到所有需要覆盖的地方；是一个动态的可以不断扩展的网络架构，任意的WIFI节点设备均可以保持无线互联。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306132314987.png" width = "90%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Mesh组网
-  	</div>
-</center>
+![https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306132314987.png](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306132314987.png)
 
 
 这个很直观的体现就是大学里每层走廊中间都会架设一台路由，而你每移动一个楼层，你手机的校园网都会重新连接，也就是手机信号会快速自动重连距离你最近的一台路由，这就构成了一个庞大的无线链路网络。下面我们再来了解下Matter 的网络拓扑结构主要分为单一网络拓扑和星形网络拓扑：
 
 ### 1.单一网络拓扑
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121601076.png" width = "30%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      单一Thread网络拓扑
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121601076.png)
 
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121516744.png" width = "30%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      单一WIFI网络拓扑
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121516744.png)
 
 
 
@@ -186,18 +131,7 @@ Matter协议还可以在没有公网IPv6基础设施的情况下运行，经资�
 * **R(Router)**：指的是内部路由器。R 是一种网络设备，可以连接多个 ED 和其他 R，负责在 Thread 网络中进行路由选择和数据转发。
 * **SED(Sleepy End Device)**：指的是低功耗终端设备。SED 是一种特殊的终端设备，通常采用低功耗的无线技术，可以在不需要进行通信时进入睡眠模式，从而延长电池寿命。SED 可以直接连接到 BR 或者 R，也可以通过其他设备中继进行通信。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121605090.png" width = "100%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      星形网络拓扑
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306121605090.png)
 
 星形网络拓扑由多个外围网络组成，这些网络通过Hub连接在一起。Hub通常是客户家庭网络（Wi-Fi/以太网）中的设备，而外围网络可以是任何支持的网络类型。**外围网络必须始终通过一个或多个边界路由器(Border Router)直接连接到Hub。**
 
@@ -217,18 +151,7 @@ Matter协议还可以在没有公网IPv6基础设施的情况下运行，经资�
 
 一组节点包含了多组**Endpoint（端点）**。**而每个端点都封装了一个功能集**。例如，端点1可能涉及照明功能，而端点2可能涉及移动侦测，以及其他与实用程序（例如设备 OTA）的处理方式。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122042737.png" width = "60%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      设备、节点和端点
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122042737.png)
 
 ### 2.节点角色（Node roles）
 
@@ -252,18 +175,7 @@ Matter协议还可以在没有公网IPv6基础设施的情况下运行，经资�
 
 在最后一层，我们会找到**Attributes**，这是节点持有的状态，表示可以读取或写入的内容，支持多种数据格式，实际中代表了智能设备的相关属性(如门的开关、室内温度等)。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122111729.png" width = "60%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      节点、端点、属性和命令
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122111729.png)
 
 
 #### 3.2 命令（Commands）
@@ -274,18 +186,7 @@ Matter协议还可以在没有公网IPv6基础设施的情况下运行，经资�
 
 最后，Clusters 也可能有**Events**，它**可以被认为是过去状态转换的记录**。虽然属性代表**当前状态**，但事件是**过去**的日志，包括单调递增的计数器、时间戳和优先级。它们能够捕获状态转换，以及使用属性不容易实现的数据建模。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122122628.png" width = "100%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      层次结构示例：Matter设备交互模型
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122122628.png)
 
 `Endpoint 0`作为`Utility Clusters`**保留。Utility Clusters 是特定的集群，它包含端点上的服务功能，例如发现、寻址、诊断和软件更新**。另一方面，**Application(应用集群)**支持主要操作，例如开/关或温度测量。
 
@@ -328,18 +229,7 @@ Clusters 可能是**Client Cluster**或**Server Cluster**。服务器是**有状
 
 但是，就像典型的台灯一样，我们的物理设备还将包括一个开/关灯 开关设备类型，用于其本地开/关。此设备类型必须实现*开/关客户端*集群，以便它可以控制服务器集群。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122240843.png" width = "100%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      客户端与服务端集群
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306122240843.png)
 
 
 在此示例中，节点 A 上的开/关客户端集群正在更改节点 A 和节点 B 上的开/关服务器集群的属性，而节点 B 的客户端集群仅更改节点 B 本身上的服务器集群。
@@ -360,18 +250,7 @@ Clusters 可能是**Client Cluster**或**Server Cluster**。服务器是**有状
 
 每当一个节点与另一个节点建立加密通信序列时，它们就构成了**交互**关系。**Interactions 可能由一个或多个Transactions组成，而 Transactions 由一个或多个Action组成**，可以理解为 Node 之间的 IM 级消息。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306140839728.png" width = "100%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      交互模型的层次结构
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306140839728.png)
 
 
 Matter 支持多个操作，例如从另一个节点请求属性或事件的读取请求操作，或其响应，报告数据操作，它将信息从服务器返回到客户端。
@@ -422,18 +301,7 @@ Matter Path 使用规范：
 
 目标接收到读取请求操作后，它将使用请求的信息组装一个报告数据操作；当目标接收到读取请求操作后，它将使用请求的信息组装一个报告数据操作。详见下图：
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141108121.png" width = "80%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Read Transaction
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141108121.png)
 
 #### 2.2 报告请求数据（Report Data Action）
 
@@ -473,18 +341,7 @@ Matter Path 使用规范：
 - Attribute Reports（属性报告）：读取操作请求中请求的零个或多个报告属性的列表。
 - Event Reports（事件报告）：零个或多个报告事件的列表。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141332135.png" width = "60%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Subscription Transaction
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141332135.png)
 
 在订阅请求之后，目标用包含第一批报告数据的报告数据操作响应发起者：**Primed Published Data**。
 
@@ -516,18 +373,7 @@ Matter Path 使用规范：
 - **Timed Request（定时请求）**：一个标志，指示此操作是否是定时写入事务的一部分。
 - **Suppress Response（抑制响应）**：指示是否应抑制响应状态操作的标志。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141423081.png" width = "80%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Untimed Write Transaction
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141423081.png)
 
 
 ##### 4.1.2 写响应操作（Write Response Action）
@@ -614,18 +460,7 @@ Initiator 启动事务发送此操作，其中包含：
 
 一旦接收到定时请求操作，目标必须使用状态响应操作确认定时请求操作。一旦 Initiator  收到状态响应操作报告没有错误，它将发送调用请求操作。
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141539988.png" width = "80%" alt=""/>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">
-      Timed Invoke Transaction
-  	</div>
-</center>
+![](https://cdn.jsdelivr.net/gh/kurisaW/picbed/img2023/202306141539988.png)
 
 ##### 5.2.2 调用请求操作（Invoke Request Action）
 
