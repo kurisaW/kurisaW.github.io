@@ -125,7 +125,7 @@ RTM_EXPORT(rt_hw_console_output);
 
 ![image-20221003140736161](https://img-blog.csdnimg.cn/img_convert/5e3d4a57e4a6b55dd62f61b5d6577105.png)
 
-此时就可以正常使用segger_rtt了
+此时就可以正常使用segger_rtt了！
 
 ![image-20221003140911791](https://img-blog.csdnimg.cn/img_convert/d09d8a0f28e2c45542199eb982dfed6e.png)
 
