@@ -5,7 +5,7 @@ slug: Cplusplus-基础知识复习
 date: 2021-09-19 00:00:00+0000
 image: cover.jpg
 categories:
-    - C素养提升
+    - Cplusplus
 tags:
     - Cplusplus
     - 多态性
