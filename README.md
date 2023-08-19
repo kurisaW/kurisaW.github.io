@@ -1,4 +1,22 @@
-[![Deploy to Github Pages](https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml)
+<div align="center" style="margin: 40px 0">
+   <a href="https://github.com/kurisaW">
+      <img src="https://img.shields.io/badge/GitHub-%40kurisaw-181717?style=flat-square&logo=github" 
+      alt="@kurisaw" />
+   </a>
+   <a href="https://kurisaw.netlify.app/">
+      <img src="https://img.shields.io/badge/website-kurisaw.com-brightgreen?style=flat-square"
+      alt="kurisaw.com" />
+   </a>
+   <a href="mailto:yifang.wangyq@foxmail.com">
+      <img src="https://img.shields.io/badge/Email-yifang.wangyq@foxmail.com-blue?style=flat-square&logo=gmail" 
+      alt="yifang.wangyq@foxmail.com"/>
+   </a>
+   <a href="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml">
+     <img src="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml/badge.svg" 
+     alt="Deploy to Github Pages">  
+   </a>
+</div>
+
 
 # Hi there!👋
 
