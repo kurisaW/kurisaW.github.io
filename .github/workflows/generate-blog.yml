@@ -1,13 +1,8 @@
 name: Generate Blog
 
 on:
-  workflow_run:
-    workflows:
-      - "Deploy to Github Pages"
-    types:
-      - completed
- # schedule:
- #   - cron: '0 0 * * *'
+ schedule:
+   - cron: '0 0 * * *'
 # on:
 #   push:
 #     branches: [ master ]
