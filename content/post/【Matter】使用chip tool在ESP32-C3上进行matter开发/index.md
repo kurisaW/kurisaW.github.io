@@ -1,7 +1,7 @@
 ---
-title: 【Matter】使用chip tool在ESP32-C3上进行matter开发
+title: 【Matter】使用chip-tool在ESP32-C3上进行matter开发
 description: 使用chip tool在ESP32-C3上进行matter开发
-slug: 【Matter】使用chip tool在ESP32-C3上进行matter开发
+slug: 【Matter】使用chip-tool在ESP32-C3上进行matter开发
 date: 2023-05-30 00:00:00+0000
 image: cover.jpg
 categories:
