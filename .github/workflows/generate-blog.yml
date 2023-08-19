@@ -7,7 +7,7 @@ on:
   workflow_run:
     workflows: ["Deploy to Github Pages"]
     types:
-      - completed
+      - modify
 
 jobs:
   build:
