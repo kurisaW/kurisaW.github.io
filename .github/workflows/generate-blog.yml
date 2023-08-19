@@ -4,11 +4,13 @@ name: Generate Blog
 #  schedule:
 #    - cron: '0 0 * * *'
 on:
-  workflow_run:
-    workflows: ["Deploy to Github Pages"]
-    types:
-      - modify
-
+  push:
+    branches: [ master ]
+  delete:
+    branches: [ master ]
+  create:
+    branches: [ master ]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
