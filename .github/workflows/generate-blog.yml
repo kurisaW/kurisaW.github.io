@@ -1,12 +1,8 @@
 name: Generate Blog
 
 on:
-  push:
-    branches: [ master ]
-  delete:
-    branches: [ master ]
-  create:
-    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
