@@ -1,7 +1,7 @@
 ---
-title: 【经验分享】Linux 环境下v2ray的使用
+title: 【经验分享】Linux环境下v2ray的使用
 description: Linux 环境下v2ray的使用
-slug: 【经验分享】Linux 环境下v2ray的使用
+slug: 【经验分享】Linux环境下v2ray的使用
 date: 2023-05-04 00:00:00+0000
 image: cover.jpg
 categories:
