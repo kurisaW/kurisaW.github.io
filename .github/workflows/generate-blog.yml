@@ -4,12 +4,10 @@ name: Generate Blog
 #  schedule:
 #    - cron: '0 0 * * *'
 on:
-  push:
-    branches: [ master ]
-  delete:
-    branches: [ master ]
-  create:
-    branches: [ master ]
+  workflow_run:
+    workflows: ["Master Workflow"]
+    types:
+      - completed
 
 jobs:
   build:
