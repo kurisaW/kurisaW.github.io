@@ -4,7 +4,7 @@
       alt="@kurisaw" />
    </a>
    <a href="https://kurisaw.netlify.app/">
-      <img src="https://img.shields.io/badge/website-kurisaw.com-brightgreen?style=flat-square"
+      <img src="https://img.shields.io/badge/website-kurisaw.eu.org-brightgreen?style=flat-square"
       alt="kurisaw.com" />
    </a>
    <a href="mailto:yifang.wangyq@foxmail.com">
