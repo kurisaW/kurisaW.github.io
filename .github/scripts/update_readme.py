@@ -26,7 +26,6 @@ markdown_table = f"""
 | UpdateTime | Title | Summary |
 | ---------- | ----- | ------- |
 {''.join([f"| {post['date']} | [{post['title']}]({post['link']}) |  |\n" for post in sorted_posts])}
-"""
 
 # 更新README.md文件
 readme_path = 'README.md'  # 替换为你的README.md路径
