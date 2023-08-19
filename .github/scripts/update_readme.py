@@ -17,7 +17,7 @@ for dir in subdirectories:
         date = date_match.group(1) if date_match else 'N/A'
         title = title_match.group(1) if title_match else 'Untitled'
         summary = summary_match.group(1).strip() if summary_match else 'Untitled'
-        link = f'https://github.com/kurisaW/kurisaW.github.io/tree/master/{dir}/index.md'
+        link = f'https://github.com/kurisaW/kurisaW.github.io/blob/master/{blog_directory}/{dir}/index.md'
         blog_posts.append({'date': date, 'title': title, 'link': link, 'summary': summary})
 
 # 排序博客文章并选择最近的10篇
