@@ -22,7 +22,7 @@ jobs:
         
     - name: Generate diary
       run: |  
-        python .github/scripts/generate_readme.py
+        python .github/scripts/update_readme.py
         
     - name: Commit changes
       run: |
