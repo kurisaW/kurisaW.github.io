@@ -26,11 +26,13 @@ markdown_table = f"""
 | UpdateTime | Title | Summary |
 | ---------- | ----- | ------- |
 {''.join([f"| {post['date']} | [{post['title']}]({post['link']}) |  |\n" for post in sorted_posts])}
+"""
 
 # 更新README.md文件
 readme_path = 'README.md'  # 替换为你的README.md路径
 with open(readme_path, 'r', encoding='utf-8') as file:
     readme_content = file.read()
+    # 使用正则表达式替换部分
     updated_readme = re.sub(r'(## `✍️ Recent Posts`)([\s\S]*?)(\n##)', rf'\1{markdown_table}\3', readme_content)
 
 with open(readme_path, 'w', encoding='utf-8') as file:
