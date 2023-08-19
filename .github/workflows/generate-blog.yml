@@ -5,6 +5,8 @@ on:
     branches: [ master ]
   delete:
     branches: [ master ]
+  create:
+    branches: [ master ]
 
 jobs:
   build:
