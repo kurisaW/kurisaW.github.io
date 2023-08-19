@@ -47,6 +47,11 @@ jobs:
             - name: Build
               run: hugo --minify --gc
 
+            - name: Trigger Another Workflow
+              uses: actions/workflow-dispatch@v2
+              with:
+                workflow: generate-blog.yml
+
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@4.1.4
               with:
