@@ -1,3 +1,7 @@
+<div align="center">
+   <h1>kurisaw's blog</h1>
+</div>
+
 <div align="center" style="margin: 40px 0">
    <a href="https://github.com/kurisaW">
       <img src="https://img.shields.io/badge/GitHub-%40kurisaw-181717?style=flat-square&logo=github" 
@@ -18,9 +22,7 @@
 </div>
 
 
-# Hi there!👋
-
-I'm KurisaW,or you can call me yifang.
+## `👨‍💻About My Persion`
 
 ```yaml
 🔭 Now I am a junior student ...
@@ -32,67 +34,24 @@ I'm KurisaW,or you can call me yifang.
 😊 I will be happy to discuss technology and knowledge with you and look forward to your visit!
 ```
 
-`Contact me:`
+## `✍️ Recent Posts`
+
+| UpdateTime | Title                                                        | Summary                                                      |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 2023-08-09 | [测测常用设备的功率](https://github.com/Bpazy/blog/issues/184) | 用功率表把家里常用设备测了一下功耗：  * 台式机：待机 50W，玩 Dota2 170W > 安钛克(Antec)VP450 450W > i7-6700K > 1060 > 2 块 SSD > 1 |
+| 2023-08-03 | [Nginx 小记](https://github.com/Bpazy/blog/issues/252)       | 记录一些零碎的 Nginx 知识点                                  |
+| 2023-08-02 | [MQTT with mosquitto](https://github.com/Bpazy/blog/issues/264) |                                                              |
+| 2023-08-02 | [Zigbee2MQTT](https://github.com/Bpazy/blog/issues/263)      |                                                              |
+| 2023-08-02 | [打造我的 homelab](https://github.com/Bpazy/blog/issues/262) | ## 概要 新房装修，趁机把早就想要搞的各种智能家居搞起来，智能开关、智能温控、家具联动、语音控制等等。我会从几个方面分享整套 homelab 的内容：电路、硬件、软件、监控。  ## 硬件篇 ### |
+| 2023-05-11 | [Pve 中的 Ubuntu (LVM) 动态扩容](https://github.com/Bpazy/blog/issues/261) | 大体上就两个步骤： 1. 在 PVE 扩容 Hard Disk； 2. 在 Ubuntu 中使用该部分空间；  pve 扩容很简单： ![image](https://github.com/Bpazy |
+| 2023-03-29 | [Clash 使用记录](https://github.com/Bpazy/blog/issues/204)   | Clash 相关记录在这，比如：同步 CFW 配置、Tun 模式 CPU 占用、Linux 使用 Tun、Clash Dashboard 等。 |
+| 2023-03-16 | [xargs笔记](https://github.com/Bpazy/blog/issues/131)        | ## xargs 和 mv配合 需求：将所有子目录里的txt文件移动到当前目录。 ```shell D:\INSTALLER\2 │  321.txt │ └─新建文件夹     │  1.txt |
+| 2023-03-13 | [Proxmox VE 技巧记录](https://github.com/Bpazy/blog/issues/260) |                                                              |
+| 2023-03-02 | [tailscale 组网](https://github.com/Bpazy/blog/issues/201)   | 官网: [https://tailscale.com/](https://tailscale.com/)，威联通踩坑 |
+
+## `📠 Contact me:`
 
 * [Github Address :https://github.com/kurisaW](https://github.com/kurisaW)
 * [Email :yifang.wangyq@foxmail.com](mailto:yifang.wangyq@foxmail.com)
 * [My Website :https://kurisaw.github.io/](https://kurisaw.github.io/)
 
----
-
-# How to use the `Hugo Theme Stack Starter Template`?
-
-This is a quick start template for [Hugo theme Stack](https://github.com/CaiJimmy/hugo-theme-stack). It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme.
-
-It comes with a basic theme structure and configuration. GitHub action has been set up to deploy the theme to a public GitHub page automatically. Also, there's a cron job to update the theme automatically everyday.
-
-To get started:
-
-1. Click *Use this template*, and create your repository on GitHub.
-   ![image](https://user-images.githubusercontent.com/98592772/210561857-e235865f-76aa-4ca5-a309-3dfce64da916.png)
-
-2. Once the repository is created, create a GitHub codespace asociated with it.
-   ![image](https://user-images.githubusercontent.com/98592772/210561721-27a39816-e194-412e-8ea7-8b490630a136.png)
-
-3. And voila! You're ready to go. The codespace has been configured with the latest version of Hugo extended, just run `hugo server` in the terminal and see your new site in action.
-
-4. Check `config` folder for the configuration files. You can edit them to suit your needs. Make sure to update the `baseurl` property in `config/_default/config.toml` to your site's URL.
-
-5. Once you're done editing the site, just commit it and push it. GitHub action will deploy the site automatically to GitHub page asociated with the repository.
-   ![image](https://user-images.githubusercontent.com/98592772/210562134-0b328d80-c66d-46c8-b128-2514dd769fc7.png)
-
----
-
-In case you don't want to use GitHub codespace, you can also run this template in your local machine. **You need to install Git, Go and Hugo extended locally.**
-
-### Update theme manually
-
-Run:
-
-```bash
-hugo mod get -u github.com/CaiJimmy/hugo-theme-stack/v3
-hugo mod tidy
-```
-
-> This starter template has been configured with `v3` version of theme. Due to the limitation of Go module, once the `v4` or up version of theme is released, you need to update the theme manually. (Modifying `config/module.toml` file)
-
-### Deploy to another static page hostings
-
-If you want to build this site using another static page hosting, you need to make sure they have Go installed in the machine. 
-
-<details>
-  <summary>Vercel</summary>
-
-
-You need to overwrite build command to install manually Go:
-
-```
-amazon-linux-extras install golang1.11 && hugo --gc --minify
-```
-
-![](https://user-images.githubusercontent.com/5889006/156917172-01e4d418-3469-4ffb-97e4-a905d28b8424.png)
-
-Make sure also to specify Hugo version in the environment variable `HUGO_VERSION` (Use the latest version of Hugo extended):
-
-![Environment variable](https://user-images.githubusercontent.com/5889006/156917212-afb7c70d-ab85-480f-8288-b15781a462c0.png)
-</details>
