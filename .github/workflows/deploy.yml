@@ -48,7 +48,7 @@ jobs:
               run: hugo --minify --gc
 
             - name: Trigger Another Workflow
-              uses: actions/workflow-dispatch@v2
+              uses: actions/github-script@v5
               with:
                 workflow: generate-blog.yml
 
