@@ -1,7 +1,7 @@
 ---
-title: 【Matter】 Matter学习笔记1
+title: 【Matter】Matter学习笔记1
 description: Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。
-slug: 【Matter】 Matter学习笔记1
+slug: 【Matter】Matter学习笔记1
 date: 2023-06-14 00:00:00+0000
 image: cover.jpg
 categories:
