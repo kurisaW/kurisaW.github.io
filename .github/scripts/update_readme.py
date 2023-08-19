@@ -12,18 +12,20 @@ for dir in subdirectories:
     with open(index_path, 'r', encoding='utf-8') as file:
         content = file.read()
         date_match = re.search(r'date:\s*(\d{4}-\d{2}-\d{2})', content)
-        title_match = re.search(r'# (.+)', content)
+        title_match = re.search(r'title:\s*(.+)', content)
+        summary_match = re.search(r'description:\s*(.+)', content)
         date = date_match.group(1) if date_match else 'N/A'
         title = title_match.group(1) if title_match else 'Untitled'
+        summary = summary_match.group(1).strip() if summary_match else 'Untitled'
         link = f'https://github.com/kurisaW/kurisaW.github.io/blob/main/blogs/{dir}/index.md'
-        blog_posts.append({'date': date, 'title': title, 'link': link})
+        blog_posts.append({'date': date, 'title': title, 'link': link, 'summary': summary})
 
 # 排序博客文章并选择最近的10篇
 sorted_posts = sorted(blog_posts, key=lambda x: x['date'], reverse=True)[:10]
 
 # 生成Markdown表格
 markdown_table = "\n| UpdateTime | Title | Summary |\n| ---------- | ----- | ------- |\n" + \
-    "\n".join([f"| {post['date']} | [{post['title']}]({post['link']}) |  |" for post in sorted_posts])
+    "\n".join([f"| {post['date']} | [{post['title']}]({post['link']}) | {post['summary'] | \n" for post in sorted_posts])
 
 # 更新README.md文件
 readme_path = 'README.md'  # 替换为你的README.md路径
