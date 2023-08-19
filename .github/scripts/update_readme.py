@@ -25,7 +25,7 @@ sorted_posts = sorted(blog_posts, key=lambda x: x['date'], reverse=True)[:10]
 
 # 生成Markdown表格
 markdown_table = "\n| UpdateTime | Title | Summary |\n| ---------- | ----- | ------- |\n" + \
-    "\n".join([f"| {post['date']} | [{post['title']}]({post['link']}) | {post['summary']} |\n" for post in sorted_posts])
+    "\n".join([f"| {post['date']} | [{post['title']}]({post['link']}) | {post['summary']} |" for post in sorted_posts])
 
 
 # 更新README.md文件
