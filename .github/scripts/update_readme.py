@@ -15,7 +15,7 @@ for dir in subdirectories:
         title_match = re.search(r'# (.+)', content)
         date = date_match.group(1) if date_match else 'N/A'
         title = title_match.group(1) if title_match else 'Untitled'
-        link = f'https://github.com/yourusername/yourrepo/blob/main/blogs/{dir}/index.md'
+        link = f'https://github.com/kurisaW/kurisaW.github.io/blob/main/blogs/{dir}/index.md'
         blog_posts.append({'date': date, 'title': title, 'link': link})
 
 # 排序博客文章并选择最近的10篇
