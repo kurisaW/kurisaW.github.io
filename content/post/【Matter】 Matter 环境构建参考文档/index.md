@@ -1,7 +1,7 @@
 ---
-title: 【Matter】 Matter 环境构建参考文档
+title: 【Matter】Matter 环境构建参考文档
 description: Matter支持用 GN 配置构建，一个快速且可扩展的元构建系统，生成输入到 ninja 。
-slug: 【Matter】 Matter 环境构建参考文档
+slug: 【Matter】Matter 环境构建参考文档
 date: 2023-05-24 00:00:00+0000
 image: cover.jpg
 categories:
