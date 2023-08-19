@@ -11,7 +11,7 @@ for dir in subdirectories:
     index_path = os.path.join(blog_directory, dir, 'index.md')
     with open(index_path, 'r', encoding='utf-8') as file:
         content = file.read()
-        date_match = re.search(r'data:\s*(\d{4}-\d{2}-\d{2})', content)
+        date_match = re.search(r'date:\s*(\d{4}-\d{2}-\d{2})', content)
         title_match = re.search(r'# (.+)', content)
         date = date_match.group(1) if date_match else 'N/A'
         title = title_match.group(1) if title_match else 'Untitled'
