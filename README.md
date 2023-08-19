@@ -19,6 +19,14 @@
      <img src="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/deploy.yml/badge.svg" 
      alt="Deploy to Github Pages">  
    </a>
+   <a href="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/generate-blog.yml">
+     <img src="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/generate-blog.yml/badge.svg" 
+     alt="Generate Blog">  
+   </a>
+   <a href="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/update-theme.yml">
+     <img src="https://github.com/kurisaW/kurisaW.github.io/actions/workflows/update-theme.yml/badge.svg" 
+     alt="Update theme">  
+   </a>
 </div>
 
 
