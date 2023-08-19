@@ -1,6 +1,6 @@
 ---
 title: 【NXP】LPC55S69 FAL分区管理与easyflash变量管理
-description: 
+description: FAL分区管理与easyflash变量管理
 slug: 【NXP】LPC55S69 FAL分区管理与easyflash变量管理
 date: 2023-04-23 00:00:00+0000
 image: cover.jpg
