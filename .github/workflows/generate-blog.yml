@@ -1,15 +1,15 @@
 name: Generate Blog
 
-#on:
-#  schedule:
-#    - cron: '0 0 * * *'
 on:
-  push:
-    branches: [ master ]
-  delete:
-    branches: [ master ]
-  create:
-    branches: [ master ]
+ schedule:
+   - cron: '0 0 * * *'
+# on:
+#   push:
+#     branches: [ master ]
+#   delete:
+#     branches: [ master ]
+#   create:
+#     branches: [ master ]
     
 jobs:
   build:
