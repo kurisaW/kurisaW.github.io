@@ -39,10 +39,10 @@ jobs:
         id: changes
         run: |
           git diff --quiet HEAD -- README.md
-          if [ $? -eq 1 ]; then 
-            echo "::set-output name=has_changes::true"
+          if [ $? -eq 0 ]; then  
+            echo "::set-output name=has_changes::false" 
           else
-            echo "::set-output name=has_changes::false"  
+            echo "::set-output name=has_changes::true"
           fi
 
       - name: Commit and push changes
