@@ -61,7 +61,7 @@ sudo systemctl disable v2ray --now
 
 ![image-20230504105340371](https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041053522.png)
 
-## 启动v2ray进程
+## 启动v2raya进程
 
 ```c
 sudo systemctl start v2raya.service
