@@ -53,8 +53,8 @@
 | 2023-05-30 | [【Matter】使用chip-tool在ESP32-C3上进行matter开发](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】使用chip-tool在ESP32-C3上进行matter开发/index.md) | 使用chip tool在ESP32-C3上进行matter开发 |
 | 2023-05-24 | [【Matter】Matter环境构建参考文档](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】Matter环境构建参考文档/index.md) | Matter支持用 GN 配置构建，一个快速且可扩展的元构建系统，生成输入到 ninja 。 |
 | 2023-05-06 | [【Matter】esp-matter环境下的应用实践（程序烧录及串口监视）](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】esp-matter环境下的应用实践（程序烧录及串口监视）/index.md) | esp-matter环境下的应用实践，包括程序烧录及串口监视 |
-| 2023-05-04 | [【Matter】esp-matter开发环境搭建](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】esp-matter开发环境搭建/index.md) | Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。 |
 | 2023-05-04 | [【经验分享】Linux环境下v2ray的使用](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【经验分享】Linux环境下v2ray的使用/index.md) | Linux 环境下v2ray的使用 |
+| 2023-05-04 | [【Matter】esp-matter开发环境搭建](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】esp-matter开发环境搭建/index.md) | Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。 |
 ## `📠 Contact me:`
 
 * [Github Address :https://github.com/kurisaW](https://github.com/kurisaW)
