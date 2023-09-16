@@ -72,7 +72,7 @@ host rt-thread.com
     IdentityFile ~/.ssh/gitlab_id-rsa
 ```
 
-![](.\figure\ssh-config.png)
+![](./figure/ssh-config.png)
 
 ## 验证
 
@@ -92,4 +92,4 @@ ssh -T git@rt-thread.com
 
 如果出现如下提示即表示远程仓库 SSH 公钥和本地 SSH 密钥配对成功
 
-![](.\figure\valid-ssh.png)
+![](./figure/valid-ssh.png)
