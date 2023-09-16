@@ -45,6 +45,7 @@
 ## `✍️ Recent Posts`
 | UpdateTime | Title | Summary |
 | ---------- | ----- | ------- |
+| 2023-09-16 | [【Git版本控制】Github和Gitlab同时使用ssh](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Git版本控制】Github和Gitlab同时使用ssh/index.md) | 最近在使用WSL时会同时用到GitHub和Gitlab，因此与传统配置ssh方式有些不一样的地方，这里特别记录一下 |
 | 2023-08-20 | [【Matter】CHIP设备层设计笔记](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】CHIP设备层设计笔记/index.md) | 本文档包含与 CHIP 设备层 ( `src/platform`) 内部设计相关的概述、注释和其他信息材料。它旨在作为对实现者有价值的主题的托管文档的地方。 |
 | 2023-06-19 | [【Matter】如何在Linux平台下测试Matter应用级通信（虚拟设备）](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】如何在Linux平台下测试Matter应用级通信（虚拟设备）/index.md) | 如何在Linux平台下测试Matter应用级通信（虚拟设备） |
 | 2023-06-14 | [【Matter】Matter学习笔记1](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】Matter学习笔记1/index.md) | Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。 |
@@ -54,7 +55,6 @@
 | 2023-05-24 | [【Matter】Matter环境构建参考文档](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】Matter环境构建参考文档/index.md) | Matter支持用 GN 配置构建，一个快速且可扩展的元构建系统，生成输入到 ninja 。 |
 | 2023-05-06 | [【Matter】esp-matter环境下的应用实践（程序烧录及串口监视）](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】esp-matter环境下的应用实践（程序烧录及串口监视）/index.md) | esp-matter环境下的应用实践，包括程序烧录及串口监视 |
 | 2023-05-04 | [【经验分享】Linux环境下v2ray的使用](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【经验分享】Linux环境下v2ray的使用/index.md) | Linux 环境下v2ray的使用 |
-| 2023-05-04 | [【Matter】esp-matter开发环境搭建](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】esp-matter开发环境搭建/index.md) | Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。 |
 ## `📠 Contact me:`
 
 * [Github Address :https://github.com/kurisaW](https://github.com/kurisaW)
