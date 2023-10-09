@@ -1,7 +1,7 @@
 ---
-title: 【Linux系统开发】Linux常见问题汇总
+title: 【Linux系统开发】Linux常见开发汇总
 description: 汇总一些常用的Linux问题解决方案（持续更新中...）
-slug: 【Linux系统开发】Linux常见问题汇总
+slug: 【Linux系统开发】Linux常见开发汇总
 date: 2023-10-09 00:00:00+0000
 image: cover.jpg
 categories:
@@ -45,4 +45,44 @@ sudo apt install libgsettings-qt1
 ```
 
 重启即可
+
+## 3.Cmake安装指定版本
+
+首先去官网下载所需版本的压缩包：
+
+> * https://cmake.org/files/
+
+执行解压命令
+
+```bash
+tar -zxv -f cmake-3.22.6.tar.gz
+```
+
+安装相关依赖：
+
+```bash
+sudo apt-get install g++
+
+sudo apt-get install libssl-dev
+
+sudo apt-get install make
+```
+
+进入解压后的cmake文件，执行：
+
+```
+./bootstrap
+```
+
+编译构建：
+
+```bash
+make
+```
+
+安装：
+
+```bash
+sudo make install
+```
 
