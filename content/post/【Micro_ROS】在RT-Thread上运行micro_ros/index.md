@@ -205,7 +205,7 @@ scons --build_microros
 
 ![screenshot_image.png](figure/5f8d170d4a726855cf680c2d7a84681d.png.webp)
 
-编译完成后会使用 ar 将所有依赖的 micro_ros 库文件动态链接成 `packages\micro_ros_rtthread_component\builder\libmicroros\libmicroros.a`文件，同时将`C:\Users\20537\AppData\Local\Temp\micro\mcu\install\include`目录复制到`packages\micro_ros_rtthread_component\builder\libmicroros\include`目录下
+编译完成后会使用 ar 将所有依赖的 micro_ros 库文件静态链接成 `packages\micro_ros_rtthread_component\builder\libmicroros\libmicroros.a`文件，同时将`C:\Users\20537\AppData\Local\Temp\micro\mcu\install\include`目录复制到`packages\micro_ros_rtthread_component\builder\libmicroros\include`目录下
 
 编译完成后我们就得到了 rt-thread.elf 文件，可以使用 STM32CubeProgrammer 工具进行烧录到星火Spark上
 
