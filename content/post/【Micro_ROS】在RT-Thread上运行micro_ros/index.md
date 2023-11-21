@@ -250,7 +250,7 @@ $ ros2 topic pub /micro_ros_rtt_subscriber std_msgs/msg/Int32  data:\ 10	// 发�
 
 ### 8.1 准备工作
 
-首先需要在linux本地 搭建好 ROS 环境，micro-ros环境的安装参考**[[鱼香大佬的网站]](https://fishros.com/d2lros2foxy/#/chapt2/2.3ROS2%E7%9A%84%E5%AE%89%E8%A3%85)**
+首先需要在linux本地 搭建好 ROS 环境，micro-ros环境的安装参考**[鱼香大佬的网站](https://fishros.com/d2lros2foxy/#/chapt2/2.3ROS2%E7%9A%84%E5%AE%89%E8%A3%85)**
 
 **注意：我们安装的ros版本为 `ros:foxy`**
 
