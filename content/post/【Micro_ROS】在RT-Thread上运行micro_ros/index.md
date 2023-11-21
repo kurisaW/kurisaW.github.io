@@ -276,6 +276,12 @@ $ sudo apt-get install python3-pip
 $ colcon build
 $ source install/local_setup.bash
 
+ps:如果提示找不到colcon命令，使用如下方式安装colcon
+
+sudo apt install python3-colcon-common-externsions    # linux
+python3 -m pip install colcon-common-externsions      # macos
+pip install -U colcon-commmon-externsions             # windows
+
 # 创建一份固件工作区
 $ ros2 run micro_ros_setup create_firmware_ws.sh host
 
