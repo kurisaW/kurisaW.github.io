@@ -45,6 +45,7 @@
 ## `✍️ Recent Posts`
 | UpdateTime | Title | Summary |
 | ---------- | ----- | ------- |
+| 2024-02-03 | [【经验分享】如何让你的终端实现自动补齐、历史回溯](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【经验分享】如何让你的终端实现自动补齐、历史回溯/index.md) | 如何让你的终端实现自动补齐、历史回溯等功能，提升你的开发效率 |
 | 2023-11-04 | [【嵌入式素养提升】MPU与MCU](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【嵌入式素养提升】MPU与MCU/index.md) | 计算、控制单元小型化后出现的技术，集成电路进步带来的计算机系统集成程度提高的结果。 |
 | 2023-10-26 | [【经验分享】WSL中使用USB设备](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【经验分享】WSL中使用USB设备/index.md) | 本文就WSL中无法使用主机USB设备背景下，通过编译linux内核启用USB设备功能 |
 | 2023-10-26 | [【Micro_ROS】在RT-Thread上运行micro_ros](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Micro_ROS】在RT-Thread上运行micro_ros/index.md) | Micro-ROS的目标是将ROS2的强大功能扩展到资源受限的嵌入式平台，例如微控制器和嵌入式系统 |
@@ -54,7 +55,6 @@
 | 2023-08-20 | [【Matter】CHIP设备层设计笔记](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】CHIP设备层设计笔记/index.md) | 本文档包含与 CHIP 设备层 ( `src/platform`) 内部设计相关的概述、注释和其他信息材料。它旨在作为对实现者有价值的主题的托管文档的地方。 |
 | 2023-06-19 | [【Matter】如何在Linux平台下测试Matter应用级通信（虚拟设备）](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】如何在Linux平台下测试Matter应用级通信（虚拟设备）/index.md) | 如何在Linux平台下测试Matter应用级通信（虚拟设备） |
 | 2023-06-14 | [【Matter】Matter学习笔记1](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】Matter学习笔记1/index.md) | Matter 作为一个应用级的协议，向下屏蔽了设备制造商的生态和系统，让各种智能家居设备之间能相互通信。 |
-| 2023-06-07 | [【Matter】Nordic-Mattter开发大纲](https://github.com/kurisaW/kurisaW.github.io/blob/master/content/post/【Matter】Nordic-Mattter开发大纲/index.md) | 这部分仅作为开发大纲，后面会出一系列系统教程，以 Matter over Thread：在一台设备上配置边界路由器和控制器 为例。 |
 ## `📠 Contact me:`
 
 * [Github Address :https://github.com/kurisaW](https://github.com/kurisaW)
