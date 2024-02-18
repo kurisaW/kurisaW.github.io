@@ -1,7 +1,7 @@
 ---
 title: RT-Thread Studio使用（1）（按键控制电机正反转、蜂鸣器）
 description: RT-Thread，全称是 Real Time-Thread，顾名思义，它是一个嵌入式实时多线程操作系统，基本属性之一是支持多任务，允许多个任务同时运行并不意味着处理器在同一时刻真地执行了多个任务。
-slug: 【玩转RT-Thread】 RT-Thread Studio使用（1）（按键控制电机正反转、蜂鸣器）
+slug: 【玩转RT-Thread】RT-Thread Studio使用（1）（按键控制电机正反转、蜂鸣器）
 date: 2022-07-15 00:00:00+0000
 image: cover.jpg
 categories:

@@ -1,7 +1,7 @@
 ---
 title: 时钟管理（原理+实战）
 description: 操作系统需要通过时间来规范其任务的执行，操作系统中最小的时间单位是时钟节拍 (OS Tick)。
-slug: 【玩转RT-Thread】 时钟管理（原理+实战）
+slug: 【玩转RT-Thread】时钟管理（原理+实战）
 date: 2022-07-13 00:00:00+0000
 image: cover.jpg
 categories:

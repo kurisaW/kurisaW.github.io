@@ -1,7 +1,7 @@
 ---
 title: RT-Thread Studio使用 2.内核实战篇（线程）
 description: 在 RT-Thread 中，线程是实现任务的载体，它是 RT-Thread 中最基本的调度单位，它描述了一个任务执行的运行环境，也描述了这个任务所处的优先等级，重要的任务可设置相对较高的优先级，非重要的任务可以设置较低的优先级，不同的任务还可以设置相同的优先级，轮流运行。
-slug: 【玩转RT-Thread】 RT-Thread Studio使用 2.内核实战篇（线程）
+slug: 【玩转RT-Thread】RT-Thread Studio使用 2.内核实战篇（线程）
 date: 2022-07-14 00:00:00+0000
 image: cover.jpg
 categories:
