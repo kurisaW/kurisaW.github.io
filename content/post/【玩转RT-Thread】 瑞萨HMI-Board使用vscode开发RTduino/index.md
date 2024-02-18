@@ -1,7 +1,7 @@
 ---
-title: 【玩转RT-Thread】 瑞萨HMI-Board使用vscode开发RTduino
+title: 【玩转RT-Thread】瑞萨HMI-Board使用vscode开发RTduino
 description: 瑞萨HMI-Board使用vscode开发RTduino
-slug: 【玩转RT-Thread】 瑞萨HMI-Board使用vscode开发RTduino
+slug: 【玩转RT-Thread】瑞萨HMI-Board使用vscode开发RTduino
 date: 2024-02-18 00:00:00+0000
 image: cover.jpg
 categories:
