@@ -66,7 +66,7 @@ Host github.com
     IdentityFile ~/.ssh/github_id-rsa
 
 #gitlab
-host rt-thread.com
+host git.rt-thread.com
     Hostname git.rt-thread.com
     User git
     IdentityFile ~/.ssh/gitlab_id-rsa
