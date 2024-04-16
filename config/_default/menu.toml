@@ -5,7 +5,7 @@
 #  url = "/"
 #  [main.params]
 #    icon = "home"
-#    newtab = true
+#    newtab = true 
 
 [[social]]
 identifier = "github"
