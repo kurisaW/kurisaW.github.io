@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RTduino on kurisaW</title><link>https://kurisaw.github.io/tags/rtduino/</link><description>Recent content in RTduino on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 18 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/rtduino/index.xml" rel="self" type="application/rss+xml"/><item><title>【玩转RT-Thread】瑞萨HMI-Board使用vscode开发RTduino</title><link>https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/</link><pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/cover.jpg" alt="Featured image of post 【玩转RT-Thread】瑞萨HMI-Board使用vscode开发RTduino" />&lt;h1 id="瑞萨hmi-board使用vscode开发rtduino结合ssd1306-oled">瑞萨HMI-Board使用vscode开发RTduino（结合ssd1306 oled）
+&lt;/h1>&lt;hr>
+&lt;h2 id="1准备工作">1.准备工作
+&lt;/h2>&lt;p>软件环境：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/RT-Thread/rt-thread" target="_blank" rel="noopener"
+> RT-Thread 主仓代码（需下载至本地）&lt;/a>&lt;/li>
+&lt;li>vscode&lt;/li>
+&lt;li>rt-thread env&lt;/li>
+&lt;/ul>
+&lt;p>硬件环境：&lt;/p>
+&lt;ul>
+&lt;li>RA6M3-HMI-Board 开发板&lt;/li>
+&lt;li>0.96寸 ssd1306 oled 显示屏&lt;/li>
+&lt;/ul>
+&lt;h2 id="2工程配置">2.工程配置
+&lt;/h2>&lt;p>首先我们需要准备好上述所需内容，在将 RT-Thread 源码拉取到本地后，进入如下目录：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> rt-thread&lt;span class="se">\b&lt;/span>sp&lt;span class="se">\r&lt;/span>enesas&lt;span class="se">\r&lt;/span>a6m3-hmi-board
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里需要我们提前安装好 ENV 环境，具体细节请参考 &lt;a class="link" href="https://docs.rtduino.com/#/zh/beginner/env?id=env%e7%bc%96%e8%af%91%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba" target="_blank" rel="noopener"
+>Env编译环境搭建&lt;/a> 。&lt;/p>
+&lt;p>鼠标右键打开 ENV 工具后，使用 &lt;strong>menuconfig&lt;/strong> 命令打开可视化菜单，勾选上 &lt;strong>RTduino&lt;/strong> 的使能项，保存并退出&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123170636251.png"
+width="1086"
+height="392"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123170636251_hu8d0896b28c78ec2ba226d972cc9b9d66_18932_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123170636251_hu8d0896b28c78ec2ba226d972cc9b9d66_18932_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123170636251"
+class="gallery-image"
+data-flex-grow="277"
+data-flex-basis="664px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">RT-Thread Configuration
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> → Hardware Drivers Config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> → Onboard Peripheral Drivers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span>*&lt;span class="o">]&lt;/span> Compatible with Arduino Ecosystem &lt;span class="o">(&lt;/span>RTduino&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123171151275.png"
+width="1920"
+height="1004"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123171151275_hu896160409f1299a8e7f72313b1208e83_49774_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123171151275_hu896160409f1299a8e7f72313b1208e83_49774_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123171151275"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;p>此时我们可以注意到在使能该项后，系统会自动勾选上RTduino所需的软件包库及一些系统控制宏，同时我们还需要更新软件包进行下载（注意国内用户需要关闭代理后调用该命令）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ pkgs --update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们可以注意到在 bsp 根目录下生成了一个 packages 目录，并下载了我们所需的 RTduino 依赖库：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173108623.png"
+width="1682"
+height="768"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173108623_hu9818317fb8669572496764f5c1e90d0a_104325_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173108623_hu9818317fb8669572496764f5c1e90d0a_104325_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123173108623"
+class="gallery-image"
+data-flex-grow="219"
+data-flex-basis="525px"
+>&lt;/p>
+&lt;h2 id="3开始编译">3.开始编译
+&lt;/h2>&lt;p>打开 ENV ，同时执行如下命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ scons -j16
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173509831.png"
+width="1920"
+height="1004"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173509831_hu4af38eccac0a3b38ba49909657b54b49_100762_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123173509831_hu4af38eccac0a3b38ba49909657b54b49_100762_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123173509831"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;p>在工程编译完成后会生成一个 &lt;code>.elf&lt;/code>后缀的可执行文件，到这里工程的编译就顺利结束了。&lt;/p>
+&lt;h2 id="4vscode调试配置">4.vscode调试配置
+&lt;/h2>&lt;p>首先我们需要在 vscode 中安装 &lt;code>Cortex-Debug&lt;/code> 插件，打开 vscode 扩展，搜索 &lt;code>Cortex-Debug&lt;/code>并安装扩展：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123175244073.png"
+width="1920"
+height="1030"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123175244073_hu19dfc852061595e0b59627814afb4d72_250922_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123175244073_hu19dfc852061595e0b59627814afb4d72_250922_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123175244073"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;p>接下来就是安装 &lt;code>pyocd&lt;/code> 到本机了，当然也可以使用 python 进行安装，不过我们推荐使用 RT-Thread 官方提供的 pyocd，打开如下链接并下载到本地，这里下载最新版本即可：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">download link: https://github.com/RT-Thread-Studio/sdk-debugger-pyocd/releases
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接下来就是创建一份 debug 配置文件了，找到 vscode 左侧菜单栏的调试图标，点击 &lt;code>create a launch.json file&lt;/code>：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123180230889.png"
+width="1385"
+height="462"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123180230889_hu3c3d7ef8e7deed0551797e2cae34503d_41891_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123180230889_hu3c3d7ef8e7deed0551797e2cae34503d_41891_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123180230889"
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="719px"
+>&lt;/p>
+&lt;p>之后 vscode 会创建一份 &lt;code>launch.json&lt;/code> 文件，我们需要替换文件内容为：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Use IntelliSense to learn about possible attributes.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// Hover to view descriptions of existing attributes.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;version&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;0.2.0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;configurations&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;HMI-Board&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;cwd&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;${workspaceFolder}&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;executable&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;${workspaceRoot}/bsp/renesas/ra6m3-hmi-board/rtthread.elf&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;request&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;launch&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;cortex-debug&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;runToEntryPoint&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;targetId&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;R7FA6M3AH&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;servertype&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pyocd&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;serverpath&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;D:/compile/sdk-debugger-pyocd/pyocd.bat&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;armToolchainPath&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;D:/toolschain/gcc-arm-none-eabi-10-2020-q4-major-win32/bin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;gdbPath&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;D:/toolschain/gcc-arm-none-eabi-10-2020-q4-major-win32/bin/arm-none-eabi-gdb.exe&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注意：&lt;code>launch.json&lt;/code>文件中的部分参数需要根据具体位置配置&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>serverpath&lt;/code>：这部分路径在前面所安装的 &lt;code>sdk-debugger-pyocd&lt;/code>位置&lt;/li>
+&lt;li>&lt;code>armToolchainPath&lt;/code>：gcc 工具链，找不到位置的可以&lt;a class="link" href="https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-win32.exe?revision=9a4bce5a-7577-4b4f-910d-4585f55d35e8&amp;amp;rev=9a4bce5a75774b4f910d4585f55d35e8&amp;amp;hash=9770A44FEA9E9CDAC0DD9A009190CC8B" target="_blank" rel="noopener"
+>点击此处下载&lt;/a>&lt;/li>
+&lt;li>&lt;code>gdbPath&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>在完成上述配置后就可以点击 &lt;code>F5&lt;/code> 进行调试了，可能下载速度会比较慢，需要等待一会，调试成功效果如下：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123183906784.png"
+width="1920"
+height="1030"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123183906784_hu4193fbf261fb292b6d3393c5e365f285_122004_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123183906784_hu4193fbf261fb292b6d3393c5e365f285_122004_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123183906784"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;p>我们点击全速运行，并打开串口终端，可以看到系统启动后会自动打印 RTduino 线程信息：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184032932.png"
+width="815"
+height="536"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184032932_hue66132b98d0d39699465bd3964499c6e_27169_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184032932_hue66132b98d0d39699465bd3964499c6e_27169_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123184032932"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="364px"
+>&lt;/p>
+&lt;p>到这里 RTduino 就已经成功运行在 RT-Thread 啦！&lt;/p>
+&lt;h2 id="5demo使用-rtduino-驱动-096寸-ssd1306-oled">5.demo：使用 RTduino 驱动 0.96寸 ssd1306 oled
+&lt;/h2>&lt;p>在上面的环节中我们已经成功运行 RTduino 了，接下来我们将通过&lt;code>RTduino&lt;/code>，并在&lt;code>RT-Thread&lt;/code>中使用 &lt;code>Arduino&lt;/code> 源码驱动一个 oled 屏幕。&lt;/p>
+&lt;p>我们接着回到 ENV 中，使用 &lt;code>menuconfig&lt;/code>命令打开菜单，同时使用 &lt;code>shift + /&lt;/code>打开搜索界面，并且输入：&lt;code>ssd1306&lt;/code>关键字后回车搜索，在出现的页面我们使用键盘的方向键向下翻找，找到 &lt;code>Adafruit SSD1306&lt;/code>对应的 &lt;code>2&lt;/code>选项，进入点击 &lt;code>y&lt;/code> 使能：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184834403.png"
+width="1920"
+height="946"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184834403_hue981b9fca4b8353c1c66949c5f753232_77378_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184834403_hue981b9fca4b8353c1c66949c5f753232_77378_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123184834403"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="487px"
+>&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184930394.png"
+width="1920"
+height="946"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184930394_hu3aeac499ced8b050c8858e3a276fb87c_46269_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123184930394_hu3aeac499ced8b050c8858e3a276fb87c_46269_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123184930394"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="487px"
+>&lt;/p>
+&lt;p>这样我们就成功把 &lt;code>Adafruit SSD1306&lt;/code> 示例库下载到本地了，同时还有一下依赖库：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123185120453.png"
+width="1720"
+height="772"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123185120453_hu43bb075284a1598afec893f4245d907b_263089_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123185120453_hu43bb075284a1598afec893f4245d907b_263089_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123185120453"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="534px"
+>&lt;/p>
+&lt;p>我们找到路径：&lt;code>rt-thread\bsp\renesas\ra6m3-hmi-board\packages\Adafruit-SSD1306-latest\examples\ssd1306_128x64_i2c&lt;/code>，可以看到该文件夹下有一个&lt;code>ssd1306_128x64_i2c.ino&lt;/code>文件，这就是 Arduino 的工程文件，我们复制该文件内容到如下路径下的&lt;code>arduino_main.cpp&lt;/code>文件中：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> rt-thread&lt;span class="se">\b&lt;/span>sp&lt;span class="se">\r&lt;/span>enesas&lt;span class="se">\r&lt;/span>a6m3-hmi-board&lt;span class="se">\b&lt;/span>oard&lt;span class="se">\r&lt;/span>tduino&lt;span class="se">\a&lt;/span>rduino_main.cpp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;span class="lnt">182
+&lt;/span>&lt;span class="lnt">183
+&lt;/span>&lt;span class="lnt">184
+&lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
+&lt;/span>&lt;span class="lnt">187
+&lt;/span>&lt;span class="lnt">188
+&lt;/span>&lt;span class="lnt">189
+&lt;/span>&lt;span class="lnt">190
+&lt;/span>&lt;span class="lnt">191
+&lt;/span>&lt;span class="lnt">192
+&lt;/span>&lt;span class="lnt">193
+&lt;/span>&lt;span class="lnt">194
+&lt;/span>&lt;span class="lnt">195
+&lt;/span>&lt;span class="lnt">196
+&lt;/span>&lt;span class="lnt">197
+&lt;/span>&lt;span class="lnt">198
+&lt;/span>&lt;span class="lnt">199
+&lt;/span>&lt;span class="lnt">200
+&lt;/span>&lt;span class="lnt">201
+&lt;/span>&lt;span class="lnt">202
+&lt;/span>&lt;span class="lnt">203
+&lt;/span>&lt;span class="lnt">204
+&lt;/span>&lt;span class="lnt">205
+&lt;/span>&lt;span class="lnt">206
+&lt;/span>&lt;span class="lnt">207
+&lt;/span>&lt;span class="lnt">208
+&lt;/span>&lt;span class="lnt">209
+&lt;/span>&lt;span class="lnt">210
+&lt;/span>&lt;span class="lnt">211
+&lt;/span>&lt;span class="lnt">212
+&lt;/span>&lt;span class="lnt">213
+&lt;/span>&lt;span class="lnt">214
+&lt;/span>&lt;span class="lnt">215
+&lt;/span>&lt;span class="lnt">216
+&lt;/span>&lt;span class="lnt">217
+&lt;/span>&lt;span class="lnt">218
+&lt;/span>&lt;span class="lnt">219
+&lt;/span>&lt;span class="lnt">220
+&lt;/span>&lt;span class="lnt">221
+&lt;/span>&lt;span class="lnt">222
+&lt;/span>&lt;span class="lnt">223
+&lt;/span>&lt;span class="lnt">224
+&lt;/span>&lt;span class="lnt">225
+&lt;/span>&lt;span class="lnt">226
+&lt;/span>&lt;span class="lnt">227
+&lt;/span>&lt;span class="lnt">228
+&lt;/span>&lt;span class="lnt">229
+&lt;/span>&lt;span class="lnt">230
+&lt;/span>&lt;span class="lnt">231
+&lt;/span>&lt;span class="lnt">232
+&lt;/span>&lt;span class="lnt">233
+&lt;/span>&lt;span class="lnt">234
+&lt;/span>&lt;span class="lnt">235
+&lt;/span>&lt;span class="lnt">236
+&lt;/span>&lt;span class="lnt">237
+&lt;/span>&lt;span class="lnt">238
+&lt;/span>&lt;span class="lnt">239
+&lt;/span>&lt;span class="lnt">240
+&lt;/span>&lt;span class="lnt">241
+&lt;/span>&lt;span class="lnt">242
+&lt;/span>&lt;span class="lnt">243
+&lt;/span>&lt;span class="lnt">244
+&lt;/span>&lt;span class="lnt">245
+&lt;/span>&lt;span class="lnt">246
+&lt;/span>&lt;span class="lnt">247
+&lt;/span>&lt;span class="lnt">248
+&lt;/span>&lt;span class="lnt">249
+&lt;/span>&lt;span class="lnt">250
+&lt;/span>&lt;span class="lnt">251
+&lt;/span>&lt;span class="lnt">252
+&lt;/span>&lt;span class="lnt">253
+&lt;/span>&lt;span class="lnt">254
+&lt;/span>&lt;span class="lnt">255
+&lt;/span>&lt;span class="lnt">256
+&lt;/span>&lt;span class="lnt">257
+&lt;/span>&lt;span class="lnt">258
+&lt;/span>&lt;span class="lnt">259
+&lt;/span>&lt;span class="lnt">260
+&lt;/span>&lt;span class="lnt">261
+&lt;/span>&lt;span class="lnt">262
+&lt;/span>&lt;span class="lnt">263
+&lt;/span>&lt;span class="lnt">264
+&lt;/span>&lt;span class="lnt">265
+&lt;/span>&lt;span class="lnt">266
+&lt;/span>&lt;span class="lnt">267
+&lt;/span>&lt;span class="lnt">268
+&lt;/span>&lt;span class="lnt">269
+&lt;/span>&lt;span class="lnt">270
+&lt;/span>&lt;span class="lnt">271
+&lt;/span>&lt;span class="lnt">272
+&lt;/span>&lt;span class="lnt">273
+&lt;/span>&lt;span class="lnt">274
+&lt;/span>&lt;span class="lnt">275
+&lt;/span>&lt;span class="lnt">276
+&lt;/span>&lt;span class="lnt">277
+&lt;/span>&lt;span class="lnt">278
+&lt;/span>&lt;span class="lnt">279
+&lt;/span>&lt;span class="lnt">280
+&lt;/span>&lt;span class="lnt">281
+&lt;/span>&lt;span class="lnt">282
+&lt;/span>&lt;span class="lnt">283
+&lt;/span>&lt;span class="lnt">284
+&lt;/span>&lt;span class="lnt">285
+&lt;/span>&lt;span class="lnt">286
+&lt;/span>&lt;span class="lnt">287
+&lt;/span>&lt;span class="lnt">288
+&lt;/span>&lt;span class="lnt">289
+&lt;/span>&lt;span class="lnt">290
+&lt;/span>&lt;span class="lnt">291
+&lt;/span>&lt;span class="lnt">292
+&lt;/span>&lt;span class="lnt">293
+&lt;/span>&lt;span class="lnt">294
+&lt;/span>&lt;span class="lnt">295
+&lt;/span>&lt;span class="lnt">296
+&lt;/span>&lt;span class="lnt">297
+&lt;/span>&lt;span class="lnt">298
+&lt;/span>&lt;span class="lnt">299
+&lt;/span>&lt;span class="lnt">300
+&lt;/span>&lt;span class="lnt">301
+&lt;/span>&lt;span class="lnt">302
+&lt;/span>&lt;span class="lnt">303
+&lt;/span>&lt;span class="lnt">304
+&lt;/span>&lt;span class="lnt">305
+&lt;/span>&lt;span class="lnt">306
+&lt;/span>&lt;span class="lnt">307
+&lt;/span>&lt;span class="lnt">308
+&lt;/span>&lt;span class="lnt">309
+&lt;/span>&lt;span class="lnt">310
+&lt;/span>&lt;span class="lnt">311
+&lt;/span>&lt;span class="lnt">312
+&lt;/span>&lt;span class="lnt">313
+&lt;/span>&lt;span class="lnt">314
+&lt;/span>&lt;span class="lnt">315
+&lt;/span>&lt;span class="lnt">316
+&lt;/span>&lt;span class="lnt">317
+&lt;/span>&lt;span class="lnt">318
+&lt;/span>&lt;span class="lnt">319
+&lt;/span>&lt;span class="lnt">320
+&lt;/span>&lt;span class="lnt">321
+&lt;/span>&lt;span class="lnt">322
+&lt;/span>&lt;span class="lnt">323
+&lt;/span>&lt;span class="lnt">324
+&lt;/span>&lt;span class="lnt">325
+&lt;/span>&lt;span class="lnt">326
+&lt;/span>&lt;span class="lnt">327
+&lt;/span>&lt;span class="lnt">328
+&lt;/span>&lt;span class="lnt">329
+&lt;/span>&lt;span class="lnt">330
+&lt;/span>&lt;span class="lnt">331
+&lt;/span>&lt;span class="lnt">332
+&lt;/span>&lt;span class="lnt">333
+&lt;/span>&lt;span class="lnt">334
+&lt;/span>&lt;span class="lnt">335
+&lt;/span>&lt;span class="lnt">336
+&lt;/span>&lt;span class="lnt">337
+&lt;/span>&lt;span class="lnt">338
+&lt;/span>&lt;span class="lnt">339
+&lt;/span>&lt;span class="lnt">340
+&lt;/span>&lt;span class="lnt">341
+&lt;/span>&lt;span class="lnt">342
+&lt;/span>&lt;span class="lnt">343
+&lt;/span>&lt;span class="lnt">344
+&lt;/span>&lt;span class="lnt">345
+&lt;/span>&lt;span class="lnt">346
+&lt;/span>&lt;span class="lnt">347
+&lt;/span>&lt;span class="lnt">348
+&lt;/span>&lt;span class="lnt">349
+&lt;/span>&lt;span class="lnt">350
+&lt;/span>&lt;span class="lnt">351
+&lt;/span>&lt;span class="lnt">352
+&lt;/span>&lt;span class="lnt">353
+&lt;/span>&lt;span class="lnt">354
+&lt;/span>&lt;span class="lnt">355
+&lt;/span>&lt;span class="lnt">356
+&lt;/span>&lt;span class="lnt">357
+&lt;/span>&lt;span class="lnt">358
+&lt;/span>&lt;span class="lnt">359
+&lt;/span>&lt;span class="lnt">360
+&lt;/span>&lt;span class="lnt">361
+&lt;/span>&lt;span class="lnt">362
+&lt;/span>&lt;span class="lnt">363
+&lt;/span>&lt;span class="lnt">364
+&lt;/span>&lt;span class="lnt">365
+&lt;/span>&lt;span class="lnt">366
+&lt;/span>&lt;span class="lnt">367
+&lt;/span>&lt;span class="lnt">368
+&lt;/span>&lt;span class="lnt">369
+&lt;/span>&lt;span class="lnt">370
+&lt;/span>&lt;span class="lnt">371
+&lt;/span>&lt;span class="lnt">372
+&lt;/span>&lt;span class="lnt">373
+&lt;/span>&lt;span class="lnt">374
+&lt;/span>&lt;span class="lnt">375
+&lt;/span>&lt;span class="lnt">376
+&lt;/span>&lt;span class="lnt">377
+&lt;/span>&lt;span class="lnt">378
+&lt;/span>&lt;span class="lnt">379
+&lt;/span>&lt;span class="lnt">380
+&lt;/span>&lt;span class="lnt">381
+&lt;/span>&lt;span class="lnt">382
+&lt;/span>&lt;span class="lnt">383
+&lt;/span>&lt;span class="lnt">384
+&lt;/span>&lt;span class="lnt">385
+&lt;/span>&lt;span class="lnt">386
+&lt;/span>&lt;span class="lnt">387
+&lt;/span>&lt;span class="lnt">388
+&lt;/span>&lt;span class="lnt">389
+&lt;/span>&lt;span class="lnt">390
+&lt;/span>&lt;span class="lnt">391
+&lt;/span>&lt;span class="lnt">392
+&lt;/span>&lt;span class="lnt">393
+&lt;/span>&lt;span class="lnt">394
+&lt;/span>&lt;span class="lnt">395
+&lt;/span>&lt;span class="lnt">396
+&lt;/span>&lt;span class="lnt">397
+&lt;/span>&lt;span class="lnt">398
+&lt;/span>&lt;span class="lnt">399
+&lt;/span>&lt;span class="lnt">400
+&lt;/span>&lt;span class="lnt">401
+&lt;/span>&lt;span class="lnt">402
+&lt;/span>&lt;span class="lnt">403
+&lt;/span>&lt;span class="lnt">404
+&lt;/span>&lt;span class="lnt">405
+&lt;/span>&lt;span class="lnt">406
+&lt;/span>&lt;span class="lnt">407
+&lt;/span>&lt;span class="lnt">408
+&lt;/span>&lt;span class="lnt">409
+&lt;/span>&lt;span class="lnt">410
+&lt;/span>&lt;span class="lnt">411
+&lt;/span>&lt;span class="lnt">412
+&lt;/span>&lt;span class="lnt">413
+&lt;/span>&lt;span class="lnt">414
+&lt;/span>&lt;span class="lnt">415
+&lt;/span>&lt;span class="lnt">416
+&lt;/span>&lt;span class="lnt">417
+&lt;/span>&lt;span class="lnt">418
+&lt;/span>&lt;span class="lnt">419
+&lt;/span>&lt;span class="lnt">420
+&lt;/span>&lt;span class="lnt">421
+&lt;/span>&lt;span class="lnt">422
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">/*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * Copyright &lt;span class="o">(&lt;/span>c&lt;span class="o">)&lt;/span> 2006-2023, RT-Thread Development Team
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * SPDX-License-Identifier: Apache-2.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> *
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * Change Logs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * Date Author Notes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> * 2023-10-28 Wangyuqiang first version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include &amp;lt;Arduino.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include &amp;lt;SPI.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include &amp;lt;Wire.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include &amp;lt;Adafruit_GFX.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include &amp;lt;Adafruit_SSD1306.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define SCREEN_WIDTH 128 // OLED display width, in pixels&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define SCREEN_HEIGHT 64 // OLED display height, in pixels&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// Declaration &lt;span class="k">for&lt;/span> an SSD1306 display connected to I2C &lt;span class="o">(&lt;/span>SDA, SCL pins&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// The pins &lt;span class="k">for&lt;/span> I2C are defined by the Wire-library.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// On an arduino UNO: A4&lt;span class="o">(&lt;/span>SDA&lt;span class="o">)&lt;/span>, A5&lt;span class="o">(&lt;/span>SCL&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// On an arduino MEGA 2560: 20&lt;span class="o">(&lt;/span>SDA&lt;span class="o">)&lt;/span>, 21&lt;span class="o">(&lt;/span>SCL&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// On an arduino LEONARDO: 2&lt;span class="o">(&lt;/span>SDA&lt;span class="o">)&lt;/span>, 3&lt;span class="o">(&lt;/span>SCL&lt;span class="o">)&lt;/span>, ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define OLED_RESET -1 // Reset pin # (or -1 if sharing Arduino reset pin)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define SCREEN_ADDRESS 0x3C ///&amp;lt; See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Adafruit_SSD1306 display&lt;span class="o">(&lt;/span>SCREEN_WIDTH, SCREEN_HEIGHT, &lt;span class="p">&amp;amp;&lt;/span>Wire, OLED_RESET&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define NUMFLAKES 10 // Number of snowflakes in the animation example&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define LOGO_HEIGHT 16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define LOGO_WIDTH 16&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">static const unsigned char PROGMEM logo_bmp&lt;span class="o">[]&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span> 0b00000000, 0b11000000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00000001, 0b11000000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00000001, 0b11000000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00000011, 0b11100000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b11110011, 0b11100000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b11111110, 0b11111000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b01111110, 0b11111111,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00110011, 0b10011111,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00011111, 0b11111100,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00001101, 0b01110000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00011011, 0b10100000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00111111, 0b11100000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00111111, 0b11110000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b01111100, 0b11110000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b01110000, 0b01110000,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 0b00000000, 0b00110000 &lt;span class="o">}&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawline&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw many lines
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw rectangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw rectangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawcircle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw circles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillcircle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw circles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawroundrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw rounded rectangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillroundrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw rounded rectangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawtriangle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw triangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfilltriangle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw triangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawchar&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw characters of the default font
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawstyles&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw &lt;span class="s1">&amp;#39;stylized&amp;#39;&lt;/span> characters
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testscrolltext&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw scrolling text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawbitmap&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw a small bitmap image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testanimate&lt;span class="o">(&lt;/span>const uint8_t *bitmap, uint8_t w, uint8_t h&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void setup&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.begin&lt;span class="o">(&lt;/span>115200&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // &lt;span class="nv">SSD1306_SWITCHCAPVCC&lt;/span> &lt;span class="o">=&lt;/span> generate display voltage from 3.3V internally
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="o">(&lt;/span>!display.begin&lt;span class="o">(&lt;/span>SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS&lt;span class="o">))&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.println&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;SSD1306 allocation failed&amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="p">;;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Don&lt;span class="s1">&amp;#39;t proceed, loop forever
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // Show initial display buffer contents on the screen --
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // the library initializes this with an Adafruit splash screen.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> display.display();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> delay(2000); // Pause for 2 seconds
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // Clear the buffer
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> display.clearDisplay();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // Draw a single pixel in white
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> display.drawPixel(10, 10, SSD1306_WHITE);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // Show the display buffer on the screen. You MUST call display() after
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // drawing commands to make them visible on screen!
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> display.display();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> delay(2000);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // display.display() is NOT necessary after every single drawing command,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> // unless that&amp;#39;&lt;/span>s what you want...rather, you can batch up a bunch of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // drawing operations and &lt;span class="k">then&lt;/span> update the screen all at once by calling
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // display.display&lt;span class="o">()&lt;/span>. These examples demonstrate both approaches...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawline&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw many lines
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawrect&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw rectangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testfillrect&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw rectangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawcircle&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw circles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testfillcircle&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw circles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawroundrect&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw rounded rectangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testfillroundrect&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw rounded rectangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawtriangle&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw triangles &lt;span class="o">(&lt;/span>outlines&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testfilltriangle&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw triangles &lt;span class="o">(&lt;/span>filled&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawchar&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw characters of the default font
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawstyles&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw &lt;span class="s1">&amp;#39;stylized&amp;#39;&lt;/span> characters
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testscrolltext&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw scrolling text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testdrawbitmap&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Draw a small bitmap image
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Invert and restore display, pausing in-between
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.invertDisplay&lt;span class="o">(&lt;/span>&lt;span class="nb">true&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.invertDisplay&lt;span class="o">(&lt;/span>&lt;span class="nb">false&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> testanimate&lt;span class="o">(&lt;/span>logo_bmp, LOGO_WIDTH, LOGO_HEIGHT&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Animate bitmaps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void loop&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawline&lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int16_t i&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Clear display buffer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.width&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>0, 0, i, display.height&lt;span class="o">()&lt;/span>-1, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Update screen with each newly-drawn line
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>0, 0, display.width&lt;span class="o">()&lt;/span>-1, i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>250&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.width&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>0, display.height&lt;span class="o">()&lt;/span>-1, i, 0, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>display.height&lt;span class="o">()&lt;/span>-1&lt;span class="p">;&lt;/span> i&amp;gt;&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i-&lt;span class="o">=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>0, display.height&lt;span class="o">()&lt;/span>-1, display.width&lt;span class="o">()&lt;/span>-1, i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>250&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>display.width&lt;span class="o">()&lt;/span>-1&lt;span class="p">;&lt;/span> i&amp;gt;&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i-&lt;span class="o">=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>-1, display.height&lt;span class="o">()&lt;/span>-1, i, 0, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>display.height&lt;span class="o">()&lt;/span>-1&lt;span class="p">;&lt;/span> i&amp;gt;&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i-&lt;span class="o">=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>-1, display.height&lt;span class="o">()&lt;/span>-1, 0, i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>250&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>-1, 0, 0, i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.width&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>4&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawLine&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>-1, 0, i, display.height&lt;span class="o">()&lt;/span>-1, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Pause &lt;span class="k">for&lt;/span> &lt;span class="m">2&lt;/span> seconds
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>/2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>2&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawRect&lt;span class="o">(&lt;/span>i, i, display.width&lt;span class="o">()&lt;/span>-2*i, display.height&lt;span class="o">()&lt;/span>-2*i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Update screen with each newly-drawn rectangle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>/2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>3&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // The INVERSE color is used so rectangles alternate white/black
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.fillRect&lt;span class="o">(&lt;/span>i, i, display.width&lt;span class="o">()&lt;/span>-i*2, display.height&lt;span class="o">()&lt;/span>-i*2, SSD1306_INVERSE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Update screen with each newly-drawn rectangle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawcircle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;max&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>,display.height&lt;span class="o">())&lt;/span>/2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>2&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawCircle&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>/2, display.height&lt;span class="o">()&lt;/span>/2, i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillcircle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>max&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>,display.height&lt;span class="o">())&lt;/span>/2&lt;span class="p">;&lt;/span> i&amp;gt;0&lt;span class="p">;&lt;/span> i-&lt;span class="o">=&lt;/span>3&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // The INVERSE color is used so circles alternate white/black
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.fillCircle&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span> / 2, display.height&lt;span class="o">()&lt;/span> / 2, i, SSD1306_INVERSE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Update screen with each newly-drawn circle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawroundrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>/2-2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>2&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawRoundRect&lt;span class="o">(&lt;/span>i, i, display.width&lt;span class="o">()&lt;/span>-2*i, display.height&lt;span class="o">()&lt;/span>-2*i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.height&lt;span class="o">()&lt;/span>/4, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfillroundrect&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;display.height&lt;span class="o">()&lt;/span>/2-2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>2&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // The INVERSE color is used so round-rects alternate white/black
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.fillRoundRect&lt;span class="o">(&lt;/span>i, i, display.width&lt;span class="o">()&lt;/span>-2*i, display.height&lt;span class="o">()&lt;/span>-2*i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.height&lt;span class="o">()&lt;/span>/4, SSD1306_INVERSE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawtriangle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;max&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>,display.height&lt;span class="o">())&lt;/span>/2&lt;span class="p">;&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="o">+=&lt;/span>5&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawTriangle&lt;span class="o">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2 , display.height&lt;span class="o">()&lt;/span>/2-i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2-i, display.height&lt;span class="o">()&lt;/span>/2+i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2+i, display.height&lt;span class="o">()&lt;/span>/2+i, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testfilltriangle&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>max&lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span>,display.height&lt;span class="o">())&lt;/span>/2&lt;span class="p">;&lt;/span> i&amp;gt;0&lt;span class="p">;&lt;/span> i-&lt;span class="o">=&lt;/span>5&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // The INVERSE color is used so triangles alternate white/black
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.fillTriangle&lt;span class="o">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2 , display.height&lt;span class="o">()&lt;/span>/2-i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2-i, display.height&lt;span class="o">()&lt;/span>/2+i,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.width&lt;span class="o">()&lt;/span>/2+i, display.height&lt;span class="o">()&lt;/span>/2+i, SSD1306_INVERSE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawchar&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextSize&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Normal 1:1 pixel scale
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextColor&lt;span class="o">(&lt;/span>SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw white text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setCursor&lt;span class="o">(&lt;/span>0, 0&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Start at top-left corner
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.cp437&lt;span class="o">(&lt;/span>&lt;span class="nb">true&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Use full &lt;span class="m">256&lt;/span> char &lt;span class="s1">&amp;#39;Code Page 437&amp;#39;&lt;/span> font
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Not all the characters will fit on the display. This is normal.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Library will draw what it can and the rest will be clipped.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>int16_t &lt;span class="nv">i&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> i&amp;lt;256&lt;span class="p">;&lt;/span> i++&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">i&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span> display.write&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> display.write&lt;span class="o">(&lt;/span>i&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawstyles&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextSize&lt;span class="o">(&lt;/span>1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Normal 1:1 pixel scale
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextColor&lt;span class="o">(&lt;/span>SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw white text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setCursor&lt;span class="o">(&lt;/span>0,0&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Start at top-left corner
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.println&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;Hello, world!&amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextColor&lt;span class="o">(&lt;/span>SSD1306_BLACK, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw &lt;span class="s1">&amp;#39;inverse&amp;#39;&lt;/span> text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.println&lt;span class="o">(&lt;/span>3.141592&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextSize&lt;span class="o">(&lt;/span>2&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw 2X-scale text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextColor&lt;span class="o">(&lt;/span>SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.print&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;0x&amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span> display.println&lt;span class="o">(&lt;/span>0xDEADBEEF, HEX&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testscrolltext&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextSize&lt;span class="o">(&lt;/span>2&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Draw 2X-scale text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setTextColor&lt;span class="o">(&lt;/span>SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.setCursor&lt;span class="o">(&lt;/span>10, 0&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.println&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;scroll&amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Show initial text
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>100&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Scroll in various directions, pausing in-between:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.startscrollright&lt;span class="o">(&lt;/span>0x00, 0x0F&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.stopscroll&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.startscrollleft&lt;span class="o">(&lt;/span>0x00, 0x0F&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.stopscroll&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.startscrolldiagright&lt;span class="o">(&lt;/span>0x00, 0x07&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.startscrolldiagleft&lt;span class="o">(&lt;/span>0x00, 0x07&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>2000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.stopscroll&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testdrawbitmap&lt;span class="o">(&lt;/span>void&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawBitmap&lt;span class="o">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>display.width&lt;span class="o">()&lt;/span> - LOGO_WIDTH &lt;span class="o">)&lt;/span> / 2,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>display.height&lt;span class="o">()&lt;/span> - LOGO_HEIGHT&lt;span class="o">)&lt;/span> / 2,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> logo_bmp, LOGO_WIDTH, LOGO_HEIGHT, 1&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>1000&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define XPOS 0 // Indexes into the &amp;#39;icons&amp;#39; array in function below&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define YPOS 1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#define DELTAY 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void testanimate&lt;span class="o">(&lt;/span>const uint8_t *bitmap, uint8_t w, uint8_t h&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int8_t f, icons&lt;span class="o">[&lt;/span>NUMFLAKES&lt;span class="o">][&lt;/span>3&lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Initialize &lt;span class="s1">&amp;#39;snowflake&amp;#39;&lt;/span> positions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">f&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> f&amp;lt; NUMFLAKES&lt;span class="p">;&lt;/span> f++&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>XPOS&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> random&lt;span class="o">(&lt;/span>&lt;span class="m">1&lt;/span> - LOGO_WIDTH, display.width&lt;span class="o">())&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> -LOGO_HEIGHT&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>DELTAY&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> random&lt;span class="o">(&lt;/span>1, 6&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.print&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;x: &amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.print&lt;span class="o">(&lt;/span>icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>XPOS&lt;span class="o">]&lt;/span>, DEC&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.print&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34; y: &amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.print&lt;span class="o">(&lt;/span>icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span>, DEC&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.print&lt;span class="o">(&lt;/span>F&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34; dy: &amp;#34;&lt;/span>&lt;span class="o">))&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Serial.println&lt;span class="o">(&lt;/span>icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>DELTAY&lt;span class="o">]&lt;/span>, DEC&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="p">;;&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span> // Loop forever...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.clearDisplay&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Clear the display buffer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Draw each snowflake:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">f&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> f&amp;lt; NUMFLAKES&lt;span class="p">;&lt;/span> f++&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.drawBitmap&lt;span class="o">(&lt;/span>icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>XPOS&lt;span class="o">]&lt;/span>, icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span>, bitmap, w, h, SSD1306_WHITE&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display.display&lt;span class="o">()&lt;/span>&lt;span class="p">;&lt;/span> // Show the display buffer on the screen
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> delay&lt;span class="o">(&lt;/span>200&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span> // Pause &lt;span class="k">for&lt;/span> 1/10 second
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Then update coordinates of each flake...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nv">f&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="p">;&lt;/span> f&amp;lt; NUMFLAKES&lt;span class="p">;&lt;/span> f++&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span> +&lt;span class="o">=&lt;/span> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>DELTAY&lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // If snowflake is off the bottom of the screen...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span> &amp;gt;&lt;span class="o">=&lt;/span> display.height&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // Reinitialize to a random position, just off the top
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>XPOS&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> random&lt;span class="o">(&lt;/span>&lt;span class="m">1&lt;/span> - LOGO_WIDTH, display.width&lt;span class="o">())&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>YPOS&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> -LOGO_HEIGHT&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icons&lt;span class="o">[&lt;/span>f&lt;span class="o">][&lt;/span>DELTAY&lt;span class="o">]&lt;/span> &lt;span class="o">=&lt;/span> random&lt;span class="o">(&lt;/span>1, 6&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在此示例中有几点注意事项：&lt;/p>
+&lt;ul>
+&lt;li>在每一份添加的示例工程中，我们都必须要包含头文件 &lt;code>#include &amp;lt;Arduino.h&amp;gt;&lt;/code>&lt;/li>
+&lt;li>由于我的这款 ssd1306 oled 显示屏是 i2c 驱动，i2c地址为 &lt;code>0x3c&lt;/code>，所以对应示例工程中的 &lt;code>SCREEN_ADDRESS&lt;/code>需要修改为 &lt;code>0X3C&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190157061.png"
+width="533"
+height="143"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190157061_hu8a3d8543fb6e60812177c0c00e8cafca_20743_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190157061_hu8a3d8543fb6e60812177c0c00e8cafca_20743_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123190157061"
+class="gallery-image"
+data-flex-grow="372"
+data-flex-basis="894px"
+>&lt;/p>
+&lt;ul>
+&lt;li>由于 Arduino 代码风格是一般不会添加函数声明的，需要我们手动添加一遍&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190348607.png"
+width="1920"
+height="1030"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190348607_huf9270c96311cd21b6f20f26e38cf62e0_256139_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123190348607_huf9270c96311cd21b6f20f26e38cf62e0_256139_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123190348607"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;p>接着我们继续编译工程源码，同时准备接线，由于在这份示例工程中默认使用的是 RTduino 默认的 i2c 设备（具体可查看文件：pins_arduino.h），而这份 bsp 对接 RTduino 默认为 RT-Thread 的软件模拟 i2c0，其对应引脚为：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">pin&lt;/th>
+&lt;th style="text-align:center">func&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">P203&lt;/td>
+&lt;td style="text-align:center">i2c0-sda&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">P202&lt;/td>
+&lt;td style="text-align:center">i2c0-scl&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">VCC&lt;/td>
+&lt;td style="text-align:center">vcc&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">GND&lt;/td>
+&lt;td style="text-align:center">gnd&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>接着我们启动调试，在等待下载后可以看到系统初始化会同时启动 RT-Thread main线程和 RTduino线程&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123191534695.png"
+width="813"
+height="431"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123191534695_huded9533eaa475083c852bef1354ae06b_23008_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/image-20240123191534695_huded9533eaa475083c852bef1354ae06b_23008_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="image-20240123191534695"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="452px"
+>&lt;/p>
+&lt;p>查看demo：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/demo.gif"
+width="1280"
+height="720"
+srcset="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/demo_hu55faf0cb12b470d4d703d4639e500e16_14061071_480x0_resize_box_1.gif 480w, https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-thread%E7%91%9E%E8%90%A8hmi-board%E4%BD%BF%E7%94%A8vscode%E5%BC%80%E5%8F%91rtduino/figures/demo_hu55faf0cb12b470d4d703d4639e500e16_14061071_1024x0_resize_box_1.gif 1024w"
+loading="lazy"
+alt="demo"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p></description></item></channel></rss>

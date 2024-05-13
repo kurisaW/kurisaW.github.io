@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Experience Sharing on kurisaW</title><link>https://kurisaw.github.io/tags/experience-sharing/</link><description>Recent content in Experience Sharing on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 03 Feb 2024 15:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/experience-sharing/index.xml" rel="self" type="application/rss+xml"/><item><title>【经验分享】如何让你的终端实现自动补齐、历史回溯</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E7%BB%88%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E9%BD%90%E5%8E%86%E5%8F%B2%E5%9B%9E%E6%BA%AF/</link><pubDate>Sat, 03 Feb 2024 15:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E7%BB%88%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E9%BD%90%E5%8E%86%E5%8F%B2%E5%9B%9E%E6%BA%AF/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E5%A6%82%E4%BD%95%E8%AE%A9%E4%BD%A0%E7%9A%84%E7%BB%88%E7%AB%AF%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E9%BD%90%E5%8E%86%E5%8F%B2%E5%9B%9E%E6%BA%AF/cover.jpg" alt="Featured image of post 【经验分享】如何让你的终端实现自动补齐、历史回溯" />&lt;h2 id="linux下配置">Linux下配置
+&lt;/h2>&lt;p>在 Linux 系统上配置 oh-my-zsh 并更改主题以及启用历史回溯非常简单。下面是详细步骤：&lt;/p>
+&lt;h3 id="步骤-1-安装-zsh">步骤 1: 安装 zsh
+&lt;/h3>&lt;p>确保你的系统上已经安装了 zsh。你可以使用系统的包管理器进行安装。例如，在基于 Debian/Ubuntu 的系统上，你可以运行：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt-get install zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤-2-安装-oh-my-zsh">步骤 2: 安装 oh-my-zsh
+&lt;/h3>&lt;p>在终端中运行以下命令来安装 oh-my-zsh：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sh -c &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者，如果你没有安装 &lt;code>curl&lt;/code>，可以使用 &lt;code>wget&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sh -c &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤-3-更改主题">步骤 3: 更改主题
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>打开 &lt;code>~/.zshrc&lt;/code> 文件以编辑它：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">nano ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>找到 &lt;code>ZSH_THEME&lt;/code> 行并更改主题。你可以在 &lt;a class="link" href="https://github.com/ohmyzsh/ohmyzsh/wiki/Themes" target="_blank" rel="noopener"
+>oh-my-zsh 主题库&lt;/a>中选择一个主题，例如：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">ZSH_THEME&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;agnoster&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>保存并关闭文件。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="步骤-4-启用历史回溯">步骤 4: 启用历史回溯
+&lt;/h3>&lt;p>oh-my-zsh 默认启用历史回溯。确保 &lt;code>~/.zshrc&lt;/code> 中没有明确禁用该功能的设置。检查是否存在以下行：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">HIST_STAMPS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;yyyy-mm-dd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这将显示历史命令的时间戳。如果你想要简单地显示命令历史而不包含时间戳，可以将其设置为：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">HIST_STAMPS&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤-5-重新启动-zsh-或打开新终端">步骤 5: 重新启动 zsh 或打开新终端
+&lt;/h3>&lt;p>在更改 &lt;code>~/.zshrc&lt;/code> 文件后，你需要重新启动 zsh 或者打开一个新的终端窗口以应用更改。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>现在，你的 oh-my-zsh 应该已经配置好，并且你可以享受新的主题和命令历史回溯功能。如果你在终端中输入 &lt;code>zsh&lt;/code> 并按 Enter，也可以切换到 zsh 提示符，体验更改后的主题和配置。&lt;/p>
+&lt;h2 id="windwos下配置">Windwos下配置
+&lt;/h2>&lt;p>在 Windows 下，你可以使用一些工具来实现类似 oh-my-zsh 的命令历史显示和补全功能。其中之一是使用 PowerShell，并安装 &lt;code>PSReadLine&lt;/code> 模块，它提供了丰富的命令行编辑和历史记录功能。&lt;/p>
+&lt;p>以下是在 PowerShell 中配置类似 oh-my-zsh 的历史记录显示的步骤：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安装 PSReadLine 模块:&lt;/strong>
+打开 PowerShell 终端，并执行以下命令来安装 &lt;code>PSReadLine&lt;/code> 模块：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Install-Module&lt;/span> &lt;span class="n">-Name&lt;/span> &lt;span class="n">PSReadLine&lt;/span> &lt;span class="n">-Force&lt;/span> &lt;span class="n">-SkipPublisherCheck&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置 PowerShell 用户配置文件:&lt;/strong>
+执行以下命令打开 PowerShell 配置文件（如果不存在，会创建一个新文件）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">notepad&lt;/span> &lt;span class="nv">$PROFILE&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>在配置文件中添加以下行:&lt;/strong>
+在打开的配置文件中，添加以下内容：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Import-Module&lt;/span> &lt;span class="n">PSReadLine&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Set-PSReadLineOption&lt;/span> &lt;span class="n">-HistoryNoDuplicates:&lt;/span>&lt;span class="vm">$false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Set-PSReadLineOption&lt;/span> &lt;span class="n">-EditMode&lt;/span> &lt;span class="n">Emacs&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>保存并关闭文件。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>重新启动 PowerShell:&lt;/strong>
+关闭当前的 PowerShell 终端，并重新打开一个新的终端。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>使用历史记录搜索:&lt;/strong>
+可以在 PowerShell 终端中使用 &lt;code>Ctrl + r&lt;/code> 来搜索并显示命令历史记录。输入字符，它会匹配历史记录中的命令。&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>【经验分享】Linux环境下v2ray的使用</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABlinux%E7%8E%AF%E5%A2%83%E4%B8%8Bv2ray%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 04 May 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABlinux%E7%8E%AF%E5%A2%83%E4%B8%8Bv2ray%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABlinux%E7%8E%AF%E5%A2%83%E4%B8%8Bv2ray%E7%9A%84%E4%BD%BF%E7%94%A8/cover.jpg" alt="Featured image of post 【经验分享】Linux环境下v2ray的使用" />&lt;h1 id="linux-环境下v2ray的使用">Linux 环境下v2ray的使用
+&lt;/h1>&lt;hr>
+&lt;blockquote>
+&lt;p>v2ray官方文档：&lt;a class="link" href="https://v2raya.org/" target="_blank" rel="noopener"
+>https://v2raya.org/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="curl安装">curl安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">apt-get purge libcurl4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">apt-get install curl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="v2ray镜像脚本安装">v2ray镜像脚本安装
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">curl&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">Ls&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.v2raya.org/go.sh | sudo bash
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041040498.png"
+loading="lazy"
+alt="image-20230504104013149"
+>&lt;/p>
+&lt;p>出现该提示信息则表示安装成功：&lt;code>info: V2Ray v5.4.1 is installed.&lt;/code>&lt;/p>
+&lt;p>接着关掉服务，因为 v2rayA 不依赖于该 systemd 服务，如果是 Xray内核，则需要把后面的v2ray替换xray&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">systemctl&lt;/span> &lt;span class="n">disable&lt;/span> &lt;span class="n">v2ray&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">now&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="v2ray软件安装">v2ray软件安装
+&lt;/h2>&lt;blockquote>
+&lt;p>仓库release地址：&lt;a class="link" href="https://github.com/v2rayA/v2rayA/releases" target="_blank" rel="noopener"
+>https://github.com/v2rayA/v2rayA/releases&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>选择合适自己 Linux 内核架构，可以使用&lt;code>dpkg --print-architecture&lt;/code>查看&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041050162.png"
+loading="lazy"
+alt="image-20230504105029122"
+>&lt;/p>
+&lt;p>这里我选择``下载到 Linux 共享文件夹&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041052416.png"
+loading="lazy"
+alt="image-20230504105226313"
+>&lt;/p>
+&lt;p>将共享文件夹下的&lt;code>installer_debian_amd64_2.0.5.deb&lt;/code>文件保存到一个文件夹下，在任务管理器中选择使用软件安装打开并进行安装&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041054352.png"
+loading="lazy"
+alt="image-20230504105440300"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041053522.png"
+loading="lazy"
+alt="image-20230504105340371"
+>&lt;/p>
+&lt;h2 id="启动v2raya进程">启动v2raya进程
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">systemctl&lt;/span> &lt;span class="n">start&lt;/span> &lt;span class="n">v2raya&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">service&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="设置开机自启动">设置开机自启动
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">systemctl&lt;/span> &lt;span class="n">enable&lt;/span> &lt;span class="n">v2raya&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">service&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="v2ray使用">v2ray使用
+&lt;/h2>&lt;p>打开火狐浏览器，输入 http://localhost:2017/&lt;/p>
+&lt;p>输入你要设置的用户名和密码，任意填写自己记着就好，最后点击创建&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041058629.png"
+loading="lazy"
+alt="image-20230504105825544"
+>&lt;/p>
+&lt;p>导入我们的机场订阅地址&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041100916.png"
+loading="lazy"
+alt="image-20230504105925321"
+>&lt;/p>
+&lt;p>选择想要使用的节点后，点击 Ready&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041106172.png"
+loading="lazy"
+alt="image-20230504110635073"
+>&lt;/p>
+&lt;h2 id="v2ray-settings">v2ray Settings
+&lt;/h2>&lt;p>我们点击网页上右上角的Setting，进行如下修改&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041110129.png"
+loading="lazy"
+alt="image-20230504111011073"
+>&lt;/p>
+&lt;h2 id="测试">测试
+&lt;/h2>&lt;p>至此所有的配置就完成了，我们打开 youtube 测试一下，没有问题，可以进行开发了&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202305041111183.png"
+loading="lazy"
+alt="image-20230504111116983"
+>&lt;/p></description></item><item><title>Wireshark网络抓包教程</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwireshark%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B/</link><pubDate>Mon, 10 Apr 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwireshark%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwireshark%E7%BD%91%E7%BB%9C%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B/cover.jpg" alt="Featured image of post Wireshark网络抓包教程" />&lt;blockquote>
+&lt;p>来源：&lt;a class="link" href="https://blog.csdn.net/HarveyH/article/details/113731485" target="_blank" rel="noopener"
+>转自：WireShark 抓包使用教程&amp;ndash;详细&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>Wireshark是非常流行的网络封包分析软件，可以截取各种网络数据包，并显示数据包详细信息。常用于开发测试过程各种问题定位。本文主要内容包括：&lt;/p>
+&lt;p>1、Wireshark软件下载和安装以及Wireshark主界面介绍。&lt;/p>
+&lt;p>2、WireShark简单抓包示例。通过该例子学会怎么抓包以及如何简单查看分析数据包内容。&lt;/p>
+&lt;p>3、Wireshark过滤器使用。通过过滤器可以筛选出想要分析的内容。包括按照协议过滤、端口和主机名过滤、数据包内容过滤。&lt;/p>
+&lt;h2 id="wireshark软件安装">Wireshark软件安装
+&lt;/h2>&lt;p>软件下载路径：&lt;a class="link" href="https://www.wireshark.org/" target="_blank" rel="noopener"
+>wireshark官网&lt;/a>。按照系统版本选择下载，下载完成后，按照软件提示一路Next安装。&lt;/p>
+&lt;p>如果你是Win10系统，安装完成后，选择抓包但是不显示网卡，下载win10pcap兼容性安装包。下载路径：&lt;a class="link" href="http://www.win10pcap.org/download/" target="_blank" rel="noopener"
+>win10pcap兼容性安装包&lt;/a>&lt;/p>
+&lt;h2 id="wireshark-开始抓包示例">&lt;strong>Wireshark 开始抓包示例&lt;/strong>
+&lt;/h2>&lt;p>先介绍一个使用wireshark工具抓取ping命令操作的示例，让读者可以先上手操作感受一下抓包的具体过程。&lt;/p>
+&lt;p>1、打开wireshark 2.6.5，主界面如下：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102042369.png"
+loading="lazy"
+alt="image-20230410204240214"
+>&lt;/p>
+&lt;p>2、选择菜单栏上Capture -&amp;gt; Option，勾选WLAN网卡（这里需要根据各自电脑网卡使用情况选择，简单的办法可以看使用的IP对应的网卡）。点击Start。启动抓包。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102043634.png"
+loading="lazy"
+alt="image-20230410204301558"
+>&lt;/p>
+&lt;p>3、wireshark启动后，wireshark处于抓包状态中。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102043120.png"
+loading="lazy"
+alt="image-20230410204330881"
+>&lt;/p>
+&lt;p>4、执行需要抓包的操作，如ping &lt;a class="link" href="https://www.baidu.com" target="_blank" rel="noopener"
+>www.baidu.com&lt;/a>。&lt;/p>
+&lt;p>5、操作完成后相关数据包就抓取到了。为避免其他无用的数据包影响分析，可以通过在过滤栏设置过滤条件进行数据包列表过滤，获取结果如下。说明：ip.addr == 119.75.217.26 and icmp 表示只显示ICPM协议且源主机IP或者目的主机IP为119.75.217.26的数据包。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102043973.png"
+loading="lazy"
+alt="image-20230410204349768"
+>&lt;/p>
+&lt;p>5、wireshark抓包完成，就这么简单。关于wireshark过滤条件和如何查看数据包中的详细内容在后面介绍。&lt;/p>
+&lt;h2 id="wireshakr抓包界面">Wireshakr抓包界面
+&lt;/h2>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102044121.png"
+loading="lazy"
+alt="image-20230410204417023"
+>&lt;/p>
+&lt;p>说明：数据包列表区中不同的协议使用了不同的颜色区分。协议颜色标识定位在菜单栏View --&amp;gt; Coloring Rules。如下所示&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102044221.png"
+loading="lazy"
+alt="image-20230410204435065"
+>&lt;/p>
+&lt;p>&lt;strong>WireShark 主要分为这几个界面&lt;/strong>&lt;/p>
+&lt;p>1. Display Filter(显示过滤器)， 用于设置过滤条件进行数据包列表过滤。菜单路径：Analyze --&amp;gt; Display Filters。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102045496.png"
+loading="lazy"
+alt="image-20230410204500320"
+>&lt;/p>
+&lt;p>2. Packet List Pane(数据包列表)， 显示捕获到的数据包，每个数据包包含编号，时间戳，源地址，目标地址，协议，长度，以及数据包信息。 不同协议的数据包使用了不同的颜色区分显示。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102045343.png"
+loading="lazy"
+alt="image-20230410204525166"
+>&lt;/p>
+&lt;p>3. Packet Details Pane(数据包详细信息), 在数据包列表中选择指定数据包，在数据包详细信息中会显示数据包的所有详细信息内容。数据包详细信息面板是最重要的，用来查看协议中的每一个字段。各行信息分别为&lt;/p>
+&lt;p>（1）Frame: 物理层的数据帧概况&lt;/p>
+&lt;p>（2）Ethernet II: 数据链路层以太网帧头部信息&lt;/p>
+&lt;p>（3）Internet Protocol Version 4: 互联网层IP包头部信息&lt;/p>
+&lt;p>（4）Transmission Control Protocol: 传输层T的数据段头部信息，此处是TCP&lt;/p>
+&lt;p>（5）Hypertext Transfer Protocol: 应用层的信息，此处是HTTP协议&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102045382.png"
+loading="lazy"
+alt="image-20230410204540297"
+>&lt;/p>
+&lt;p>&lt;strong>TCP包的具体内容&lt;/strong>&lt;/p>
+&lt;p>从下图可以看到wireshark捕获到的TCP包中的每个字段。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102045329.png"
+loading="lazy"
+alt="image-20230410204557194"
+>&lt;/p>
+&lt;p>4. Dissector Pane(数据包字节区)。&lt;/p>
+&lt;h2 id="wireshark过滤器设置">Wireshark过滤器设置
+&lt;/h2>&lt;p>初学者使用wireshark时，将会得到大量的冗余数据包列表，以至于很难找到自己自己抓取的数据包部分。wireshar工具中自带了两种类型的过滤器，学会使用这两种过滤器会帮助我们在大量的数据中迅速找到我们需要的信息。&lt;/p>
+&lt;p>（1）抓包过滤器&lt;/p>
+&lt;p>捕获过滤器的菜单栏路径为Capture --&amp;gt; Capture Filters。用于&lt;strong>在抓取数据包前设置。&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102046204.png"
+loading="lazy"
+alt="image-20230410204620124"
+>&lt;/p>
+&lt;p>如何使用？可以在抓取数据包前设置如下。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102046995.png"
+loading="lazy"
+alt="image-20230410204653927"
+>&lt;/p>
+&lt;p>ip host 60.207.246.216 and icmp表示只捕获主机IP为60.207.246.216的ICMP数据包。获取结果如下：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102047470.png"
+loading="lazy"
+alt="image-20230410204717268"
+>&lt;/p>
+&lt;p>（2）显示过滤器&lt;/p>
+&lt;p>显示过滤器是用于在抓取数据包后设置过滤条件进行过滤数据包。通常是在抓取数据包时设置条件相对宽泛，抓取的数据包内容较多时使用显示过滤器设置条件顾虑以方便分析。同样上述场景，在捕获时未设置捕获规则直接通过网卡进行抓取所有数据包，如下&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102047185.png"
+loading="lazy"
+alt="image-20230410204734985"
+>&lt;/p>
+&lt;p>执行ping &lt;a class="link" href="https://www.huawei.com" target="_blank" rel="noopener"
+>www.huawei.com&lt;/a>获取的数据包列表如下&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102047584.png"
+loading="lazy"
+alt="image-20230410204753507"
+>&lt;/p>
+&lt;p>观察上述获取的数据包列表，含有大量的无效数据。这时可以通过设置显示器过滤条件进行提取分析信息。ip.addr == 211.162.2.183 and icmp。并进行过滤。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102048361.png"
+loading="lazy"
+alt="image-20230410204815301"
+>&lt;/p>
+&lt;p>上述介绍了抓包过滤器和显示过滤器的基本使用方法。**在组网不复杂或者流量不大情况下，使用显示器过滤器进行抓包后处理就可以满足我们使用。**下面介绍一下两者间的语法以及它们的区别。&lt;/p>
+&lt;p>&lt;strong>wireshark过滤器表达式的规则&lt;/strong>&lt;/p>
+&lt;p>1、抓包过滤器语法和实例&lt;/p>
+&lt;p>抓包过滤器类型Type（host、net、port）、方向Dir（src、dst）、协议Proto（ether、ip、tcp、udp、http、icmp、ftp等）、逻辑运算符（&amp;amp;&amp;amp; 与、|| 或、！非）&lt;/p>
+&lt;p>（1）协议过滤&lt;/p>
+&lt;p>比较简单，直接在抓包过滤框中直接输入协议名即可。&lt;/p>
+&lt;p>TCP，只显示TCP协议的数据包列表&lt;/p>
+&lt;p>HTTP，只查看HTTP协议的数据包列表&lt;/p>
+&lt;p>ICMP，只显示ICMP协议的数据包列表&lt;/p>
+&lt;p>（2）IP过滤&lt;/p>
+&lt;p>host 192.168.1.104&lt;/p>
+&lt;p>src host 192.168.1.104&lt;/p>
+&lt;p>dst host 192.168.1.104&lt;/p>
+&lt;p>（3）端口过滤&lt;/p>
+&lt;p>port 80&lt;/p>
+&lt;p>src port 80&lt;/p>
+&lt;p>dst port 80&lt;/p>
+&lt;p>（4）逻辑运算符&amp;amp;&amp;amp; 与、|| 或、！非&lt;/p>
+&lt;p>src host 192.168.1.104 &amp;amp;&amp;amp; dst port 80 抓取主机地址为192.168.1.80、目的端口为80的数据包&lt;/p>
+&lt;p>host 192.168.1.104 || host 192.168.1.102 抓取主机为192.168.1.104或者192.168.1.102的数据包&lt;/p>
+&lt;p>！broadcast 不抓取广播数据包&lt;/p>
+&lt;p>2、显示过滤器语法和实例&lt;/p>
+&lt;p>（1）比较操作符&lt;/p>
+&lt;p>比较操作符有== 等于、！= 不等于、&amp;gt; 大于、&amp;lt; 小于、&amp;gt;= 大于等于、&amp;lt;=小于等于。&lt;/p>
+&lt;p>（2）协议过滤&lt;/p>
+&lt;p>比较简单，直接在Filter框中直接输入协议名即可。&lt;strong>注意：协议名称需要输入小写。&lt;/strong>&lt;/p>
+&lt;p>tcp，只显示TCP协议的数据包列表&lt;/p>
+&lt;p>http，只查看HTTP协议的数据包列表&lt;/p>
+&lt;p>icmp，只显示ICMP协议的数据包列表&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102048252.png"
+loading="lazy"
+alt="image-20230410204852057"
+>&lt;/p>
+&lt;p>（3） ip过滤&lt;/p>
+&lt;p>ip.src ==192.168.1.104 显示源地址为192.168.1.104的数据包列表&lt;/p>
+&lt;p>ip.dst==192.168.1.104, 显示目标地址为192.168.1.104的数据包列表&lt;/p>
+&lt;p>ip.addr == 192.168.1.104 显示源IP地址或目标IP地址为192.168.1.104的数据包列表&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102049772.png"
+loading="lazy"
+alt="image-20230410204937591"
+>&lt;/p>
+&lt;p>（4）端口过滤&lt;/p>
+&lt;p>tcp.port ==80, 显示源主机或者目的主机端口为80的数据包列表。&lt;/p>
+&lt;p>tcp.srcport == 80, 只显示TCP协议的源主机端口为80的数据包列表。&lt;/p>
+&lt;p>tcp.dstport == 80，只显示TCP协议的目的主机端口为80的数据包列表。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102049752.png"
+loading="lazy"
+alt="image-20230410204953546"
+>&lt;/p>
+&lt;p>（5） Http模式过滤&lt;/p>
+&lt;p>http.request.method==&amp;ldquo;GET&amp;rdquo;, 只显示HTTP GET方法的。&lt;/p>
+&lt;p>（6）逻辑运算符为 and/or/not&lt;/p>
+&lt;p>过滤多个条件组合时，使用and/or。比如获取IP地址为192.168.1.104的ICMP数据包表达式为ip.addr == 192.168.1.104 and icmp&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102050123.png"
+loading="lazy"
+alt="image-20230410205019907"
+>&lt;/p>
+&lt;p>（7）按照数据包内容过滤。假设我要以IMCP层中的内容进行过滤，可以单击选中界面中的码流，在下方进行选中数据。如下&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102050553.png"
+loading="lazy"
+alt="image-20230410205039366"
+>&lt;/p>
+&lt;p>右键单击选中后出现如下界面&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102050685.png"
+loading="lazy"
+alt="image-20230410205054595"
+>&lt;/p>
+&lt;p>选中Select后在过滤器中显示如下&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102051573.png"
+loading="lazy"
+alt="image-20230410205109402"
+>&lt;/p>
+&lt;p>后面条件表达式就需要自己填写。如下我想过滤出data数据包中包含&amp;quot;abcd&amp;quot;内容的数据流。&lt;strong>包含的关键词是contains 后面跟上内容。&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102051902.png"
+loading="lazy"
+alt="image-20230410205121718"
+>&lt;/p>
+&lt;p>看到这， 基本上对wireshak有了初步了解。&lt;/p>
+&lt;h2 id="wireshark抓包分析tcp三次握手">Wireshark抓包分析TCP三次握手
+&lt;/h2>&lt;p>（1）TCP三次握手连接建立过程&lt;/p>
+&lt;p>Step1：客户端发送一个SYN=1，ACK=0标志的数据包给服务端，请求进行连接，这是第一次握手；&lt;/p>
+&lt;p>Step2：服务端收到请求并且允许连接的话，就会发送一个SYN=1，ACK=1标志的数据包给发送端，告诉它，可以通讯了，并且让客户端发送一个确认数据包，这是第二次握手；&lt;/p>
+&lt;p>Step3：服务端发送一个SYN=0，ACK=1的数据包给客户端端，告诉它连接已被确认，这就是第三次握手。TCP连接建立，开始通讯。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102051845.png"
+loading="lazy"
+alt="image-20230410205135665"
+>&lt;/p>
+&lt;p>（2）wireshark抓包获取访问指定服务端数据包&lt;/p>
+&lt;p>Step1：启动wireshark抓包，打开浏览器输入www.huawei.com。&lt;/p>
+&lt;p>Step2：使用ping &lt;a class="link" href="https://www.huawei.com" target="_blank" rel="noopener"
+>www.huawei.com&lt;/a>获取IP。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102051433.png"
+loading="lazy"
+alt="image-20230410205150253"
+>&lt;/p>
+&lt;p>Step3：输入过滤条件获取待分析数据包列表 ip.addr == 211.162.2.183&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102052925.png"
+loading="lazy"
+alt="image-20230410205200760"
+>&lt;/p>
+&lt;p>图中可以看到wireshark截获到了三次握手的三个数据包。第四个包才是HTTP的， 这说明HTTP的确是使用TCP建立连接的。&lt;/p>
+&lt;p>&lt;strong>第一次握手数据包&lt;/strong>&lt;/p>
+&lt;p>客户端发送一个TCP，标志位为SYN，序列号为0， 代表客户端请求建立连接。 如下图。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102052226.png"
+loading="lazy"
+alt="image-20230410205215079"
+>&lt;/p>
+&lt;p>数据包的关键属性如下：&lt;/p>
+&lt;p>SYN ：标志位，表示请求建立连接&lt;/p>
+&lt;p>Seq = 0 ：初始建立连接值为0，数据包的相对序列号从0开始，表示当前还没有发送数据&lt;/p>
+&lt;p>Ack =0：初始建立连接值为0，已经收到包的数量，表示当前没有接收到数据&lt;/p>
+&lt;p>&lt;strong>第二次握手的数据包&lt;/strong>&lt;/p>
+&lt;p>服务器发回确认包, 标志位为 SYN,ACK. 将确认序号(Acknowledgement Number)设置为客户的I S N加1以.即0+1=1, 如下图&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102052307.png"
+loading="lazy"
+alt="image-20230410205230236"
+>&lt;/p>
+&lt;p>数据包的关键属性如下：&lt;/p>
+&lt;p>[SYN + ACK]: 标志位，同意建立连接，并回送SYN+ACK&lt;/p>
+&lt;p>Seq = 0 ：初始建立值为0，表示当前还没有发送数据&lt;/p>
+&lt;p>Ack = 1：表示当前端成功接收的数据位数，虽然客户端没有发送任何有效数据，确认号还是被加1，因为包含SYN或FIN标志位。（并不会对有效数据的计数产生影响，因为含有SYN或FIN标志位的包并不携带有效数据）&lt;/p>
+&lt;p>&lt;strong>第三次握手的数据包&lt;/strong>&lt;/p>
+&lt;p>客户端再次发送确认包(ACK) SYN标志位为0,ACK标志位为1.并且把服务器发来ACK的序号字段+1,放在确定字段中发送给对方.并且在数据段放写ISN的+1, 如下图:&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102052080.png"
+loading="lazy"
+alt="image-20230410205245006"
+>&lt;/p>
+&lt;p>数据包的关键属性如下：&lt;/p>
+&lt;p>ACK ：标志位，表示已经收到记录&lt;/p>
+&lt;p>Seq = 1 ：表示当前已经发送1个数据&lt;/p>
+&lt;p>Ack = 1 : 表示当前端成功接收的数据位数，虽然服务端没有发送任何有效数据，确认号还是被加1，因为包含SYN或FIN标志位（并不会对有效数据的计数产生影响，因为含有SYN或FIN标志位的包并不携带有效数据)。&lt;/p>
+&lt;p>就这样通过了TCP三次握手，建立了连接。开始进行数据交互&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102053540.png"
+loading="lazy"
+alt="image-20230410205305433"
+>&lt;/p>
+&lt;p>下面针对数据交互过程的数据包进行一些说明：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102053537.png"
+loading="lazy"
+alt="image-20230410205320467"
+>&lt;/p>
+&lt;p>数据包的关键属性说明&lt;/p>
+&lt;p>Seq: 1&lt;/p>
+&lt;p>Ack: 1: 说明现在共收到1字节数据&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102053985.png"
+loading="lazy"
+alt="image-20230410205335911"
+>&lt;/p>
+&lt;p>Seq: 1&lt;br>
+Ack: 951: 说明现在服务端共收到951字节数据&lt;/p>
+&lt;p>在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG。如下&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102053340.png"
+loading="lazy"
+alt="image-20230410205349152"
+>&lt;/p>
+&lt;p>其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有DATA数据传输，RST表示连接重置。&lt;/p>
+&lt;h2 id="wireshark分析常用操作">Wireshark分析常用操作
+&lt;/h2>&lt;p>调整数据包列表中时间戳显示格式。调整方法为View --&amp;gt;Time Display Format --&amp;gt; Date and Time of Day。调整后格式如下：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304102054848.png"
+loading="lazy"
+alt="image-20230410205401641"
+>&lt;/p></description></item><item><title>【经验分享】ARM常用汇编指令</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABarm%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/</link><pubDate>Wed, 29 Mar 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABarm%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABarm%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/cover.jpg" alt="Featured image of post 【经验分享】ARM常用汇编指令" />&lt;h1 id="arm常用汇编指令">ARM常用汇编指令
+&lt;/h1>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令名称&lt;/th>
+&lt;th>作用&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>EQU&lt;/td>
+&lt;td>给数字常量设置一个符号名，相当于C语言中的define&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AREA&lt;/td>
+&lt;td>汇编一个新的代码段或者数据段&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SPACE&lt;/td>
+&lt;td>分配内存空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>PRESERVE8&lt;/td>
+&lt;td>当前文件栈需要按照8字节对齐&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EXPORT&lt;/td>
+&lt;td>声明一个符号具有全局属性，可被外部文件使用&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DCD&lt;/td>
+&lt;td>以字为单位分配内存，要求4字节对齐，并要求初始化这些内存&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>PROC&lt;/td>
+&lt;td>定义子程序，与ENDP成对使用，表示子程序结束&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>WEAK&lt;/td>
+&lt;td>弱定义，如果外部文件声明了一个标号，则优先使用外部文件定义的标号，即使外部文件没有定义也不出错。要注意的是，这不是ARM的指令，而是编译器的，这里要放一起只是为了方便&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>IMPORT&lt;/td>
+&lt;td>声明标号来自外部文件，与C语言的EXETERN关键字类似&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>B&lt;/td>
+&lt;td>跳转到一个标号&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ALIGN&lt;/td>
+&lt;td>编译器对指令或者数据的存放地址进行对齐，一般需要跟一个立即数，默认为4字节对齐。要注意的是，这不是ARM的指令，而是编译器的，这里要放一起只是为了方便&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>END&lt;/td>
+&lt;td>到达文件的末尾，文件结束&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>IF,ELSE,ENDIF&lt;/td>
+&lt;td>汇编条件分支语句，与C语言的if else类似&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>MRS&lt;/td>
+&lt;td>加载特殊功能寄存器的值到特殊功能寄存器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CBZ&lt;/td>
+&lt;td>比较，如果结果为0则转移&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CBNZ&lt;/td>
+&lt;td>比较，如果结果非0则转移&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LDR&lt;/td>
+&lt;td>从存储器中加载字到一个寄存器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LDR[伪指令]&lt;/td>
+&lt;td>加载一个立即数或者一个地址到一个寄存器中。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LDRH&lt;/td>
+&lt;td>从存储器中加载半字到一个寄存器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LDRB&lt;/td>
+&lt;td>从存储器中加载字节到一个寄存器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>STR&lt;/td>
+&lt;td>把一个寄存器按字节存储到存储器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>STRH&lt;/td>
+&lt;td>把一个寄存器的低半字存储到存储器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>STRB&lt;/td>
+&lt;td>把一个寄存器的低字节存储到存储器中&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LDMIA&lt;/td>
+&lt;td>加载多个字，并且在加载后自增基址寄存器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>STMIA&lt;/td>
+&lt;td>存储多个字，并且在存储后自增基址寄存器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ORR&lt;/td>
+&lt;td>按位或&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>BX&lt;/td>
+&lt;td>直接跳转到由寄存器给定的地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>BL&lt;/td>
+&lt;td>跳转到标号对应的地址，并且把跳转前的下一条指令地址保存到LR&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>BLX&lt;/td>
+&lt;td>跳转到由寄存器REG给出的地址，并且根据REG的LSB切换处理器模式，还要把转移前的下一条指令地址保存到LR中。ARM(LSB=0),Thumb(LSB=1)。cortex-M3只在Thumb中运行，那就必须保证reg的LSB=1，否则会报错&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Microsoft Visual C++ 14.0 安装及Pycocotools2.0版本安装教学（防踩坑）</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABmicrosoft-visual-c-14.0-%E5%AE%89%E8%A3%85%E5%8F%8Apycocotools2.0%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E6%95%99%E5%AD%A6%E9%98%B2%E8%B8%A9%E5%9D%91/cover.jpg" alt="Featured image of post Microsoft Visual C++ 14.0 安装及Pycocotools2.0版本安装教学（防踩坑）" />&lt;h2 id="1microsoft-visual-c-140安装">1、Microsoft Visual C++ 14.0安装
+&lt;/h2>&lt;p>这里附上百度网盘下载链接：
+链接: &lt;a class="link" href="https://pan.baidu.com/s/1t5GWGymN6mFHDNlgrmD0yw?pwd=ec88" target="_blank" rel="noopener"
+>https://pan.baidu.com/s/1t5GWGymN6mFHDNlgrmD0yw?pwd=ec88&lt;/a> 提取码: ec88&lt;/p>
+&lt;p>下载完成后双击打开
+&lt;img src="https://img-blog.csdnimg.cn/04150c3c158c4baab13f0646ab6bb578.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>默认下载方式即可&lt;/p>
+&lt;hr>
+&lt;h2 id="2pycocotools20版本安装">2、Pycocotools2.0版本安装
+&lt;/h2>&lt;h4 id="1准备材料">（1）准备材料：
+&lt;/h4>&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/cocodataset/cocoapi" target="_blank" rel="noopener"
+>下载pycocotools安装包&lt;/a>（可直接git拉取到本地文件夹）&lt;/li>
+&lt;/ul>
+&lt;h4 id="2源码配置">（2）源码配置
+&lt;/h4>&lt;p>打开下载好的pycocotools，双击打开&lt;code>setup.py&lt;/code>（文件路径：\cocoapi\PythonAPI\setup.py）&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/985a37a42b1043bc9dc87d3c3e4e1d0f.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>这里&lt;code>将蓝色部分删除，只保留红色部分&lt;/code>(切记需要执行这一步！！！)&lt;/p>
+&lt;p>开始界面找到所有应用并打开&lt;code>Anaconda Powershell Prompt&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/9ad6e210127c49c9bfb16f9fd9b65968.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>先打开自己创建的虚拟环境，这里我的虚拟环境为python_env，可供参考。&lt;/p>
+&lt;p>如上图所示进入到&lt;code>\cocoapi\PythonAPI&lt;/code>该目录下&lt;/p>
+&lt;p>分别执行以下两个命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">py&lt;/span> &lt;span class="n">build_ext&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">inplace&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="n">setup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">py&lt;/span> &lt;span class="n">build_ext&lt;/span> &lt;span class="n">install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://img-blog.csdnimg.cn/02ec23e44b3848609cc74c8c28368a0f.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>执行pip list查看&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/642adca979d64daba7f8d2164e88443c.png"
+loading="lazy"
+>
+此时回到&lt;code>\cocoapi\PythonAPI&lt;/code>目录下，可以看到生成了相关文件
+&lt;img src="https://img-blog.csdnimg.cn/bdde5563cb794cf1962800f4656b71f5.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>
+将&lt;code>pycocotools&lt;/code>和&lt;code>pycocotools.egg-info&lt;/code>文件夹复制到你所创建的虚拟环境中（位置：Anaconda3-&amp;gt;envs-&amp;gt;python_env-&amp;gt;Lib-&amp;gt;site-packages）
+&lt;img src="https://img-blog.csdnimg.cn/8dd05ee9c4724de4a2ba536ad84aec81.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>至此所有问题解决！&lt;/p></description></item><item><title>总结：开发板挂载根文件系统遇到的一些问题</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</link><pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8C%82%E8%BD%BD%E6%A0%B9%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/cover.jpg" alt="Featured image of post 总结：开发板挂载根文件系统遇到的一些问题" />&lt;h2 id="一桥接网络">一、桥接网络
+&lt;/h2>&lt;h4 id="1简介">1、简介
+&lt;/h4>&lt;p>是指需手动配置虚拟机的IP地址（IP地址可自定义，但要和主机在同一个网段下）子网掩码，网关，此时虚拟机相当于局域网的另一台电脑，占用一个IP地址&lt;/p>
+&lt;h4 id="注意避坑">注意避坑：
+&lt;/h4>&lt;p>如果你的虚拟机选择了桥接模式，那么建议最好是不要使用校园网，因为一般校园网会需要验证登录，但是在虚拟机中好像并不会弹出登录界面（个人理解），因此你的网络在虚拟机中是无法运行的。&lt;/p>
+&lt;h4 id="2解决办法">2、解决办法：
+&lt;/h4>&lt;p>&amp;lt;1&amp;gt;选择直接使用网线连接到电脑，然后在虚拟机中桥接选择自己对应的网卡即可，博主自己是没有连接网线的，所以我自己是没有采取这个办法的。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241318456.png"
+loading="lazy"
+alt="image-20230424131854375"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241319850.png"
+loading="lazy"
+alt="image-20230424131957782"
+>&lt;/p>
+&lt;p>&amp;lt;2&amp;gt;无线网卡连接&lt;/p>
+&lt;p>考虑到生活的便捷性，大多数人一般都是使用的无线网卡上网，所以这里我们采用连接自己的个人热点进行网络桥接(当然也可以选择WiFi热点，此处为个人热点指南，WiFi连接可同样参考)&lt;/p>
+&lt;p>如下配置：&lt;/p>
+&lt;ul>
+&lt;li>主机配置&lt;/li>
+&lt;/ul>
+&lt;p>首先电脑win+R，输入&lt;code>cmd&lt;/code>进入终端，然后输入命令：&lt;code>ipconfig&lt;/code>，找到自己的热点网络信息&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241320409.png"
+loading="lazy"
+alt="image-20230424132028276"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241320692.png"
+loading="lazy"
+alt="image-20230424132041431"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241321679.png"
+loading="lazy"
+alt="image-20230424132117501"
+>&lt;/p>
+&lt;ul>
+&lt;li>虚拟机配置&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322849.png"
+loading="lazy"
+alt="image-20230424132214739"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322385.png"
+loading="lazy"
+alt="image-20230424132233318"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ctrl+alt+T打开终端，输入命令:vi /etc/network/interfaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241322519.png"
+loading="lazy"
+alt="image-20230424132250210"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">保存退出后，再次输入命令：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">首先将网卡关闭：ifdown eth0(一般桥接默认为eth0网卡)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">然后启用网卡：ifup eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="二开发板端测试">二、开发板端测试：
+&lt;/h2>&lt;p>&lt;code>以下内容为开发板挂载根文件系统，感兴趣的可以动手实践一下借鉴下面这篇博客&lt;/code>&lt;/p>
+&lt;p>&lt;a class="link" href="https://blog.csdn.net/qq_56914146/article/details/124407302?spm=1001.2014.3001.5502" target="_blank" rel="noopener"
+>【Linux系统开发】x210开发板根目录文件系统构建&lt;/a>&lt;/p>
+&lt;p>我们打开secureCRT：&lt;/p>
+&lt;p>开机先ping下虚拟机网络：&lt;code>ping '虚拟机IP'&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>注意：此处如果无法ping通虚拟机，一般是自己的虚拟机网络有问题，可以尝试输入以下命令解决&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="err">方法一：打开命令：&lt;/span>&lt;span class="n">sudo&lt;/span> &lt;span class="n">gedit&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">etc&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">NetworkManager&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">nm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">system&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">settings&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">出现文件内容：&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># This file is installed into /etc/NetworkManager, and is loaded by&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># NetworkManager by default. To override, specify: &amp;#39;--config file&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># during NM startup. This can be done by appending to DAEMON_OPTS in&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># the file:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># /etc/default/NetworkManager&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">main&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plugins&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">ifupdown&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">keyfile&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">ifupdown&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">managed&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="bp">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">（这里&lt;/span>&lt;span class="n">false改成true&lt;/span>&lt;span class="err">）&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">方法二：虚拟机重置网卡
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking restart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking start
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifdown eth0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifup eth0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当开发板ping通虚拟机后，我们在secureCRT控制台输入&lt;code>reset&lt;/code>命令重启开发板&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323671.png"
+loading="lazy"
+alt="image-20230424132308595"
+>&lt;/p>
+&lt;p>这里的内核加载过程中再次出现了问题，显示我nfs服务端无回应&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323776.png"
+loading="lazy"
+alt="image-20230424132323723"
+>&lt;/p>
+&lt;p>解决：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mount -t nfs -o nolock &amp;#39;开发板ipaddr ip&amp;#39;:/root/rootfs/x210_rootfs //再次重新挂载根文件系统
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//NFC网络重启
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/etc/init.d/nfs-kernel-server restart
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /etc/init.d/networking start
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304241323050.png"
+loading="lazy"
+alt="image-20230424132335917"
+>&lt;/p>
+&lt;p>问题解决！&lt;/p></description></item></channel></rss>

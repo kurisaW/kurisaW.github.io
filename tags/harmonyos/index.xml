@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HarmonyOS on kurisaW</title><link>https://kurisaw.github.io/tags/harmonyos/</link><description>Recent content in HarmonyOS on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/harmonyos/index.xml" rel="self" type="application/rss+xml"/><item><title>【HarmonyOS】小熊派鸿蒙系统搭建</title><link>https://kurisaw.github.io/p/harmonyos%E5%B0%8F%E7%86%8A%E6%B4%BE%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/</link><pubDate>Fri, 07 Apr 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/harmonyos%E5%B0%8F%E7%86%8A%E6%B4%BE%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/</guid><description>&lt;img src="https://kurisaw.github.io/p/harmonyos%E5%B0%8F%E7%86%8A%E6%B4%BE%E9%B8%BF%E8%92%99%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/cover.jpg" alt="Featured image of post 【HarmonyOS】小熊派鸿蒙系统搭建" />&lt;h2 id="一bearpi-hm-micro-开发板介绍">一、BearPi-HM Micro 开发板介绍
+&lt;/h2>&lt;p>BearPi-HM Micro开发板是一块高度集成并可运行Openharmony系统的开发板，板载高性能的工业级处理器STM32MP157芯片，搭配4.3寸LCD电容式触摸屏，并板载wifi电路及标准的E53接口，标准的E53接口可扩展智能加湿器、智能台灯、智能安防、智能烟感等案例。可折叠式屏幕设计大大提高用户开发体验，便于携带和存放，更好地满足不同用户的需求，拓展无限可能。&lt;/p>
+&lt;h2 id="二linux镜像下载">二、Linux镜像下载
+&lt;/h2>&lt;p>下载官方提供镜像(任选一种方式下载)&lt;/p>
+&lt;ul>
+&lt;li>Ubuntu20.04（大小8G）下载地址（百度云）：&lt;a class="link" href="https://gitee.com/link?target=https%3A%2F%2Fpan.baidu.com%2Fs%2F1W0cgtXC5T2bv0lAya7eizA" target="_blank" rel="noopener"
+>https://pan.baidu.com/s/1W0cgtXC5T2bv0lAya7eizA&lt;/a> 提取码：1234&lt;/li>
+&lt;li>Ubuntu18.04（大小4.8G）下载地址（百度云）：&lt;a class="link" href="https://gitee.com/link?target=https%3A%2F%2Fpan.baidu.com%2Fs%2F1YIdqlRWRGq_heAfrgQ7EPQ" target="_blank" rel="noopener"
+>https://pan.baidu.com/s/1YIdqlRWRGq_heAfrgQ7EPQ&lt;/a> 提取码：1234&lt;/li>
+&lt;/ul>
+&lt;h2 id="三bearpi-hm-micro编译环境配置">三、BearPi-HM Micro编译环境配置
+&lt;/h2>&lt;p>在完成上面的镜像下载后，我们需要对BearPi-HM Micro环境进行编译环境的配置&lt;/p>
+&lt;h4 id="1首先添加如下镜像源">1.首先添加如下镜像源
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vi /etc/apt/source.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp"># 添加中科大源
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="n">deb&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">src&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">src&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">src&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">src&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">deb&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">src&lt;/span> &lt;span class="nl">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="c1">//mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="2更新镜像源">2.更新镜像源
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="3安装依赖库及工具">3.安装依赖库及工具
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">apt&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">get&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">build&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">essential&lt;/span> &lt;span class="n">gcc&lt;/span> &lt;span class="n">g&lt;/span>&lt;span class="o">++&lt;/span> &lt;span class="n">make&lt;/span> &lt;span class="n">zlib&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">libffi&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span> &lt;span class="n">e2fsprogs&lt;/span> &lt;span class="n">pkg&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">config&lt;/span> &lt;span class="n">flex&lt;/span> &lt;span class="n">bison&lt;/span> &lt;span class="n">perl&lt;/span> &lt;span class="n">bc&lt;/span> &lt;span class="n">openssl&lt;/span> &lt;span class="n">libssl&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span> &lt;span class="n">libelf&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span> &lt;span class="n">libc6&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">amd64&lt;/span> &lt;span class="n">binutils&lt;/span> &lt;span class="n">binutils&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span> &lt;span class="n">libdwarf&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">dev&lt;/span> &lt;span class="n">u&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">boot&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span> &lt;span class="n">mtd&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">utils&lt;/span> &lt;span class="n">gcc&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">arm&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">linux&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">gnueabi&lt;/span> &lt;span class="n">cpio&lt;/span> &lt;span class="n">device&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tree&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">compiler&lt;/span> &lt;span class="n">net&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span> &lt;span class="n">openssh&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">server&lt;/span> &lt;span class="n">git&lt;/span> &lt;span class="n">vim&lt;/span> &lt;span class="n">openjdk&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">11&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">jre&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">headless&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="4安装hb">4.安装hb
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># 安装hb命令
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">python3 -m pip install --user ohos-build==0.4.3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 环境变量配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">vim&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 在.bashrc文件最后一行添加如下代码，并保存退出&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">PATH&lt;/span>&lt;span class="o">=~/.&lt;/span>&lt;span class="n">local&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bin&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PATH&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 更新环境变量&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">source&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="5测试hb是否安装成功">5.测试hb是否安装成功
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hb -h
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071818214.png"
+loading="lazy"
+alt="image-20230407181805793"
+>&lt;/p>
+&lt;h2 id="四安装mkimage工具">四、安装mkimage工具
+&lt;/h2>&lt;p>首先解释这个工具的用途：&lt;strong>用来制作不压缩或者压缩的多种可启动映象文件。&lt;/strong>&lt;/p>
+&lt;h4 id="1新建tools目录">1.新建tools目录
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">mkdir&lt;/span> &lt;span class="o">~/&lt;/span>&lt;span class="n">tools&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="2下载mkimagestm32工具到tools目录并复制到homebearpitools目录下">2.下载mkimage.stm32工具到&lt;code>~/tools&lt;/code>目录，并复制到/home/bearpi/tools/目录下
+&lt;/h4>&lt;ul>
+&lt;li>&lt;a class="link" href="https://pan.baidu.com/share/init?surl=T2O8luJ0-8g5ZZYdOvWfqQ" target="_blank" rel="noopener"
+>mkimage.stm32下载地址&lt;/a> 提取码：1234&lt;/li>
+&lt;/ul>
+&lt;h4 id="3修改mkimagestm32文件权限">3.修改mkimage.stm32文件权限
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">chmod&lt;/span> &lt;span class="mi">777&lt;/span> &lt;span class="o">~/&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mkimage&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stm32&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="4设置环境变量">4.设置环境变量
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">vim&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将下面的代码拷贝至.bashrc文件最后，并保存退出&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">PATH&lt;/span>&lt;span class="o">=~/&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">$&lt;/span>&lt;span class="n">PATH&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 更新环境变量&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">source&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">bashrc&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="五bearpi镜像导入vmware">五、bearpi镜像导入VMware
+&lt;/h2>&lt;p>准备好前面的Linux镜像，并解压该文件，打开VMware station，选择上方导航栏：文件-&amp;gt;打开(O)，选择我们Linux镜像中的&lt;code>BearPi-HM_Micro_Ubuntu.ovf&lt;/code>文件，等待镜像文件的导入，开始登录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">账户：bearpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">密码：bearpi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>首先将网络连接模式更改为NAT模式，选择上方导航栏：虚拟机(M)-&amp;gt;设置-&amp;gt;网络适配器-&amp;gt;NAT模式&lt;/p>
+&lt;p>此时打开一个终端，输入ifconfig查看ip&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071852103.png"
+loading="lazy"
+alt="image-20230407185206621"
+>&lt;/p>
+&lt;h2 id="六源码获取">六、源码获取
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd /home/bearpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir project &amp;amp;&amp;amp; cd project
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://gitee.com/bearpi/bearpi-hm_micro_small.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="七编译代码">七、编译代码
+&lt;/h2>&lt;p>首先进入到项目文件夹中&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd /home/bearpi/project/bearpi-hm_micro_small/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行如下命令(普通用户模式终端下)：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hb set
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>出现&lt;code>[OHOS INFO] Input code path: &lt;/code>提示信息后再输入&lt;code>.&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071902001.png"
+loading="lazy"
+alt="image-20230407190200859"
+>&lt;/p>
+&lt;p>我们选择&lt;code>bearpi-hm_micro&lt;/code>后回车&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071904137.png"
+loading="lazy"
+alt="image-20230407190426957"
+>&lt;/p>
+&lt;p>输入下面的命令，等待下载程序完成&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hb build -t notest --tee -f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当出现&lt;code>build success&lt;/code>时，即代表编译成功&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071916323.png"
+loading="lazy"
+alt="image-20230407191628183"
+>&lt;/p>
+&lt;h2 id="八查看编译出的固件位置">八、查看编译出的固件位置
+&lt;/h2>&lt;p>当编译完后，在Windows中可以直接查看到最终编译的固件，具体路径在： &lt;code>/home/bearpi/project/bearpi-hm_micro_small/out/bearpi_hm_micro/bearpi_hm_micro&lt;/code> 其中有以下文件是后面烧录系统需要使用的。&lt;/p>
+&lt;ul>
+&lt;li>OHOS_Image.stm32：系统镜像文件&lt;/li>
+&lt;li>rootfs_vfat.img：根文件系统&lt;/li>
+&lt;li>userfs_vfat.img：用户文件系统&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071919790.png"
+loading="lazy"
+alt="image-20230407191938678"
+>&lt;/p>
+&lt;p>我们将这三个文件复制到该目录下：&lt;code>/home/bearpi/project/bearpi-hm_micro_small/applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/&lt;/code>，方便后续烧录系统使用&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cp&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">r&lt;/span> &lt;span class="n">OHOS_Image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stm32&lt;/span> &lt;span class="n">rootfs_vfat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">img&lt;/span> &lt;span class="n">userfs_vfat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">img&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bearpi&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">project&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">bearpi&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">hm_micro_small&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">applications&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">BearPi&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">BearPi&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">HM_Micro&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">download_img&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">kernel&lt;/span>&lt;span class="o">/&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202304071929824.png"
+loading="lazy"
+alt="image-20230407192926584"
+>&lt;/p>
+&lt;h2 id="九固件烧录">九、固件烧录
+&lt;/h2>&lt;h4 id="1准备工作">1.准备工作
+&lt;/h4>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.wch.cn/downloads/CH341SER_EXE.html" target="_blank" rel="noopener"
+>CH340驱动&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.st.com/en/development-tools/stm32cubeprog.html#get-software" target="_blank" rel="noopener"
+>STM32CubeProgramme(v2.4.0+)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="2连接开发板">2.连接开发板
+&lt;/h4>&lt;p>首先将电脑的虚拟机和RailDriver打开，确保SFTP服务能够正常使用。（关于RailDriver配置可以查看这篇文章：&lt;a class="link" href="https://kurisaw.github.io/p/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91ubuntu%E9%85%8D%E7%BD%AEsftp%E6%9C%8D%E5%8A%A1/" target="_blank" rel="noopener"
+>【Linux系统开发】Ubuntu配置SFTP服务&lt;/a>）&lt;/p>
+&lt;p>当计算机本地磁盘出现一个SFTP(Y:)的网络盘符出现即代表服务能正常使用。&lt;/p>
+&lt;p>我们将开发板的usb接口连接到电脑，此时由于虚拟机会识别到设备，我们选择连接到本机&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111834424.png"
+loading="lazy"
+alt="image-20230411183456029"
+>&lt;/p>
+&lt;h4 id="3镜像烧录">3.镜像烧录
+&lt;/h4>&lt;ul>
+&lt;li>
+&lt;p>首先将开发板的拨码开关拨至“000”模式，然后再按下Reset键。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开STM32CubeProgramme，选择USB设备和正确的端口后，点击Connect连接小熊派。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击STM32CubeProgrammer工具的“+”按钮，然后选择烧录配置的tvs文件(路径：&lt;code>Y:\home\bearpi\project\bearpi-hm_micro_small\applications\BearPi\BearPi-HM_Micro\tools\download_img\flashlayout\bearpi-hm_micro.tsv&lt;/code>)。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击Browse按钮，然后选择工程源码下的烧录镜像路径&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击下载，等待烧录成功，中间会有一次断开连接，需要再虚拟机界面再次选择将USB设备连接到主机&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111935608.png"
+loading="lazy"
+alt="image-20230411193521444"
+>&lt;/p>
+&lt;h4 id="4启动系统">4.启动系统
+&lt;/h4>&lt;p>将开发板背面的拨码开关切换至“010”启动模式，并按一下RESET重启开发板，之后等待几秒中会看到屏幕中出现桌面及预装软件，之后就可以结合SSH进行远程终端开发了。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111940183.jpg"
+loading="lazy"
+alt="3"
+>&lt;/p></description></item></channel></rss>

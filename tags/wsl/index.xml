@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on kurisaW</title><link>https://kurisaw.github.io/tags/wsl/</link><description>Recent content in WSL on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 26 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>【经验分享】WSL中使用USB设备</title><link>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/</link><pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/cover.jpg" alt="Featured image of post 【经验分享】WSL中使用USB设备" />&lt;h2 id="具体步骤">具体步骤：
+&lt;/h2>&lt;p>首先在windows中安装 USBIP 工具，在GitHub上下载安装包并根据README文档的说明进行操作：&lt;/p>
+&lt;blockquote>
+&lt;p>下载链接：https://github.com/dorssel/usbipd-win/releases&lt;/p>
+&lt;/blockquote>
+&lt;p>同时在 WSL Linux 端也需要安装编译内核所需的库和工具，为后续做准备：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt install build-essential flex bison libssl-dev libelf-dev libncurses-dev autoconf libudev-dev libtool
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>打开wsl ubuntu终端使用命令：&lt;code>uname -r&lt;/code>得到版本号，同时根据版本号使用管理员模式新建目录&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/e6c7f98cdc98394c9085941b369626c7.png"
+width="587"
+height="103"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/e6c7f98cdc98394c9085941b369626c7_hu6d5d5753661e9718c36ca0fe088bab7d_13231_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/e6c7f98cdc98394c9085941b369626c7_hu6d5d5753661e9718c36ca0fe088bab7d_13231_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="569"
+data-flex-basis="1367px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo mkdir /usr/src/5.15.90.1-microsoft-standard-WSL2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>同时我们去GitHub下载一份wsl内核源码：https://github.com/microsoft/WSL2-Linux-Kernel/releases&lt;/p>
+&lt;p>这里的版本就是你使用命令 &lt;code>uname -r&lt;/code> 得到的版本号，建议可以先手动安装压缩包，然后使用vscode连接wsl，把文件拖拽到wsl下&lt;/p>
+&lt;p>然后解压到指定路径下(这部分注意区分版本号，不要一昧照搬命令)：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo tar -xzvf WSL2-Linux-Kernel-linux-msft-wsl-5.15.90.1.tar.gz -C /usr/src/5.15.90.1-microsoft-standard-WSL2/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> /usr/src/5.15.90.1-microsoft-standard-WSL2/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo mv WSL2-Linux-Kernel-linux-msft-wsl-5.15.90.1/* ./ &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo rm -r WSL2-Linux-Kernel-linux-msft-wsl-5.15.90.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后将内核的一些配置信息复制到当前文件夹下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo cp /proc/config.gz config.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo gunzip config.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo mv config .config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接着我们执行menuconfig命令打开图形化菜单&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo make menuconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>进入如下路径：&lt;code>&amp;gt; Device Drivers &amp;gt; USB support&lt;/code>&lt;/p>
+&lt;p>下面是一些必须的添加项，一般默认都是选中的，不过最好还是检查下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Support
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Support -&amp;gt; USB announce new devices
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Support -&amp;gt; USB Modem &lt;span class="o">(&lt;/span>CDC ACM&lt;span class="o">)&lt;/span> support
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Support -&amp;gt; USB/IP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Support -&amp;gt; USB/IP -&amp;gt; VHCI HCD
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Serial Converter Support
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Device Drivers -&amp;gt; USB Serial Converter Support -&amp;gt; USB FTDI Single port Serial Driver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>同时记得关闭 &lt;code>Device Drivers -&amp;gt; USB Support -&amp;gt; USB/IP -&amp;gt; Debug messages for USB/IP&lt;/code>这一选项，否则调试信息会非常影响你的使用体验&lt;/p>
+&lt;p>另外也可以添加你具体所需的USB模块勾选上，保存退出后执行内核编译&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo make -j8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>内核编译期间发生报错：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22ab297a83f4bfaf40bc2a9546ee238c.png"
+width="1069"
+height="344"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22ab297a83f4bfaf40bc2a9546ee238c_hu565d753fb626a3c75cce20fb44cc39bd_29743_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22ab297a83f4bfaf40bc2a9546ee238c_hu565d753fb626a3c75cce20fb44cc39bd_29743_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="310"
+data-flex-basis="745px"
+>&lt;/p>
+&lt;p>这主要是由于系统缺少dwarves软件包导致的，我们使用apt命令安装并继续执行编译：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt install dwarves
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo make -j8 &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo make modules_install -j8 &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo make install -j8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>发现又产生了报错：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/fe79652443aa3daeb419680393a251ac.png"
+width="932"
+height="310"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/fe79652443aa3daeb419680393a251ac_hu153a755aa2ef188338b9bb4b2fb8f8c2_27191_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/fe79652443aa3daeb419680393a251ac_hu153a755aa2ef188338b9bb4b2fb8f8c2_27191_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="300"
+data-flex-basis="721px"
+>&lt;/p>
+&lt;p>查找资料似乎说明的是这仅仅是个警告，我通过禁用BTF的调试信息解决了这个问题&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo vi .config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 找到宏`CONFIG_DEBUG_INFO_BTF`并将value改为 `n`&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装内核时发生报错：&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/74dedf7b13810239898885579a948cd1.png.webp"
+width="1200"
+height="176"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/74dedf7b13810239898885579a948cd1.png_huef029ec2ac474bddd194389cce0e4fc7_35882_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/74dedf7b13810239898885579a948cd1.png_huef029ec2ac474bddd194389cce0e4fc7_35882_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="681"
+data-flex-basis="1636px"
+>&lt;/p>
+&lt;p>解决方式有两种：&lt;/p>
+&lt;ul>
+&lt;li>1.可以选择在&lt;code>.config&lt;/code>中禁用宏&lt;code>CONFIG_X86_X32&lt;/code>&lt;/li>
+&lt;li>2.找到合适的binutils版本使其能够编译&lt;/li>
+&lt;/ul>
+&lt;p>我选择的是第一种，根据我在网上找到的说法是：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 除非您想要它并且拥有它的用户空间，否则 X32 并不是特别有用。请注意，X32 是 64 位的 x32 ABI，它是编译为在 64 位长模式下运行的“32 位”短指针代码，与真正的本机 32 位二进制/ABI 支持不同。这是一种具有非常具体的利基的特殊模式。&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 您可以在内核配置中禁用[CONFIG_X86_X32](https://cateee.net/lkddb/web-lkddb/X86_X32.html)或获取具有 elf32_x86_64 目标支持的 binutils。如何获取 binutils 取决于您的发行版。&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>所以我选择禁用宏&lt;code>CONFIG_X86_X32&lt;/code>，之后继续执行命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo make modules_install -j8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo make install -j8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/08603c912f855bc06d966116b81a1678.png.webp"
+width="1200"
+height="643"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/08603c912f855bc06d966116b81a1678.png_hu470e5e8bafee61400d78725d3d6f98b5_118168_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/08603c912f855bc06d966116b81a1678.png_hu470e5e8bafee61400d78725d3d6f98b5_118168_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;p>之后就可以选择编译 USBIP 工具了：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> tools/usb/usbip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo ./autogen.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo ./configure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo make install -j8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>复制工具库位置，以便 usbip 工具可以获取到：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo cp libsrc/.libs/libusbip.so.0 /lib/libusbip.so.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装 usb.ids 以便显示 USB 设备的名称：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt-get install hwdata
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>重启WSL：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ wsl --shutdown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>下面进行测试是否成功：
+打开powershell：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ usbipd wsl list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>假设我们需要在wsl使用的 usb 设备为 &lt;code>ST-Link Debug, USB 大容量存储设备, USB 串行设备 (COM3)&lt;/code>，设备id为 &lt;code>0483:374b&lt;/code>&lt;/p>
+&lt;p>我们使用命令附加设备到 wsl2 中&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ usbipd wsl attach --hardware-id &lt;span class="s2">&amp;#34;0483:374b&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/9f445ae61efe3fa9bf3ce333e0ce469d.png.webp"
+width="1200"
+height="408"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/9f445ae61efe3fa9bf3ce333e0ce469d.png_huc102e1e211029c5cedda14d6097aac59_44184_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/9f445ae61efe3fa9bf3ce333e0ce469d.png_huc102e1e211029c5cedda14d6097aac59_44184_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="294"
+data-flex-basis="705px"
+>&lt;/p>
+&lt;p>此时我们打开一个 wsl 终端，使用命令 &lt;code>lsusb&lt;/code> 即可看到附加到 wsl 的设备&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22478bf5a6a9981288f17be128919d96.png"
+width="1146"
+height="310"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22478bf5a6a9981288f17be128919d96_hufea644602841bee6c7283a2b22a3e541_32967_480x0_resize_box_3.png 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/22478bf5a6a9981288f17be128919d96_hufea644602841bee6c7283a2b22a3e541_32967_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="369"
+data-flex-basis="887px"
+>&lt;/p>
+&lt;p>然后我们再次回到 powershell ，执行 &lt;code>usbipd wsl list&lt;/code>命令，可以看到此时的 usb 设备已经成功添加到 wsl 了&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/b9d74353b8bcb2fbbbd2cd992ae9d8e9.png.webp"
+width="1200"
+height="572"
+srcset="https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/b9d74353b8bcb2fbbbd2cd992ae9d8e9.png_hua939fa00c4e9286056c5c99bbb532251_65046_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%ABwsl%E4%B8%AD%E4%BD%BF%E7%94%A8usb%E8%AE%BE%E5%A4%87/figure/b9d74353b8bcb2fbbbd2cd992ae9d8e9.png_hua939fa00c4e9286056c5c99bbb532251_65046_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="209"
+data-flex-basis="503px"
+>&lt;/p></description></item></channel></rss>

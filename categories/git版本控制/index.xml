@@ -1,0 +1,1651 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git版本控制 on kurisaW</title><link>https://kurisaw.github.io/categories/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</link><description>Recent content in Git版本控制 on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 09 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/categories/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>【Git版本控制】在Linux终端显示Git版本信息</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%9C%A8linux%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BAgit%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF/</link><pubDate>Mon, 09 Oct 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%9C%A8linux%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BAgit%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%9C%A8linux%E7%BB%88%E7%AB%AF%E6%98%BE%E7%A4%BAgit%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF/cover.jpg" alt="Featured image of post 【Git版本控制】在Linux终端显示Git版本信息" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在使用Git管理项目时，经常需要知道当前所在的分支是哪一个。这个信息对于协作和版本控制非常重要。然而，Git默认情况下并不会在命令行中显示当前分支名称，这可能会导致一些混淆和不便。在本篇博文中，我们将介绍如何通过编辑&lt;code>.bashrc&lt;/code>文件，使Git在命令行中显示当前分支的名称，让你的Git工作更加顺畅和高效。&lt;/p>
+&lt;h3 id="步骤一进入home目录">步骤一：进入home目录
+&lt;/h3>&lt;p>首先，打开你的终端，并进入home目录。你可以使用以下命令来完成这一步：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤二编辑bashrc文件">步骤二：编辑.bashrc文件
+&lt;/h3>&lt;p>接下来，我们需要编辑&lt;code>.bashrc&lt;/code>文件，这是Linux和macOS系统中存储Shell配置的文件。你可以使用vi编辑器或其他文本编辑器来打开它，这里我们以vi为例：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">vi .bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤三添加代码到文件末尾">步骤三：添加代码到文件末尾
+&lt;/h3>&lt;p>在打开的&lt;code>.bashrc&lt;/code>文件中，将以下代码添加到文件的末尾：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="k">function&lt;/span> git_branch &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">branch&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;`git branch 2&amp;gt;/dev/null | grep &amp;#34;&lt;/span>^&lt;span class="se">\*&lt;/span>&lt;span class="s2">&amp;#34; | sed -e &amp;#34;&lt;/span>s/^&lt;span class="se">\*\ &lt;/span>//&lt;span class="s2">&amp;#34;`&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">branch&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> !&lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">branch&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;(no branch)&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">branch&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;(`git rev-parse --short HEAD`...)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34; (&lt;/span>&lt;span class="nv">$branch&lt;/span>&lt;span class="s2">)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">PS1&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;\u@\h \[\033[01;36m\]\W\[\033[01;32m\]$(git_branch)\[\033[00m\] \$ &amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这段代码定义了一个名为&lt;code>git_branch&lt;/code>的函数，用于获取并显示当前Git分支的名称。然后，通过&lt;code>export&lt;/code>命令将这个信息添加到Shell的提示符中，以便在命令行中实时显示当前分支名称。&lt;/p>
+&lt;h3 id="步骤四保存并退出vi编辑器">步骤四：保存并退出vi编辑器
+&lt;/h3>&lt;p>完成以上代码的添加后，按下Esc键退出编辑模式，然后输入以下命令保存并退出vi编辑器：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">:wq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="步骤五执行命令使配置生效">步骤五：执行命令使配置生效
+&lt;/h3>&lt;p>最后，执行以下命令来使新的配置生效：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ./.bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>现在，当你进入一个包含Git仓库的目录时，命令行提示符将会显示当前分支的名称，让你随时了解项目的状态。&lt;/p>
+&lt;p>通过这个简单的配置，你可以提高Git工作的效率，更轻松地进行版本控制和协作。希望这个小技巧对你的开发工作有所帮助！&lt;/p></description></item><item><title>【Git版本控制】Github和Gitlab同时使用ssh</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/</link><pubDate>Sat, 16 Sep 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/cover.jpg" alt="Featured image of post 【Git版本控制】Github和Gitlab同时使用ssh" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>最近在使用 WSL 时会同时用到 GitHub和 Gitlab ，因此与传统配置 ssh 方式有些不一样的地方，这里特别记录一下&lt;/p>
+&lt;h2 id="本地生成公私密钥">本地生成公私密钥
+&lt;/h2>&lt;p>首先确保把之前的 ssh 信息清除，也可以将整个 &lt;code>~/.ssh&lt;/code> 目录删除&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rm -rf ~/.ssh/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们分别生成 Github 和 Gitlab账号的 SSH 密钥&lt;/p>
+&lt;ul>
+&lt;li>Github 生成密钥&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C 2053731441@qq.com -f ~/.ssh/github_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Gitlab 生成密钥&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C wangyuqiang@rt-thread.com -f ~/.ssh/gitlab_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注意不要选择其他操作，一路回车即可&lt;/p>
+&lt;p>此时打开 &lt;code>~/.ssh/&lt;/code> 目录可以看到生成了四个文件：&lt;code>github_id-rsa github_id-rsa.pub gitlab_id-rsa gitlab_id-rsa.pub&lt;/code>&lt;/p>
+&lt;p>其中 &lt;code>.pub&lt;/code> 后缀的文件为公钥，需要上传到远程仓库SSH；没有后缀的则是私钥，本地留存&lt;/p>
+&lt;h2 id="远程仓库-ssh-填写公钥密钥">远程仓库 SSH 填写公钥密钥
+&lt;/h2>&lt;p>我们先打开 Github 的 Settings选项，然后选择 &lt;code>SSH and GPG keys-&amp;gt;New SSH key&lt;/code> ，&lt;code>Title&lt;/code>可以随意拟定，&lt;code>Key&lt;/code>需要查看刚刚的 &lt;code>github_id-rsa.pub&lt;/code> 文件，并且复制到 Gitlab 的&lt;code>key&lt;/code>一栏中；&lt;/p>
+&lt;p>Gitlab 的操作方式与 Github 类似，具体步骤：&lt;/p>
+&lt;p>打开 &lt;code>Gitlab -&amp;gt; 用户设置 -&amp;gt; SSH密钥&lt;/code> ，在密钥一栏填入 &lt;code>gitlab_id-rsa.pub&lt;/code>文件中的具体值，标题自拟即可。&lt;/p>
+&lt;h2 id="配置不同-host-的-ssh-key">配置不同 Host 的 SSH Key
+&lt;/h2>&lt;p>回到 &lt;code>~/.ssh/&lt;/code> 目录下，并且创建一个名为 &lt;code>config&lt;/code> 的文件，在该文件中填写以下具体代码，其中部分参数依照自己的信息填写：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#github&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname ssh.github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Port &lt;span class="m">443&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> User git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile ~/.ssh/github_id-rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#gitlab&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">host git.rt-thread.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname git.rt-thread.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> User git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile ~/.ssh/gitlab_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/figure/ssh-config.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="验证">验证
+&lt;/h2>&lt;p>使用下面的命令分别验证 Github 和 Gitlab的 SSH 配置&lt;/p>
+&lt;ul>
+&lt;li>Github SSH 验证&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh -T git@github.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Gitlab SSH 验证&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh -T git@rt-thread.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果出现如下提示即表示远程仓库 SSH 公钥和本地 SSH 密钥配对成功&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/figure/valid-ssh.png"
+loading="lazy"
+>&lt;/p></description></item><item><title>【Git版本控制】GitHub图床服务Action---自动监视图床仓库的目录下的文件数</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%9B%BE%E5%BA%8A%E6%9C%8D%E5%8A%A1action---%E8%87%AA%E5%8A%A8%E7%9B%91%E8%A7%86%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E7%9A%84%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0/</link><pubDate>Wed, 31 May 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%9B%BE%E5%BA%8A%E6%9C%8D%E5%8A%A1action---%E8%87%AA%E5%8A%A8%E7%9B%91%E8%A7%86%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E7%9A%84%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%9B%BE%E5%BA%8A%E6%9C%8D%E5%8A%A1action---%E8%87%AA%E5%8A%A8%E7%9B%91%E8%A7%86%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E7%9A%84%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0/cover.jpg" alt="Featured image of post 【Git版本控制】GitHub图床服务Action---自动监视图床仓库的目录下的文件数" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>最近突然想起年前图床仓库发生的一个遗留问题：由于我的网络图床服务是&lt;code>Github + Typora&lt;/code>的形式，本地的图片会自动转义成网络图片并存储在图床仓库下，一般我们会指定一个目录进行图片存储，但是由于GitHub设定的单个目录最大存储文件数不能超过1000.&lt;/p>
+&lt;p>所以在注意到这件事的情况下GitHub的图床仓库就发生了问题：新加入的图片文件由于没有文件位，会自动代替旧的图片文件，这就导致了部分文件的丢失，所以这里想写一个GitHub仓库的自动化Action，每天检测仓库下每个目录下的文件个数，超过999个文件自动给GitHub默认绑定的邮箱发送信息提醒。&lt;/p>
+&lt;h2 id="具体流程">具体流程
+&lt;/h2>&lt;p>当每天自动检测仓库中每个目录中的文件数量，并且如果超过999个文件时，自动向与GitHub账户关联的默认邮箱发送消息。&lt;/p>
+&lt;h3 id="1-创建github工作流文件">1. 创建GitHub工作流文件
+&lt;/h3>&lt;p>在GitHub仓库中，转到&lt;code>.github/workflows&lt;/code>目录并创建一个新文件，比如&lt;code>file_count.yml&lt;/code>。该文件将定义运行自动化操作的工作流。&lt;/p>
+&lt;h3 id="2-定义工作流">2. 定义工作流
+&lt;/h3>&lt;p>在&lt;code>file_count.yml&lt;/code>文件中，添加以下代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">File Count Reminder&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">schedule&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">cron&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;0 0 * * *&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Runs every day at midnight UTC&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">count-files&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Check out code&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Set up Python&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/setup-python@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">python-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;3.10&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Replace with the desired Python version&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Count files and send email&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="sd">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> pip install -r requirements.txt
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> python send_email.py ${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="3-创建requirementstxt文件">3. 创建&lt;code>requirements.txt&lt;/code>文件
+&lt;/h3>&lt;p>在GitHub仓库中创建一个名为&lt;code>requirements.txt&lt;/code>的文件，并将以下内容添加到文件中：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">smtplib
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="4-创建send_emailpy文件">4. 创建&lt;code>send_email.py&lt;/code>文件
+&lt;/h3>&lt;p>在GitHub仓库中创建一个名为&lt;code>send_email.py&lt;/code>的文件，并将以下代码添加到文件中：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">smtplib&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">email.mime.text&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">MIMEText&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">email.header&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Header&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">count_files&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">directory&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dirs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">walk&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">directory&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file_count&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">files&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">file_count&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">send_email&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">github_token&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">recipient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file_count&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">smtp_server&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;smtp.gmail.com&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">smtp_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">587&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;File Count Reminder&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">content&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;The repository has &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">file_count&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1"> files.&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MIMEText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">content&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;plain&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;utf-8&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;From&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Header&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;GitHub Action&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;To&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Header&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">recipient&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">message&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Subject&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Header&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">subject&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">server&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">smtplib&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SMTP&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">smtp_server&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">smtp_port&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">starttls&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">login&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;githubaction@gmail.com&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">github_token&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendmail&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;githubaction@gmail.com&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">recipient&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">as_string&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">quit&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Email reminder sent to&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">recipient&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Failed to send email:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">repository_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;.&amp;#39;&lt;/span> &lt;span class="c1"># Replace with the path to your repository if needed&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">file_limit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">999&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">file_count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">count_files&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">repository_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="n">file_count&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">file_limit&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">github_token&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">environ&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;INPUT_GITHUB_TOKEN&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">default_email&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">environ&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;GITHUB_ACTOR&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;@users.noreply.github.com&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">send_email&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">github_token&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">default_email&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file_count&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;The repository has&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file_count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;files. No reminder needed.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>使用这些步骤，工作流将每天UTC时间午夜运行，计算仓库中的文件数量，如果文件数量超过999，则会向与GitHub账户关联的默认邮箱发送邮件提醒。&lt;/p></description></item><item><title>Github同步Gitee镜像仓库自动化脚本</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%90%8C%E6%AD%A5gitee%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</link><pubDate>Tue, 11 Apr 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%90%8C%E6%AD%A5gitee%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%90%8C%E6%AD%A5gitee%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/cover.jpg" alt="Featured image of post Github同步Gitee镜像仓库自动化脚本" />&lt;h1 id="github同步gitee镜像仓库自动化脚本">Github同步Gitee镜像仓库自动化脚本
+&lt;/h1>&lt;hr>
+&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在软件开发中，使用Git作为代码管理工具是非常普遍的。而GitHub和Gitee则是我们熟知的两个在线Git代码托管平台。如果我们在这两个平台上都有代码仓库，并且希望实现自动同步，应该怎么做呢？这就需要使用GitHub Action中的Hub Mirror Action了。&lt;/p>
+&lt;h2 id="什么是hub-mirror-action">什么是Hub Mirror Action？
+&lt;/h2>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111537579.png"
+loading="lazy"
+alt="image-20230411153729450"
+>&lt;/p>
+&lt;h3 id="1介绍">1.介绍
+&lt;/h3>&lt;p>&lt;a class="link" href="https://github.com/marketplace/actions/hub-mirror-action" target="_blank" rel="noopener"
+>Hub Mirror Action&lt;/a>是GitHub Action中的一个组件，可以将GitHub仓库内容自动同步到Gitee上，也可以实现从Gitee到GitHub的自动同步。Hub Mirror Action提供了多种同步方式，支持单向同步和双向同步，可以在配置文件中进行灵活设置。&lt;/p>
+&lt;h3 id="2用法">2.用法
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Mirror the Github organization repos to Gitee.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Yikun/hub-mirror-action@master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">src&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github/kunpengcompute&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">gitee/kunpengcompute&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_PRIVATE_KEY }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">account_type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># src_account_type: org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c"># dst_account_type: org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>附：详细使用案例请查看官方仓库 &lt;a class="link" href="https://github.com/Yikun/hub-mirror-action" target="_blank" rel="noopener"
+>https://github.com/Yikun/hub-mirror-action&lt;/a>&lt;/p>
+&lt;h2 id="配置步骤">配置步骤
+&lt;/h2>&lt;h3 id="1生成密钥对">1.生成密钥对
+&lt;/h3>&lt;p>我们先在本地使用git命令行打开终端，输入如下命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">ssh&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">keygen&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">t&lt;/span> &lt;span class="n">rsa&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">f&lt;/span> &lt;span class="o">~/&lt;/span>&lt;span class="n">Documents&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">ssh&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">id_rsa&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注：请确保文件夹&lt;code>~/Documents/ssh-key/&lt;/code>存在，当然你也可以选择放置在其他地方&lt;/p>
+&lt;p>过程中一路回车即可，注意不要设置密码。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111543237.png"
+loading="lazy"
+alt="image-20230411154330166"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111551053.png"
+loading="lazy"
+alt="image-20230411155124878"
+>&lt;/p>
+&lt;h3 id="2github私钥配置">2.GitHub私钥配置
+&lt;/h3>&lt;p>首先为了存放自动化脚本，我们需要创建一个新的GitHub仓库，并为其配置相关环境。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111547966.png"
+loading="lazy"
+alt="image-20230411154716849"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>依次点击&lt;code>Settings-&amp;gt;Secrets and variables-&amp;gt;Actions&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击&lt;code>New respository secret&lt;/code>，创建一个名为&lt;code>GITEE_PRIVATE_KEY&lt;/code>的secret，值为我们之前生成的密钥对中的私钥(id_rsa)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111553202.png"
+loading="lazy"
+alt="image-20230411155314101"
+>&lt;/p>
+&lt;h3 id="3gitee公钥配置">3.Gitee公钥配置
+&lt;/h3>&lt;p>我们打开Gitee账号，进入&lt;code>Settings-&amp;gt;安全设置-&amp;gt;SSH公钥&lt;/code>&lt;/p>
+&lt;p>添加一个名为gitee_sync的公钥，值也就是我们前面生成的公钥(id_rsa.pub)&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111558684.png"
+loading="lazy"
+alt="image-20230411155846562"
+>&lt;/p>
+&lt;h3 id="4gitee生成私人令牌">4.Gitee生成私人令牌
+&lt;/h3>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111559999.png"
+loading="lazy"
+alt="image-20230411155958898"
+>&lt;/p>
+&lt;p>令牌名称随意，同时复制生成的令牌值。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111601466.png"
+loading="lazy"
+alt="image-20230411160127393"
+>&lt;/p>
+&lt;h3 id="5github绑定gitee令牌">5.Github绑定Gitee令牌
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>依次点击&lt;code>Settings-&amp;gt;Secrets and variables-&amp;gt;Actions&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击&lt;code>New respository secret&lt;/code>，创建一个名为&lt;code>GITEE_TOKEN&lt;/code>的secret，值为Gitee生成的令牌值&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111603849.png"
+loading="lazy"
+alt="image-20230411160340721"
+>&lt;/p>
+&lt;h3 id="6编写ci脚本">6.编写CI脚本
+&lt;/h3>&lt;p>将&lt;code>ci_bot&lt;/code>仓库（放置及部署自动化脚本的仓库）下载到本地，同时创建这样的文件层次目录：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="n">ci_bot&lt;/span>&lt;span class="o">/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span>&lt;span class="err">——&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">github&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span>&lt;span class="err">——&lt;/span>&lt;span class="n">workflows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&lt;/span>&lt;span class="err">——&lt;/span>&lt;span class="n">Sync&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">yml&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在&lt;code>Sync.yml&lt;/code>文件中，添加以下代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Sync Github Repos To Gitee&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">push, delete, create ]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Sync Github Repos To Gitee &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 名字随便起&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Yikun/hub-mirror-action@master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 使用Yikun/hub-mirror-action&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">src&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github/kurisaW &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 源端账户名(github)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">gitee/kurisaW &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 目的端账户名(gitee)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_PRIVATE_KEY }} &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># SSH密钥对中的私钥&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_TOKEN }} &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Gitee账户的私人令牌&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">account_type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">user &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 账户类型&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">clone_style&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;https&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 使用https方式进行clone，也可以使用ssh&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">debug&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 启用后会显示所有执行命令&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">force_update&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 启用后，强制同步，即强制覆盖目的端仓库&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">static_list&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;kurisaW_docs&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 静态同步列表，在此填写需要同步的仓库名称，可填写多个&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">timeout&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;600s&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># git超时设置，超时后会自动重试git操作&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>保存退出后，将本次修改push到远端仓库。&lt;/p>
+&lt;p>查看Action运行情况：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111611887.png"
+loading="lazy"
+alt="image-20230411161143741"
+>&lt;/p>
+&lt;h3 id="7多仓库同步推送">7.多仓库同步推送
+&lt;/h3>&lt;p>如果你想同时同步多个仓库，只需要完成如下修改&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="l">static_list 默认为&amp;#39;&amp;#39;, 配置后，仅同步静态列表，不会再动态获取需同步列表（黑白名单机制依旧生效），如“repo1,repo2,repo3”。&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111633375.png"
+loading="lazy"
+alt="image-20230411163307283"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111631352.png"
+loading="lazy"
+alt="image-20230411163135259"
+>&lt;/p>
+&lt;h3 id="8定时运行脚本">8.定时运行脚本
+&lt;/h3>&lt;p>为了方便该脚本每天定时完成自动同步任务，我们可以使用GitHub提供的schedule事件完成：&lt;/p>
+&lt;p>修改Sync.yml文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Sync Github Repos To Gitee&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">schedule&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">cron&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0 0 * * *&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">main ]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">delete&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">main ]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">create&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">main ]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">build&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-latest&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Sync Github Repos To Gitee &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 名字随便起&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Yikun/hub-mirror-action@master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 使用Yikun/hub-mirror-action&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">src&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github/kurisaW &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 源端账户名(github)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">gitee/kurisaW &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 目的端账户名(gitee)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_PRIVATE_KEY }} &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># SSH密钥对中的私钥&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dst_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITEE_TOKEN }} &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Gitee账户的私人令牌&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">account_type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">user &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 账户类型&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">clone_style&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;https&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 使用https方式进行clone，也可以使用ssh&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">debug&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 启用后会显示所有执行命令&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">force_update&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 启用后，强制同步，即强制覆盖目的端仓库&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">static_list&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;kurisaW_docs,rt-thread,my_tools,pkgs,Npdf,kurisaW.github.io&amp;#34;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 静态同步列表，在此填写需要同步的仓库名称，可填写多个&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">timeout&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;600s&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># git超时设置，超时后会自动重试git操作&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>也就是说该自动化脚本会每天零时进行自动化脚本的运行，自动更新镜像仓库，同时如果该配置文件发生推送、删除和创建文件操作时也会触发Action行为。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img2023/202304111731377.png"
+loading="lazy"
+alt="image-20230411173142865"
+>&lt;/p>
+&lt;h2 id="总结">总结
+&lt;/h2>&lt;p>通过以上步骤，我们已经完成了GitHub同步Gitee镜像仓库自动化脚本配置的操作。Hub Mirror Action作为GitHub Action中的一个组件，可以帮助我们在两个平台之间实现代码自动同步，极大地减轻了我们手动同步代码的工作量。当然如果你有任何问题欢迎留言区提出，我将竭力为你解答。&lt;/p></description></item><item><title>【Git版本控制】Git命令详解</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6git%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link><pubDate>Fri, 17 Mar 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6git%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6git%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/cover.jpg" alt="Featured image of post 【Git版本控制】Git命令详解" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>Git 是一个分布式版本管理工具，版本管理工具就是大家在写东西的时候都用过 &lt;strong>回撤&lt;/strong>这个功能，但是回撤只能回撤几步，假如想要找回我三天之前的修改，光用回撤是找不回来的。而&lt;strong>版本管理工具能记录每次的修改&lt;/strong>，只要提交到版本仓库，就可以找到之前任何时刻的状态（文本状态）。&lt;/p>
+&lt;p>下面的内容就是列举了常用的 Git 命令和一些小技巧，可以通过页面内查找的方式 Ctrl/Command+f 进行快速查找。&lt;/p>
+&lt;h2 id="展示帮助信息">展示帮助信息
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git help -g
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The command output as below:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">The common Git guides are:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> attributes Defining attributes per path
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cli Git command-line interface and conventions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> core-tutorial A Git core tutorial for developers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cvs-migration Git for CVS users
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> diffcore Tweaking diff output
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> everyday A useful minimum set of commands for Everyday Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> glossary A Git Glossary
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hooks Hooks used by Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ignore Specifies intentionally untracked files to ignore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> modules Defining submodule properties
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> namespaces Git namespaces
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> repository-layout Git Repository Layout
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> revisions Specifying revisions and ranges for Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tutorial A tutorial introduction to Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tutorial-2 A tutorial introduction to Git: part two
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> workflows An overview of recommended workflows with Git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;#39;git help -a&amp;#39; and &amp;#39;git help -g&amp;#39; list available subcommands and some concept guides. See &amp;#39;git help &amp;lt;command&amp;gt;&amp;#39; or &amp;#39;git help &amp;lt;concept&amp;gt;&amp;#39; to read about a specific subcommand or concept.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="回到远程仓库的状态">回到远程仓库的状态
+&lt;/h2>&lt;p>抛弃本地所有的修改，回到远程仓库的状态。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git fetch --all &amp;amp;&amp;amp; git reset --hard origin/master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="重设第一个-commit">重设第一个 commit
+&lt;/h2>&lt;p>也就是把所有的改动都重新放回工作区，并&lt;strong>清空所有的 commit&lt;/strong>，这样就可以重新提交第一个 commit 了&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git update-ref -d HEAD
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看冲突文件列表">查看冲突文件列表
+&lt;/h2>&lt;p>展示工作区的冲突文件列表&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff --name-only --diff-filter=U
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示工作区和暂存区的不同">展示工作区和暂存区的不同
+&lt;/h2>&lt;p>输出&lt;strong>工作区&lt;/strong>和&lt;strong>暂存区&lt;/strong>的 different (不同)。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>还可以展示本地仓库中任意两个 commit 之间的文件变动：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff &amp;lt;commit-id&amp;gt; &amp;lt;commit-id&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示暂存区和最近版本的不同">展示暂存区和最近版本的不同
+&lt;/h2>&lt;p>输出&lt;strong>暂存区&lt;/strong>和本地最近的版本 (commit) 的 different (不同)。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff --cached
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示暂存区工作区和最近版本的不同">展示暂存区、工作区和最近版本的不同
+&lt;/h2>&lt;p>输出&lt;strong>工作区&lt;/strong>、&lt;strong>暂存区&lt;/strong> 和本地最近的版本 (commit) 的 different (不同)。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff HEAD
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="快速切换到上一个分支">快速切换到上一个分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout -
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除已经合并到-master-的分支">删除已经合并到 master 的分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch --merged master | grep -v &amp;#39;^\*\| master&amp;#39; | xargs -n 1 git branch -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示本地分支关联远程仓库的情况">展示本地分支关联远程仓库的情况
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -vv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="关联远程分支">关联远程分支
+&lt;/h2>&lt;p>关联之后，git branch -vv 就可以展示关联的远程分支名了，同时推送到远程仓库直接：git push，不需要指定远程仓库了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -u origin/mybranch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者在 push 时加上 -u 参数&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin/mybranch -u
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="列出所有远程分支">列出所有远程分支
+&lt;/h2>&lt;p>-r 参数相当于：remote&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -r
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="列出本地和远程分支">列出本地和远程分支
+&lt;/h2>&lt;p>-a 参数相当于：all&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看远程分支和本地分支的对应关系">查看远程分支和本地分支的对应关系
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git remote show origin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="远程删除了分支本地也想删除">远程删除了分支本地也想删除
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git remote prune origin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="创建并切换到本地分支">创建并切换到本地分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout -b &amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="从远程分支中创建并切换到本地分支">从远程分支中创建并切换到本地分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout -b &amp;lt;branch-name&amp;gt; origin/&amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除本地分支">删除本地分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -d &amp;lt;local-branchname&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除远程分支">删除远程分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin --delete &amp;lt;remote-branchname&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin :&amp;lt;remote-branchname&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="重命名本地分支">重命名本地分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git branch -m &amp;lt;new-branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看标签">查看标签
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git tag
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>展示当前分支的最近的 tag&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git describe --tags --abbrev=0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看标签详细信息">查看标签详细信息
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git tag -ln
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="本地创建标签">本地创建标签
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git tag &amp;lt;version-number&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>默认 tag 是打在最近的一次 commit 上，如果需要指定 commit 打 tag：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">$ git tag -a &amp;lt;version-number&amp;gt; -m &amp;#34;v1.0 发布(描述)&amp;#34; &amp;lt;commit-id&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="推送标签到远程仓库">推送标签到远程仓库
+&lt;/h2>&lt;p>首先要保证本地创建好了标签才可以推送标签到远程仓库：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin &amp;lt;local-version-number&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>一次性推送所有标签，同步到远程仓库：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin --tags
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除本地标签">删除本地标签
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git tag -d &amp;lt;tag-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除远程标签">删除远程标签
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push origin --delete tag &amp;lt;tagname&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="切回到某个标签">切回到某个标签
+&lt;/h2>&lt;p>一般上线之前都会打 tag，就是为了防止上线后出现问题，方便快速回退到上一版本。下面的命令是回到某一标签下的状态：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout -b branch_name tag_name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="放弃工作区的修改">放弃工作区的修改
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout &amp;lt;file-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>放弃所有修改：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="恢复删除的文件">恢复删除的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git rev-list -n 1 HEAD -- &amp;lt;file_path&amp;gt; #得到 deleting_commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git checkout &amp;lt;deleting_commit&amp;gt;^ -- &amp;lt;file_path&amp;gt; #回到删除文件 deleting_commit 之前的状态
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="以新增一个-commit-的方式还原某一个-commit-的修改">以新增一个 commit 的方式还原某一个 commit 的修改
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git revert &amp;lt;commit-id&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="回到某个-commit-的状态并删除后面的-commit">回到某个 commit 的状态，并删除后面的 commit
+&lt;/h2>&lt;p>和 revert 的区别：reset 命令会抹去某个 commit id 之后的所有 commit&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git reset &amp;lt;commit-id&amp;gt; #默认就是-mixed参数。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --mixed HEAD^ #回退至上个版本，它将重置HEAD到另外一个commit,并且重置暂存区以便和HEAD相匹配，但是也到此为止。工作区不会被更改。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --soft HEAD~3 #回退至三个版本之前，只回退了commit的信息，暂存区和工作区与回退之前保持一致。如果还要提交，直接commit即可
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git reset --hard &amp;lt;commit-id&amp;gt; #彻底回退到指定commit-id的状态，暂存区和工作区也会变为指定commit-id版本的内容
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="修改上一个-commit-的描述">修改上一个 commit 的描述
+&lt;/h2>&lt;p>如果暂存区有改动，同时也会将暂存区的改动提交到上一个 commit&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git commit --amend
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看-commit-历史">查看 commit 历史
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看某段代码是谁写的">查看某段代码是谁写的
+&lt;/h2>&lt;p>blame 的意思为‘责怪’，你懂的。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git blame &amp;lt;file-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="显示本地更新过-head-的-git-命令记录">显示本地更新过 HEAD 的 git 命令记录
+&lt;/h2>&lt;p>每次更新了 HEAD 的 git 命令比如 commit、amend、cherry-pick、reset、revert 等都会被记录下来（不限分支），就像 shell 的 history 一样。 这样你可以 reset 到任何一次更新了 HEAD 的操作之后，而不仅仅是回到当前分支下的某个 commit 之后的状态。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git reflog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="修改作者名">修改作者名
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git commit --amend --author=&amp;#39;Author Name &amp;lt;email@address.com&amp;gt;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="修改远程仓库的-url">修改远程仓库的 url
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git remote set-url origin &amp;lt;URL&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="增加远程仓库">增加远程仓库
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git remote add origin &amp;lt;remote-url&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="列出所有远程仓库">列出所有远程仓库
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git remote
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="查看两个星期内的改动">查看两个星期内的改动
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git whatchanged --since=&amp;#39;2 weeks ago&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="把-a-分支的某一个-commit放到-b-分支上">把 A 分支的某一个 commit，放到 B 分支上
+&lt;/h2>&lt;p>这个过程需要 cherry-pick 命令，&lt;a class="link" href="http://sg552.iteye.com/blog/1300713#bc2367928" target="_blank" rel="noopener"
+>参考&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout &amp;lt;branch-name&amp;gt; &amp;amp;&amp;amp; git cherry-pick &amp;lt;commit-id&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="给-git-命令起别名">给 git 命令起别名
+&lt;/h2>&lt;p>简化命令&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git config --global alias.&amp;lt;handle&amp;gt; &amp;lt;command&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">比如：git status 改成 git st，这样可以简化命令
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global alias.st status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="存储当前的修改但不用提交-commit">存储当前的修改，但不用提交 commit
+&lt;/h2>&lt;p>详解可以参考&lt;a class="link" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000" target="_blank" rel="noopener"
+>廖雪峰老师的 git 教程&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="保存当前状态包括-untracked-的文件">保存当前状态，包括 untracked 的文件
+&lt;/h2>&lt;p>untracked 文件：新建的文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash -u
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示所有-stashes">展示所有 stashes
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="回到某个-stash-的状态">回到某个 stash 的状态
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash apply &amp;lt;stash@{n}&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="回到最后一个-stash-的状态并删除这个-stash">回到最后一个 stash 的状态，并删除这个 stash
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash pop
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除所有的-stash">删除所有的 stash
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git stash clear
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="从-stash-中拿出某个文件的修改">从 stash 中拿出某个文件的修改
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout &amp;lt;stash@{n}&amp;gt; -- &amp;lt;file-path&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示所有-tracked-的文件">展示所有 tracked 的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git ls-files -t
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示所有-untracked-的文件">展示所有 untracked 的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git ls-files --others
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示所有忽略的文件">展示所有忽略的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git ls-files --others -i --exclude-standard
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="强制删除-untracked-的文件">强制删除 untracked 的文件
+&lt;/h2>&lt;p>可以用来删除新建的文件。如果不指定文件文件名，则清空所有工作的 untracked 文件。clean 命令，&lt;strong>注意两点&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>clean 后，删除的文件无法找回&lt;/li>
+&lt;li>不会影响 tracked 的文件的改动，只会删除 untracked 的文件&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clean &amp;lt;file-name&amp;gt; -f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="强制删除-untracked-的目录">强制删除 untracked 的目录
+&lt;/h2>&lt;p>可以用来删除新建的目录，&lt;strong>注意&lt;/strong>:这个命令也可以用来删除 untracked 的文件。详情见上一条&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clean &amp;lt;directory-name&amp;gt; -df
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示简化的-commit-历史">展示简化的 commit 历史
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git log --pretty=oneline --graph --decorate --all
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="把某一个分支导出成一个文件">把某一个分支导出成一个文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git bundle create &amp;lt;file&amp;gt; &amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="从包中导入分支">从包中导入分支
+&lt;/h2>&lt;p>新建一个分支，分支内容就是上面 git bundle create 命令导出的内容&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone repo.bundle &amp;lt;repo-dir&amp;gt; -b &amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="执行-rebase-之前自动-stash">执行 rebase 之前自动 stash
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git rebase --autostash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="从远程仓库根据-id拉下某一状态到本地分支">从远程仓库根据 ID，拉下某一状态，到本地分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git fetch origin pull/&amp;lt;id&amp;gt;/head:&amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="详细展示一行中的修改">详细展示一行中的修改
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git diff --word-diff
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="清除-gitignore-文件中记录的文件">清除 gitignore 文件中记录的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clean -X -f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示所有-alias-和-configs">展示所有 alias 和 configs
+&lt;/h2>&lt;p>&lt;strong>注意：&lt;/strong> config 分为：当前目录（local）和全局（golbal）的 config，默认为当前目录的 config&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git config --local --list (当前目录)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global --list (全局)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示忽略的文件">展示忽略的文件
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git status --ignored
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="commit-历史中显示-branch1-有的但是-branch2-没有-commit">commit 历史中显示 Branch1 有的，但是 Branch2 没有 commit
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git log Branch1 ^Branch2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="在-commit-log-中显示-gpg-签名">在 commit log 中显示 GPG 签名
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git log --show-signature
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="删除全局设置">删除全局设置
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git config --global --unset &amp;lt;entry-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="新建并切换到新分支上同时这个分支没有任何-commit">新建并切换到新分支上，同时这个分支没有任何 commit
+&lt;/h2>&lt;p>相当于保存修改，但是重写 commit 历史&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git checkout --orphan &amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="展示任意分支某一文件的内容">展示任意分支某一文件的内容
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git show &amp;lt;branch-name&amp;gt;:&amp;lt;file-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="clone-下来指定的单一分支">clone 下来指定的单一分支
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone -b &amp;lt;branch-name&amp;gt; --single-branch https://github.com/user/repo.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="clone-最新一次提交">clone 最新一次提交
+&lt;/h2>&lt;p>只会 clone 最近一次提交，将减少 clone 时间&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone --depth=1 https://github.com/user/repo.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="忽略某个文件的改动">忽略某个文件的改动
+&lt;/h2>&lt;p>关闭 track 指定文件的改动，也就是 Git 将不会在记录这个文件的改动&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git update-index --assume-unchanged path/to/file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>恢复 track 指定文件的改动&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git update-index --no-assume-unchanged path/to/file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="忽略文件的权限变化">忽略文件的权限变化
+&lt;/h2>&lt;p>不再将文件的权限变化视作改动&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git config core.fileMode false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="以最后提交的顺序列出所有-git-分支">以最后提交的顺序列出所有 Git 分支
+&lt;/h2>&lt;p>最新的放在最上面&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git for-each-ref --sort=-committerdate --format=&amp;#39;%(refname:short)&amp;#39; refs/heads/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="在-commit-log-中查找相关内容">在 commit log 中查找相关内容
+&lt;/h2>&lt;p>通过 grep 查找，given-text：所需要查找的字段&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git log --all --grep=&amp;#39;&amp;lt;given-text&amp;gt;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="把暂存区的指定-file-放到工作区中">把暂存区的指定 file 放到工作区中
+&lt;/h2>&lt;p>不添加参数，默认是 -mixed&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git reset &amp;lt;file-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="强制推送">强制推送
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git push -f &amp;lt;remote-name&amp;gt; &amp;lt;branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>【Git版本控制】使用TortoiseGit一键托管工程代码及版本控制</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BD%BF%E7%94%A8tortoisegit%E4%B8%80%E9%94%AE%E6%89%98%E7%AE%A1%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E5%8F%8A%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</link><pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BD%BF%E7%94%A8tortoisegit%E4%B8%80%E9%94%AE%E6%89%98%E7%AE%A1%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E5%8F%8A%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%BD%BF%E7%94%A8tortoisegit%E4%B8%80%E9%94%AE%E6%89%98%E7%AE%A1%E5%B7%A5%E7%A8%8B%E4%BB%A3%E7%A0%81%E5%8F%8A%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/cover.jpg" alt="Featured image of post 【Git版本控制】使用TortoiseGit一键托管工程代码及版本控制" />&lt;h4 id="一了解tortoisegit">一、了解TortoiseGit
+&lt;/h4>&lt;p>TortoiseGit 是 Git 的 Windows Shell 接口，基于 TortoiseSVN。它是开源的，可以完全使用免费提供的软件构建。&lt;/p>
+&lt;p>由于它不是针对特定 IDE（如 Visual Studio、Eclipse 或其他）的集成，因此您可以将它与您喜欢的任何开发工具以及任何类型的文件一起使用。与 TortoiseGit 的主要交互将使用 Windows 资源管理器的上下文菜单。&lt;/p>
+&lt;p>TortoiseGit 通过常规任务为您提供支持，例如提交、显示日志、区分两个版本、创建分支和标签、创建补丁等等。&lt;/p>
+&lt;p>它是在&lt;a class="link" href="https://www.gnu.org/licenses/gpl-2.0" target="_blank" rel="noopener"
+>GPL&lt;/a>下开发的。这意味着任何人都可以完全免费使用，包括在商业环境中，没有任何限制。源代码也是免费提供的，因此您甚至可以根据需要开发自己的版本。&lt;/p>
+&lt;h4 id="二安装giit及tortoisegit">二、安装GIit及TortoiseGit
+&lt;/h4>&lt;ul>
+&lt;li>Git下载官网: &lt;a class="link" href="https://gitforwindows.org/index.html" target="_blank" rel="noopener"
+>https://gitforwindows.org/index.html&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/4a21fd0a6bd1453ba31032ce73c67d73.png"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;ul>
+&lt;li>TortoiseGit下载官网：&lt;a class="link" href="https://tortoisegit.org/download/" target="_blank" rel="noopener"
+>https://tortoisegit.org/download/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/ba9793defe4baa02684e53320b79bde4.png"
+loading="lazy"
+alt="image-20220720090147944"
+>&lt;/p>
+&lt;ul>
+&lt;li>同时下载语言包&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/b9cb668ce4c7a1ba2cda1a6bab5a0a76.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>当然这里也有百度网盘链接，也可点击下方链接进行下载&lt;/p>
+&lt;p>链接：&lt;a class="link" href="https://pan.baidu.com/s/1eSmu-opC0nzMsL-5GrUHQg?pwd=dzbs" target="_blank" rel="noopener"
+>https://pan.baidu.com/s/1eSmu-opC0nzMsL-5GrUHQg?pwd=dzbs&lt;/a>
+提取码：dzbs&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/db691a46832cc291932ff63fcc3e9a74.png"
+loading="lazy"
+alt="image-20220720090721507"
+>&lt;/p>
+&lt;h4 id="三tortoisegit配置">三、TortoiseGit配置
+&lt;/h4>&lt;p>完成上述安装后，单击鼠标右键可发现Git及TortoiseGit相关选项&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/67fb3421c49f0c5e90e76fa3c04c9b71.png"
+loading="lazy"
+alt="image-20220720091049882"
+>&lt;/p>
+&lt;p>这里选择TortoiseGit-Setting(上图已经完成汉化)，选择语言修改为简体中文&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/853a58d535b9e2370949ccb7917b80b5.png"
+loading="lazy"
+alt="image-20220720091218159"
+>&lt;/p>
+&lt;p>配置用户，用户作为你操作git的个人标识，进入设置，点选左边的Git标签，可以发现,右边可以配置用户的名字与Email信息. 如下图所示：&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/e70b76490f6f5cfc699d79df3968e1fe.png"
+loading="lazy"
+alt="image-20220720091439829"
+>&lt;/p>
+&lt;p>点击 “编辑全局 .git/config(O)”按钮,会使用记事本打开全局配置文件，在全局配置文件中，在后面加上下面的内容（记住密码）:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[credential]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> helper = store
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>完成后保存，关闭记事本，确定即可。&lt;/p>
+&lt;p>　　则当你使用 HTTPS URL 方式推送项目到GitHub等在线仓库时，海龟git会记住你输入的用户名和密码（这里不是用户的姓名和Email），可以避免每次提交都要输入用户名和密码。&lt;/p>
+&lt;p>　　如果你编辑的是 本地 .git/config(L)，其实这个翻译为本地有点问题，应该叫局部，也就是在某个项目下面设置，只对此项目有效，配置是一样的。&lt;/p>
+&lt;h4 id="四添加github-ssh-keys及密钥上传">四、添加GitHub SSH Keys及密钥上传
+&lt;/h4>&lt;p>首先找到想要选择的仓库克隆到本地的一个文件夹，然后找到你们安装TortoiseGit的位置（\TortoiseGit\bin\puttygen.exe），点击Generate生成钥匙，等待进度条结束后，保存公钥和私钥位置（记住位置）&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/33d7c521e31040d4921e11ab1b12bd74.png"
+loading="lazy"
+alt="image-20220720092721281"
+>
+&lt;img src="https://img-blog.csdnimg.cn/img_convert/3f27c4682dc82b0bd0f3ef5c89a1df7e.png"
+loading="lazy"
+alt="image-20220720093308539"
+>&lt;/p>
+&lt;p>然后复制下方公钥，&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/2a5f6daf15cc2e9935764b207b726cf7.png"
+loading="lazy"
+alt="image-20220720093236525"
+>&lt;/p>
+&lt;p>打开github，完成下图操作：&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/52cf49261a89b3186083dfb7240ea8dd.png"
+loading="lazy"
+alt="image-20220815182247315"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/1db55857a0118c8cabc02f9a5c4bb19b.png"
+loading="lazy"
+alt="image-20220815182404425"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/b406ac32656957356de898117c6bb17f.png"
+loading="lazy"
+alt="image-20220815182541297"
+>&lt;/p>
+&lt;h4 id="五使用tortoisegit提交代码到远端仓库">五、使用TortoiseGit提交代码到远端仓库
+&lt;/h4>&lt;p>在Github自建一个仓库（自行选择即可，用于代码托管和版本控制），使用Git clone命令复制到本地文件夹&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/846315f99c2e767666f7be83437e4969.png"
+loading="lazy"
+alt="image-20220815185026555"
+>&lt;/p>
+&lt;p>鼠标右键可以看到选项&lt;code>Git在这里创建版本库&lt;/code>，点击创建版本库&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/bcb80e2391a690906240fd0d1b197e7a.png"
+loading="lazy"
+alt="image-20220815185825412"
+>&lt;/p>
+&lt;p>鼠标右键打开TortoiseGit-&amp;gt;设置(Settings)-&amp;gt;Git-&amp;gt;远端(Remote)，进行如下配置&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/a1f9b059fb25b079395ad2588d51c0c5.png"
+loading="lazy"
+alt="image-20220815191405483"
+>&lt;/p>
+&lt;p>此时就可以将需要托管的代码放到这个文件夹内，然后进行代码的托管和版本控制了，下面简单做个示范：&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/9c4fbf6ee5360e497644e6330255a278.png"
+loading="lazy"
+alt="image-20220815190637369"
+>&lt;/p>
+&lt;p>我们创建一个文本文件，可以发现在文件上还有一个附带的图标显示，这分别代表不同的文件状态：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">正常的：绿色的对号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">被修改过的：红色感叹号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">新添加的：蓝色的加号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">未受控的（无版本控制的）：蓝色的问号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">忽略不受控的：灰色的减号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">删除的：红色的x号
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">有冲突的：黄色的感叹号
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>鼠标右键添加文件&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/f146752e79d7bd6a4e9287e2c32ad3c1.png"
+loading="lazy"
+alt="image-20220815191829438"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/50b75011172011ae724d81bd921f8fdc.png"
+loading="lazy"
+alt="image-20220815191933736"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/a9acdcdf6d14730de5e91df7564f65f8.png"
+loading="lazy"
+alt="image-20220815192002035"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/6439911282c3c25bde45fa033f3a58b3.png"
+loading="lazy"
+alt="image-20220815192321480"
+>&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/img_convert/73d32ab54fc9914ea2d1a967c5b91065.png"
+loading="lazy"
+alt="image-20220815193032859"
+>&lt;/p>
+&lt;p>&lt;strong>&lt;code>注意：由于代理问题，需要开加速器，然后会出现拉取或提交失败，这都是正常现象，多试几次&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>总结：使用TortoiseGit提交代码到远端仓库的步骤（配置完成后）&lt;/p>
+&lt;p>&lt;em>&lt;strong>&lt;code>添加-&amp;gt;提交-&amp;gt;拉取-&amp;gt;推送&lt;/code>&lt;/strong>&lt;/em>&lt;/p>
+&lt;p>那么以上就是TortoiseGit配置及代码托管的所有教学了，有问题欢迎在评论区或私信提问！&lt;/p></description></item></channel></rss>

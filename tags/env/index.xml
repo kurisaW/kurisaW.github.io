@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Env on kurisaW</title><link>https://kurisaw.github.io/tags/env/</link><description>Recent content in Env on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 12 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/env/index.xml" rel="self" type="application/rss+xml"/><item><title>env工具学习</title><link>https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-threadenv%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/</link><pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-threadenv%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E7%8E%A9%E8%BD%ACrt-threadenv%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/cover.jpg" alt="Featured image of post env工具学习" />&lt;h4 id="一基础配置">一、基础配置
+&lt;/h4>&lt;p>1.首先需要下载git并配置好相应的环境变量&lt;/p>
+&lt;p>2.双击env，在setting中设置&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/709a490d50c24945a2b06409d51b3209.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+alt="在这里插入图片描述"
+>&lt;/p>
+&lt;p>这样就可以指定文件夹打开env工具了&lt;/p>
+&lt;h4 id="二基本命令学习">二、基本命令学习
+&lt;/h4>&lt;p>1.scons：编译&lt;/p>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/976aba29a258481d9128f4b984f78139.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Lul5pS-Xw==,size_20,color_FFFFFF,t_70,g_se,x_16"
+loading="lazy"
+alt="\[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-fPYlwcMS-1649693722218)(C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220411234217601.png)\]"
+>&lt;/p>
+&lt;p>&lt;code>（1）scons:&lt;/code>编译并打印相关内部信息
+&lt;code>（2）scons -c:&lt;/code>清除编译目标。这个命令会清除执行 scons 时生成的临时文件和目标文件。
+&lt;code>（3）scons -s:&lt;/code>编译而不打印具体的内部命令
+&lt;code>（4）scons --target=XXX:&lt;/code>使用以下命令中的其中一种重新生成对应的定制化的工程，然后在 mdk/iar 进行编译下载&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons --target=iar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scons --target=mdk4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scons --target=mdk5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>（5）scons -jN:&lt;/code>多线程编译目标，在多核计算机上可以使用此命令加快编译速度&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons -j4 //双核编译工程
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;!-- raw HTML omitted -->注意：一般不建议使用，容易将编译信息和错误混杂&lt;!-- raw HTML omitted -->
+&lt;code>（6）scons --dist:&lt;/code>搭建项目框架，使用此命令会在 BSP 目录下生成 dist 目录
+2.指定编译器安装路径&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">set RTT_CC=keil
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set RTT_EXEC_PATH=C:/Keilv5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>3.menuconfig
+打开菜单配置界面，可用户自定义模块&lt;/p>
+&lt;p>4.scons进阶学习
+scons内置函数&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>GetCurrentDir()：
+获取当前路径。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Glob(&amp;rsquo;*.c&amp;rsquo;)：
+获取当前目录下的所有 C 文件。修改参数的值为其他后缀就可以匹配当前目录下的所有某类型的文件。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>GetDepend(macro)：
+该函数定义在 tools 目录下的脚本文件中，它会从 rtconfig.h 文件读取配置信息，其参数为 rtconfig.h 中的宏名。如果 rtconfig.h 打开了某个宏，则这个方法（函数）返回真，否则返回假。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Split(str)：
+将字符串 str 分割成一个列表 list。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>DefineGroup(name， src， depend，**parameters)：
+这是 RT-Thread 基于 SCons 扩展的一个方法（函数）。DefineGroup 用于定义一个组件。组件可以是一个目录（下的文件或子目录），也是后续一些 IDE 工程文件中的一个 Group 或文件夹。
+&lt;code>DefineGroup()&lt;/code> 函数的参数描述：&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;!-- raw HTML omitted -->参数&lt;!-- raw HTML omitted -->&lt;/th>
+&lt;th style="text-align:center">&lt;!-- raw HTML omitted -->描述&lt;!-- raw HTML omitted -->&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td style="text-align:center">Group 的名字&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>src&lt;/td>
+&lt;td style="text-align:center">Group 中包含的文件，一般指的是 C/C++ 源文件。方便起见，也能够通过 Glob 函数采用通配符的方式列出 SConscript 文件所在目录中匹配的文件&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>depend&lt;/td>
+&lt;td style="text-align:center">Group 编译时所依赖的选项（例如 FinSH 组件依赖于 RT_USING_FINSH 宏定义）。编译选项一般指 rtconfig.h 中定义的 RT_USING_xxx 宏。当在 rtconfig.h 配置文件中定义了相应宏时，那么这个 Group 才会被加入到编译环境中进行编译。如果依赖的宏并没在 rtconfig.h 中被定义，那么这个 Group 将不会被加入编译。相类似的，在使用 scons 生成为 IDE 工程文件时，如果依赖的宏未被定义，相应的 Group 也不会在工程文件中出现&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>parameters&lt;/td>
+&lt;td style="text-align:center">配置其他参数，可取值见下表，实际使用时不需要配置所有参数&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>parameters可加入的参数：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;!-- raw HTML omitted -->参数&lt;!-- raw HTML omitted -->&lt;/th>
+&lt;th>&lt;!-- raw HTML omitted -->描述&lt;!-- raw HTML omitted -->&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>dirs&lt;/td>
+&lt;td>SConscript 文件路径&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>variant_dir&lt;/td>
+&lt;td>指定生成的目标文件的存放路径&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>duiplicate&lt;/td>
+&lt;td>设定是否拷贝或链接源文件到 variant_dir&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

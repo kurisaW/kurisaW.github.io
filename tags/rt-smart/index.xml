@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RT-Smart on kurisaW</title><link>https://kurisaw.github.io/tags/rt-smart/</link><description>Recent content in RT-Smart on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 19 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/rt-smart/index.xml" rel="self" type="application/rss+xml"/><item><title>RDC 2022纪念版开发板-D1S在RT-Smart运行</title><link>https://kurisaw.github.io/p/rdc-2022%E7%BA%AA%E5%BF%B5%E7%89%88%E5%BC%80%E5%8F%91%E6%9D%BF-d1s%E5%9C%A8rt-smart%E8%BF%90%E8%A1%8C/</link><pubDate>Thu, 19 Jan 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/rdc-2022%E7%BA%AA%E5%BF%B5%E7%89%88%E5%BC%80%E5%8F%91%E6%9D%BF-d1s%E5%9C%A8rt-smart%E8%BF%90%E8%A1%8C/</guid><description>&lt;img src="https://kurisaw.github.io/p/rdc-2022%E7%BA%AA%E5%BF%B5%E7%89%88%E5%BC%80%E5%8F%91%E6%9D%BF-d1s%E5%9C%A8rt-smart%E8%BF%90%E8%A1%8C/cover.jpg" alt="Featured image of post RDC 2022纪念版开发板-D1S在RT-Smart运行" />&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;p>软件&lt;/p>
+&lt;ul>
+&lt;li>ubuntu20.04&lt;/li>
+&lt;li>VMware Workstation&lt;/li>
+&lt;/ul>
+&lt;p>硬件&lt;/p>
+&lt;ul>
+&lt;li>RDC2022纪念版开发板&lt;/li>
+&lt;li>全志D1s芯片&lt;/li>
+&lt;/ul>
+&lt;h2 id="材料下载">材料下载
+&lt;/h2>&lt;p>首先打开虚拟机，创建一个目录存放本次测试的代码，然后克隆RT-Smart用户态代码。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">git clone https&lt;/span>&lt;span class="o">:&lt;/span>//&lt;span class="n">github&lt;/span>.&lt;span class="n">com&lt;/span>/&lt;span class="n">RT&lt;/span>-&lt;span class="n">Thread&lt;/span>/&lt;span class="n">userapps&lt;/span>.&lt;span class="n">git&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191107894.png"
+loading="lazy"
+alt="image-20230119110742488"
+>&lt;/p>
+&lt;p>在&lt;code>userapps&lt;/code>目录下克隆RT-Thread仓库代码&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">git clone https&lt;/span>&lt;span class="o">:&lt;/span>//&lt;span class="n">github&lt;/span>.&lt;span class="n">com&lt;/span>/&lt;span class="n">RT&lt;/span>-&lt;span class="n">Thread&lt;/span>/&lt;span class="n">rt&lt;/span>-&lt;span class="n">thread&lt;/span>.&lt;span class="n">git&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191109402.png"
+loading="lazy"
+alt="image-20230119110934253"
+>&lt;/p>
+&lt;h2 id="riscv工具链配置">Riscv工具链配置
+&lt;/h2>&lt;p>进入&lt;code>userapps/tools&lt;/code>，运行 get_toolchain.py 的脚本，会下载对应的工具链并展开到&lt;code> userapps\tools\gun_gcc&lt;/code> 目录。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">python3&lt;/span> &lt;span class="err">get_toolchain.py&lt;/span> &lt;span class="err">riscv64&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191118227.png"
+loading="lazy"
+alt="image-20230119111856993"
+>&lt;/p>
+&lt;p>返回上一级，刷新工具链环境，同时记住这里的&lt;code>EXEC_PATH&lt;/code>工具链路径，后面需要修改为此路径&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">cd&lt;/span> &lt;span class="err">..&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">source&lt;/span> &lt;span class="err">smart-env.sh&lt;/span> &lt;span class="err">riscv64&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191115786.png"
+loading="lazy"
+alt="image-20230119111552268"
+>&lt;/p>
+&lt;h2 id="内核环境编译">内核环境编译
+&lt;/h2>&lt;h4 id="scons安装">scons安装
+&lt;/h4>&lt;p>环境编译会用到&lt;code>scons&lt;/code>，所以我们先下载scons&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">sudo&lt;/span> &lt;span class="err">apt&lt;/span> &lt;span class="err">install&lt;/span> &lt;span class="err">scons&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>查看scons版本信息可判断是否安装成功&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191121945.png"
+loading="lazy"
+alt="image-20230119112101897"
+>&lt;/p>
+&lt;h4 id="env工具安装">env工具安装
+&lt;/h4>&lt;p>依次执行以下程序：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">scons&lt;/span> &lt;span class="err">--menuconfig&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">source&lt;/span> &lt;span class="err">~/.env/env.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="err">pkgs&lt;/span> &lt;span class="err">--update&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="内核编译">内核编译
+&lt;/h4>&lt;p>使用 scons 命令进行编译，编译成功后会在 &lt;code>userapps/rt-thread/bsp/allwinner/d1s&lt;/code> 目录下生成 &lt;code>sd.bin&lt;/code>，这个文件就是我们需要烧录到开发板中的文件，它包括了 &lt;code>uboot.dtb，opensbi，rtthread.bin&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时直接编译会报错，因为工具链路径还没有修改&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191129532.png"
+loading="lazy"
+alt="image-20230119112916923"
+>&lt;/p>
+&lt;p>我们复制上面的工具链路径，vi命令修改rtconfig.py，这里的路径依据你自己的工具链路径&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191132933.png"
+loading="lazy"
+alt="image-20230119113207832"
+>&lt;/p>
+&lt;p>再次执行scons命令编译&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191133159.png"
+loading="lazy"
+alt="image-20230119113353060"
+>&lt;/p>
+&lt;h2 id="程序烧录">程序烧录
+&lt;/h2>&lt;p>我这里采用的是从TF卡作为启动方式。&lt;/p>
+&lt;p>1、首先准备一张容量在128G的空白TF卡&lt;/p>
+&lt;p>2、格式化TF卡，并使用ubuntu的gparted工具重新分区&lt;/p>
+&lt;p>如果没有下载该工具可使用下面的命令进行下载：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sudo&lt;/span> &lt;span class="n">apt&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">gparted&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>启动该工具&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo gparted
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里我使用的是一张64G的TF卡，扇区大小为512字节，同时我们需要预留8M的前空间，并且分区的文件系统格式为fat32&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191140208.png"
+loading="lazy"
+alt="image-20230119114019113"
+>&lt;/p>
+&lt;p>3、接下来进行程序的烧录&lt;/p>
+&lt;p>首先进入&lt;code>userapps/rt-thread/bsp/allwinner/d1s/tools&lt;/code>，执行命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">sudo&lt;/span> &lt;span class="err">dd&lt;/span> &lt;span class="nv">if&lt;/span>&lt;span class="o">=&lt;/span>boot0_sdcard_sun20iw1p1_d1s.bin &lt;span class="nv">of&lt;/span>&lt;span class="o">=&lt;/span>/dev/sdb &lt;span class="nv">bs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">1024&lt;/span> &lt;span class="nv">seek&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">8&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191144935.png"
+loading="lazy"
+alt="image-20230119114457823"
+>&lt;/p>
+&lt;p>返回上一级，再次执行命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-makefile" data-lang="makefile">&lt;span class="line">&lt;span class="cl">&lt;span class="err">sudo&lt;/span> &lt;span class="err">dd&lt;/span> &lt;span class="nv">if&lt;/span>&lt;span class="o">=&lt;/span>sd.bin &lt;span class="nv">of&lt;/span>&lt;span class="o">=&lt;/span>/dev/sdb &lt;span class="nv">bs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">1024&lt;/span> &lt;span class="nv">seek&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">56&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191146686.png"
+loading="lazy"
+alt="image-20230119114605503"
+>&lt;/p>
+&lt;p>到此烧录工作已完成。&lt;/p>
+&lt;h2 id="启动rt-smart">启动RT-Smart
+&lt;/h2>&lt;p>我们将刚刚烧录好程序的TF卡直接插入到开发板卡槽，并连接开发板UART端口进行串口查看验证。&lt;/p>
+&lt;p>此处注意串口波特率为&lt;code>500000&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191153203.png"
+loading="lazy"
+alt="image-20230119115334091"
+>&lt;/p>
+&lt;p>简单测试下MSH命令：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202301191159278.png"
+loading="lazy"
+alt="image-20230119115950076"
+>&lt;/p>
+&lt;p>到此就测试结束啦，欢迎大家讨论交流。&lt;/p></description></item></channel></rss>

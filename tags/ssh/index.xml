@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ssh on kurisaW</title><link>https://kurisaw.github.io/tags/ssh/</link><description>Recent content in Ssh on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 16 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml"/><item><title>【Git版本控制】Github和Gitlab同时使用ssh</title><link>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/</link><pubDate>Sat, 16 Sep 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/</guid><description>&lt;img src="https://kurisaw.github.io/p/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6github%E5%92%8Cgitlab%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8ssh/cover.jpg" alt="Featured image of post 【Git版本控制】Github和Gitlab同时使用ssh" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>最近在使用 WSL 时会同时用到 GitHub和 Gitlab ，因此与传统配置 ssh 方式有些不一样的地方，这里特别记录一下&lt;/p>
+&lt;h2 id="本地生成公私密钥">本地生成公私密钥
+&lt;/h2>&lt;p>首先确保把之前的 ssh 信息清除，也可以将整个 &lt;code>~/.ssh&lt;/code> 目录删除&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">rm -rf ~/.ssh/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们分别生成 Github 和 Gitlab账号的 SSH 密钥&lt;/p>
+&lt;ul>
+&lt;li>Github 生成密钥&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C 2053731441@qq.com -f ~/.ssh/github_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Gitlab 生成密钥&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh-keygen -t rsa -C wangyuqiang@rt-thread.com -f ~/.ssh/gitlab_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注意不要选择其他操作，一路回车即可&lt;/p>
+&lt;p>此时打开 &lt;code>~/.ssh/&lt;/code> 目录可以看到生成了四个文件：&lt;code>github_id-rsa github_id-rsa.pub gitlab_id-rsa gitlab_id-rsa.pub&lt;/code>&lt;/p>
+&lt;p>其中 &lt;code>.pub&lt;/code> 后缀的文件为公钥，需要上传到远程仓库SSH；没有后缀的则是私钥，本地留存&lt;/p>
+&lt;h2 id="远程仓库-ssh-填写公钥密钥">远程仓库 SSH 填写公钥密钥
+&lt;/h2>&lt;p>我们先打开 Github 的 Settings选项，然后选择 &lt;code>SSH and GPG keys-&amp;gt;New SSH key&lt;/code> ，&lt;code>Title&lt;/code>可以随意拟定，&lt;code>Key&lt;/code>需要查看刚刚的 &lt;code>github_id-rsa.pub&lt;/code> 文件，并且复制到 Gitlab 的&lt;code>key&lt;/code>一栏中；&lt;/p>
+&lt;p>Gitlab 的操作方式与 Github 类似，具体步骤：&lt;/p>
+&lt;p>打开 &lt;code>Gitlab -&amp;gt; 用户设置 -&amp;gt; SSH密钥&lt;/code> ，在密钥一栏填入 &lt;code>gitlab_id-rsa.pub&lt;/code>文件中的具体值，标题自拟即可。&lt;/p>
+&lt;h2 id="配置不同-host-的-ssh-key">配置不同 Host 的 SSH Key
+&lt;/h2>&lt;p>回到 &lt;code>~/.ssh/&lt;/code> 目录下，并且创建一个名为 &lt;code>config&lt;/code> 的文件，在该文件中填写以下具体代码，其中部分参数依照自己的信息填写：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#github&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname ssh.github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Port &lt;span class="m">443&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> User git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile ~/.ssh/github_id-rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#gitlab&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">host git.rt-thread.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Hostname git.rt-thread.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> User git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile ~/.ssh/gitlab_id-rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://kurisaw.github.io/figure/ssh-config.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="验证">验证
+&lt;/h2>&lt;p>使用下面的命令分别验证 Github 和 Gitlab的 SSH 配置&lt;/p>
+&lt;ul>
+&lt;li>Github SSH 验证&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh -T git@github.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>Gitlab SSH 验证&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ssh -T git@rt-thread.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果出现如下提示即表示远程仓库 SSH 公钥和本地 SSH 密钥配对成功&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/figure/valid-ssh.png"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Micro_ROS on kurisaW</title><link>https://kurisaw.github.io/categories/micro_ros/</link><description>Recent content in Micro_ROS on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 26 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/categories/micro_ros/index.xml" rel="self" type="application/rss+xml"/><item><title>【Micro_ROS】在RT-Thread上运行micro_ros</title><link>https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/</link><pubDate>Thu, 26 Oct 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/</guid><description>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/cover.jpg" alt="Featured image of post 【Micro_ROS】在RT-Thread上运行micro_ros" />&lt;h1 id="快速上手micro-ros--rt-threadserial和udp方式">快速上手micro ros &amp;amp;&amp;amp; RT-Thread（serial和udp方式）
+&lt;/h1>&lt;h2 id="1背景介绍">1.背景介绍
+&lt;/h2>&lt;p>Micro-ROS（Micro Robot Operating System）是ROS 2（Robot Operating System 2）的嵌入式版本，专门设计用于在嵌入式系统中运行，以支持机器人和嵌入式设备的实时控制和通信。Micro-ROS的目标是将ROS 2的强大功能扩展到资源受限的嵌入式平台，例如微控制器和嵌入式系统。&lt;/p>
+&lt;p>Micro-ROS的出现使得嵌入式系统和机器人应用能够更紧密地与ROS 2生态系统集成，从而实现更高级别的机器人自动化和控制。它为开发人员提供了一种在嵌入式环境中构建复杂机器人系统的方法，无论是在无人机、自动导航车辆还是其他嵌入式控制应用方面。&lt;/p>
+&lt;ul>
+&lt;li>micro ros分层模块架构&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/a423ac1b736d4b4905aa5ca886288bb1.png.webp"
+width="955"
+height="611"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/a423ac1b736d4b4905aa5ca886288bb1.png_hu6a00f0a2e4e4902b4fd40b8698bda3f7_47184_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/a423ac1b736d4b4905aa5ca886288bb1.png_hu6a00f0a2e4e4902b4fd40b8698bda3f7_47184_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="156"
+data-flex-basis="375px"
+>&lt;/p>
+&lt;p>以下是Micro-ROS的一些关键特点和概念：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>嵌入式系统支持：&lt;/strong> Micro-ROS旨在在嵌入式系统上运行，包括微控制器和其他资源受限的硬件。它提供了一个轻量级的ROS 2堆栈，以便将ROS 2功能集成到这些系统中。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>实时性和硬件抽象：&lt;/strong> Micro-ROS支持实时性需求，使其适用于对实时性要求较高的应用程序。此外，它提供了硬件抽象层（HAL），允许在不同嵌入式平台上使用相同的ROS 2代码。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>通信和中间件：&lt;/strong> Micro-ROS使用ROS 2通信机制，因此可以无缝地与其他ROS 2系统通信。它支持多种通信方式，包括串口、UDP、以太网等。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>适用于机器人和自动化：&lt;/strong> Micro-ROS的主要应用领域包括机器人和自动化系统。通过将ROS 2的能力引入嵌入式系统，开发人员可以更轻松地构建具有传感器、执行器和通信需求的机器人应用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>可扩展性：&lt;/strong> Micro-ROS可以根据应用程序的需求进行扩展和定制。开发人员可以选择要包括的ROS 2功能和模块，以适应其特定应用场景。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>开源：&lt;/strong> Micro-ROS是开源项目，遵循ROS 2的开源精神。这意味着开发人员可以自由地访问、使用和贡献到该项目。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>本文将教你如何快速上手使用如何在 RT-Thread上运行 micro-ros，使用包括串口（serial）和UDP两种通信方式与主机 ROS 通信。&lt;/p>
+&lt;h2 id="2工程准备工作">2.工程准备工作
+&lt;/h2>&lt;h3 id="21-克隆-rt-thread主仓">2.1 克隆 RT-Thread主仓
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ git clone https://github.com/RT-Thread/rt-thread.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="22-克隆-env-windows">2.2 克隆 env-windows
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ git clone --recursive --depth &lt;span class="m">1&lt;/span> https://github.com/RT-Thread/env-windows.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>克隆下来的 env-windows 可以放在D盘，同时双击打开 &lt;code>env.exe&lt;/code>，待启动&lt;code>ConEmu&lt;/code>终端后将其注册到鼠标右键快捷方式&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/8f8f553cdc83a2b2ed52dec898ef5b30.png.webp"
+width="1200"
+height="613"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/8f8f553cdc83a2b2ed52dec898ef5b30.png_hu0c5e2619e8e8fdeb0fb2aa2d4b668012_74272_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/8f8f553cdc83a2b2ed52dec898ef5b30.png_hu0c5e2619e8e8fdeb0fb2aa2d4b668012_74272_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="469px"
+>&lt;/p>
+&lt;h2 id="3编译准备工作">3.编译准备工作
+&lt;/h2>&lt;h3 id="31-python--cmake安装">3.1 python &amp;amp; cmake安装
+&lt;/h3>&lt;p>首先去官网安装如下工具：&lt;/p>
+&lt;ul>
+&lt;li>python（大于python36）：https://www.python.org/downloads/windows/&lt;/li>
+&lt;li>cmake（大于v3.22）:https://cmake.org/files/&lt;/li>
+&lt;/ul>
+&lt;h3 id="32-scons工具安装">3.2 scons工具安装
+&lt;/h3>&lt;p>打开 windows powershell ，使用 python 安装 scons&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ pip3 install scons
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="33-gnu-make安装">3.3 GNU make安装
+&lt;/h3>&lt;p>GNU make 的安装可以参考该 issue 的三种方式&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/kurisaW/micro_ros_rtthread_component/issues/5" target="_blank" rel="noopener"
+>https://github.com/kurisaW/micro_ros_rtthread_component/issues/5&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>这里我选择的是使用choco安装make，打开windows powershell（管理员）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ Set-ExecutionPolicy Bypass -Scope Process -Force&lt;span class="p">;&lt;/span> iex &lt;span class="o">((&lt;/span>New-Object System.Net.WebClient&lt;span class="o">)&lt;/span>.DownloadString&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;https://chocolatey.org/install.ps1&amp;#39;&lt;/span>&lt;span class="o">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ choco install make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="34-fastgithub安装">3.4 Fastgithub安装
+&lt;/h3>&lt;p>为了防止在后续下载 micro ros 过程中 GitHub 仓库拉取失败，可以下一个 Fastgithub 来加速 GitHub&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/dotnetcore/FastGithub/releases/download/2.1.4/fastgithub_win-x64.zip" target="_blank" rel="noopener"
+>https://github.com/dotnetcore/FastGithub/releases/download/2.1.4/fastgithub_win-x64.zip&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="4工程配置">4.工程配置
+&lt;/h2>&lt;p>选择一份 bsp 进行 micro_ros 的开发，这里我使用的是 RTT 最近出的星火Spark&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> .&lt;span class="se">\r&lt;/span>t-thread&lt;span class="se">\b&lt;/span>sp&lt;span class="se">\s&lt;/span>tm32&lt;span class="se">\s&lt;/span>tm32f407-rt-spark
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="41-指定工具链">4.1 指定工具链
+&lt;/h3>&lt;p>去官网下载 &lt;code>gcc-arm-none-eabi-10-2020-q4-major-win32&lt;/code>工具链，注意不用配置到环境变量中，以免发生冲突&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-win32.exe?revision=9a4bce5a-7577-4b4f-910d-4585f55d35e8&amp;amp;rev=9a4bce5a75774b4f910d4585f55d35e8&amp;amp;hash=9770A44FEA9E9CDAC0DD9A009190CC8B" target="_blank" rel="noopener"
+>gcc-arm-none-eabi-10-2020-q4-major-win32.exe&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>修改 bsp 工程下的 rtconfig.py 文件，指定 gcc 工具链&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/1d3e7d151768600f29b406114fe88ff2.png.webp"
+width="1200"
+height="643"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/1d3e7d151768600f29b406114fe88ff2.png_hud8f517075f04d3965230e805acd5126a_75502_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/1d3e7d151768600f29b406114fe88ff2.png_hud8f517075f04d3965230e805acd5126a_75502_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;h3 id="42-micro_ros-软件包配置">4.2 micro_ros 软件包配置
+&lt;/h3>&lt;p>回到&lt;code>.\rt-thread\bsp\stm32\stm32f407-rt-spark&lt;/code>目录下，打开 ConEmu 执行如下命令生成 packages 目录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ pkgs --update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">cd&lt;/span> packages
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>克隆 micro_ros 配置仓库&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ git clone -b win_arm-gcc https://github.com/kurisaW/micro_ros_rtthread_component.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我们来看下目录层次：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">├─micro_ros_rtthread_component
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─.images
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─builder
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├─extra_packages
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├─metas
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├─microros_utils
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └─patchs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ ├─foxy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └─humble
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─docs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─examples
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─include
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├─package
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └─micro_ros_rtthread_package
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └─src
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里我们需要将&lt;code>micro_ros_rtthread_package&lt;/code>目录复制一份到&lt;code>..\env-windows\packages&lt;/code>目录下，同时修改&lt;code>..\env-windows\packages\Kconfig&lt;/code>内容如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">source &amp;#34;$PKGS_DIR/packages/Kconfig&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">source &amp;#34;$PKGS_DIR/micro_ros_rtthread_package/Kconfig&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="43-指定cmake编译工具链">4.3 指定Cmake编译工具链
+&lt;/h3>&lt;p>想要在 RT-Thread 中使用 micro_ros ，需要先通过 Cmake 编译得到一份 &lt;code>libmicroros.a&lt;/code>静态链接库文件，下面是 micro_ros Cmake 的相关配置：&lt;/p>
+&lt;p>回到目录：&lt;code>..\rt-thread\bsp\stm32\stm32f407-rt-spark&lt;/code>&lt;/p>
+&lt;p>使用 ENV 生成 CMakeLists.txt 文件，里面包含了工程的配置编译选项：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ scons --target&lt;span class="o">=&lt;/span>cmake
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时我们在当前目录下就可以看见一个 &lt;code>CMakeLists.txt&lt;/code>文件了，同时我们进入目录&lt;code>.\rt-thread\bsp\stm32\stm32f407-rt-spark\packages\micro_ros_rtthread_component\builder&lt;/code>，找到&lt;code>toolchain.cmake&lt;/code>文件，参考前面生成的&lt;code>CMakeLists.txt&lt;/code>文件修改&lt;code>toolchain.cmake&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94877df6c4caa43c69c1a1beb59bedfd.png.webp"
+width="1200"
+height="447"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94877df6c4caa43c69c1a1beb59bedfd.png_huced1339d60db3d9f500b5281fd50a464_53778_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94877df6c4caa43c69c1a1beb59bedfd.png_huced1339d60db3d9f500b5281fd50a464_53778_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="268"
+data-flex-basis="644px"
+>&lt;/p>
+&lt;h3 id="44-micro-ros-在-env-中的配置">4.4 micro ros 在 ENV 中的配置
+&lt;/h3>&lt;p>再次回到&lt;code>..\rt-thread\bsp\stm32\stm32f407-rt-spark&lt;/code>目录下，打开 ENV 勾选配置：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>*&lt;span class="o">]&lt;/span> micro-ROS package &lt;span class="k">for&lt;/span> RTThread
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span>*&lt;span class="o">]&lt;/span> Include examples
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Distribution &lt;span class="o">(&lt;/span>Foxy&lt;span class="o">)&lt;/span> ---&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Memory configuration ---&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ROS node communication mode &lt;span class="o">(&lt;/span>serial&lt;span class="o">)&lt;/span> ---&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中在&lt;code>Memory configuration&lt;/code>中的&lt;code>Publishers&lt;/code>和&lt;code>Subscribers&lt;/code>这两个参数值要求大于2，因为在 micro_ros 的示例工程：micro_ros_ping_pong要求至少两个发布者和两个订阅者，同时我们选择通信模式为 &lt;code>serial&lt;/code>&lt;/p>
+&lt;p>此外，我们需要一个串口进行通信，根据板载情况勾选一个串口设备，并确保该串口成功创建！！&lt;/p>
+&lt;p>同时我们使用 vscode 打开文件&lt;code>packages\micro_ros_rtthread_component\src\rtt_serial_transport.c&lt;/code>，搜索宏&lt;code>MICRO_ROS_SERIAL_NAME&lt;/code>并修改为你新创建的串口设备名。&lt;/p>
+&lt;h2 id="5开始编译">5.开始编译
+&lt;/h2>&lt;p>回到&lt;code>.\rt-thread\bsp\stm32\stm32f407-rt-spark&lt;/code>目录下，鼠标右键打开 windows powershell ，输入如下命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">scons --build_microros
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时我们就可以看到 python 会自动安装依赖包并且开始下载 microros所需的依赖库，并且该依赖库的安装位置位于 &lt;code>C:\Users\$user\AppData\Local\Temp\micro&lt;/code>下&lt;/p>
+&lt;p>这里的配置项主要位于&lt;code>packages\micro_ros_rtthread_component\builder\SConscript&lt;/code>文件中，由于不同的工具链和平台所使用的一些标准C库函数有些不同差异，所以目前是基于 cortex-M4 适配了 micro_ros 库，在&lt;code>packages\micro_ros_rtthread_component\builder\microros_utils\repositories.py&lt;/code>文件中更改了一些仓库分支为我修改的仓库分支，后续会以补丁文件的形式发布&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/5f8d170d4a726855cf680c2d7a84681d.png.webp"
+width="1200"
+height="643"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/5f8d170d4a726855cf680c2d7a84681d.png_hu51cce00e6e918a985c5f6ba6ead140df_143198_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/5f8d170d4a726855cf680c2d7a84681d.png_hu51cce00e6e918a985c5f6ba6ead140df_143198_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;p>编译完成后会使用 ar 将所有依赖的 micro_ros 库文件静态链接成 &lt;code>packages\micro_ros_rtthread_component\builder\libmicroros\libmicroros.a&lt;/code>文件，同时将&lt;code>C:\Users\20537\AppData\Local\Temp\micro\mcu\install\include&lt;/code>目录复制到&lt;code>packages\micro_ros_rtthread_component\builder\libmicroros\include&lt;/code>目录下&lt;/p>
+&lt;p>编译完成后我们就得到了 rt-thread.elf 文件，可以使用 STM32CubeProgrammer 工具进行烧录到星火Spark上&lt;/p>
+&lt;p>附：这里说下 GCC-AR 是什么：GCC-AR 是 &lt;strong>gcc配套的库管理工具&lt;/strong>，它可以创建，修改和提取静态库（.a文件）。 通过使用 GCC-AR，可以将多个相关的对象文件（.o文件）打包成一个静态库，以方便在后续的编译过程中重复使用这些对象文件。&lt;/p>
+&lt;p>&lt;img src="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94983d06a46f6dd3d2a5c800577ab7fa.png.webp"
+width="1200"
+height="643"
+srcset="https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94983d06a46f6dd3d2a5c800577ab7fa.png_hu44ca883a94ec9b49f7834d5fb288b2c4_136972_480x0_resize_q75_h2_box_2.webp 480w, https://kurisaw.github.io/p/micro_ros%E5%9C%A8rt-thread%E4%B8%8A%E8%BF%90%E8%A1%8Cmicro_ros/figure/94983d06a46f6dd3d2a5c800577ab7fa.png_hu44ca883a94ec9b49f7834d5fb288b2c4_136972_1024x0_resize_q75_h2_box_2.webp 1024w"
+loading="lazy"
+alt="screenshot_image.png"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/p>
+&lt;h2 id="6wsl安装及-usbipd-支持">6.WSL安装及 usbipd 支持
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>WSL安装：WSL的安装具体可以看网上怎么操作的，此处不再赘述&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Docker安装：打开 wsl 终端，使用官网脚本一键安装即可&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ curl -fsSL https://test.docker.com -o test-docker.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo sh test-docker.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>usbipd支持&lt;/li>
+&lt;/ul>
+&lt;p>请参考这篇文章完成 usbipd 的支持：https://club.rt-thread.org/ask/article/8671e03210f950a7.html&lt;/p>
+&lt;h2 id="7serial测试">7.serial测试
+&lt;/h2>&lt;p>此处仅给出相关命令，具体流程请参考演示视频：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># windows powershell端&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ usbipd wsl list // 查看系统USB设备列表
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ usbipd wsl attach --hardware-id &lt;span class="s2">&amp;#34;usb-id&amp;#34;&lt;/span> // 连接usb至wsl
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># wsl ubuntu20.04（注意：目前支持的microros版本：foxy支持的ubuntu版本为ubuntu20.04）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo docker run -it -v /dev:/dev --privileged microros/micro-ros-agent:foxy serial --dev /dev/ttyACM0 // 运行docker microros：foxy代理
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 topic list // 查看ros topic列表
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 topic &lt;span class="nb">echo&lt;/span> /micro_ros_rtt_subscriber // 打印话题详情
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 topic pub /micro_ros_rtt_subscriber std_msgs/msg/Int32 data:&lt;span class="se">\ &lt;/span>10 // 发布topic data值为10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>演示视频：&lt;a class="link" href="https://www.bilibili.com/video/BV1se41197Ea?t=3.8" target="_blank" rel="noopener"
+>[点击此处精准空降: microros_rtt_serial]&lt;/a>&lt;/strong>&lt;/p>
+&lt;h2 id="8udp4测试">8.udp4测试
+&lt;/h2>&lt;h3 id="81-准备工作">8.1 准备工作
+&lt;/h3>&lt;p>首先需要在linux本地 搭建好 ROS 环境，micro-ros环境的安装参考**&lt;a class="link" href="https://fishros.com/d2lros2foxy/#/chapt2/2.3ROS2%E7%9A%84%E5%AE%89%E8%A3%85" target="_blank" rel="noopener"
+>鱼香大佬的网站&lt;/a>**&lt;/p>
+&lt;p>&lt;strong>注意：我们安装的ros版本为 &lt;code>ros:foxy&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>继续搭建 micro-ros 构建环境，打开linux终端，按照如下步骤一步步走：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 激活ros:foxy环境&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">source&lt;/span> /opt/ros/foxy/setup.bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建工作区并拉取micro_ros_setup仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ mkdir /home/&lt;span class="nv">$user&lt;/span>/microros_ws &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">cd&lt;/span> /home/&lt;span class="nv">$user&lt;/span>/microros_ws
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ git clone -b foxy https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 更新rosdep&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">export&lt;/span> &lt;span class="nv">ROSDISTRO_INDEX_URL&lt;/span>&lt;span class="o">=&lt;/span>https://mirrors.tuna.tsinghua.edu.cn/rosdistro/index-v4.yaml
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ rosdep update --include-eol-distros
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ rosdep install --from-paths src --ignore-src -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo apt-get install python3-pip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># colcon编译&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ colcon build
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">source&lt;/span> install/local_setup.bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ps:如果提示找不到colcon命令，使用如下方式安装colcon
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install python3-colcon-common-externsions &lt;span class="c1"># linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">python3 -m pip install colcon-common-externsions &lt;span class="c1"># macos&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install -U colcon-commmon-externsions &lt;span class="c1"># windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建一份固件工作区&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 run micro_ros_setup create_firmware_ws.sh host
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 构建固件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 run micro_ros_setup build_firmware.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">source&lt;/span> install/local_setup.bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 创建microros代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 run micro_ros_setup create_agent_ws.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 构建代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ ros2 run micro_ros_setup build_agent.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">source&lt;/span> install/local_setup.bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>完成上述工作后我们micro ros的代理环境就准备就绪了&lt;/p>
+&lt;h3 id="82-以-udp-方式开启micro_ros-代理">8.2 以 UDP 方式开启micro_ros 代理
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ ros2 run micro_ros_agent micro_ros_agent udp4 --port &lt;span class="m">9999&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="83-udp测试流程">8.3 udp测试流程
+&lt;/h3>&lt;p>这里就不讲详细的配置了，具体过程请看下方链接：&lt;/p>
+&lt;p>&lt;strong>演示视频：&lt;a class="link" href="https://www.bilibili.com/video/BV1h84y1R7P6?t=2.6" target="_blank" rel="noopener"
+>[点击此处精准空降: microros_rtt_serial]&lt;/a>&lt;/strong>&lt;/p>
+&lt;h2 id="9几点说明">9.几点说明
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>为什么编译不使用 ConEmu ：因为 ConEmu 内部集成的是 python27 ，而 micro_ros 编译所需的 python 版本最低为 python36，建议使用 python38 及以上版本&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果是使用的串口方式通信，不推荐在虚拟机上运行docker microros 代理，虚拟机似乎会造成消息的多次转发，导致无法正常接收到数据，建议使用 windows wsl服务&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果是使用UDP通信的话，并且在wsl中运行 agent ，需要允许 WLS 的出入站规则，可以打开windows powershell ，并输入如下代码：&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 允许 WSL 入站规则，请打开 Windows PowerShell ，并输入如下命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ New-NetFirewallRule -DisplayName &lt;span class="s2">&amp;#34;WSL&amp;#34;&lt;/span> -Direction Inbound -InterfaceAlias &lt;span class="s2">&amp;#34;vEthernet (WSL)&amp;#34;&lt;/span> -Action Allow
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 允许 WSL 出站规则，请打开 Windows PowerShell ，并输入如下命令&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ New-NetFirewallRule -DisplayName &lt;span class="s2">&amp;#34;WSL&amp;#34;&lt;/span> -Direction Outbound -InterfaceAlias &lt;span class="s2">&amp;#34;vEthernet (WSL)&amp;#34;&lt;/span> -Action Allow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>如果使用udp通信不建议使用docker运行agent，docker不能直接外部访问IP，建议还是在linux本地搭建好 micro-ros代理环境&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>具体的实现细节在此处没有具体说明，如果是基于其他平台移植，并且想要一起学习的可以艾特我一起讨论，后面会考虑对多个架构进行支持适配&lt;/p>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Operating System on kurisaW</title><link>https://kurisaw.github.io/tags/operating-system/</link><description>Recent content in Operating System on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/operating-system/index.xml" rel="self" type="application/rss+xml"/><item><title>多线程技术学习（基于Linux）</title><link>https://kurisaw.github.io/p/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</guid><description>&lt;img src="https://kurisaw.github.io/p/linux%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/cover.jpg" alt="Featured image of post 多线程技术学习（基于Linux）" />&lt;h2 id="1linux多线程概念">1.Linux多线程概念
+&lt;/h2>&lt;blockquote>
+&lt;p>&lt;strong>（1）线程：指运行中的程序的调度单位。&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>（2）多线程的优点：&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>运行与一个线程中的多个线程，他们彼此之间使用&lt;strong>相同的地址空间&lt;/strong>，&lt;strong>共享大部分数据&lt;/strong>，启动一个线程所花费的空间远远小于启动一个进程所花费的空间，并且，线程见彼此切换所需要的时间也远远小于进程间切换所需要的时间。&lt;/li>
+&lt;li>进程间方便的通信机制。对不同的进程来说，它们有独立的数据空间，要进行数据的传递智能通过通信的方式&lt;/li>
+&lt;li>应用程序响应速度提高&lt;/li>
+&lt;li>使多CPU系统更加高效&lt;/li>
+&lt;li>改善程序结构&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>（3）线程的生命周期&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>就绪-&amp;gt;运行-&amp;gt;阻塞-&amp;gt;终止&lt;/p>
+&lt;hr>
+&lt;h2 id="2linux线程实现">2.linux线程实现
+&lt;/h2>&lt;blockquote>
+&lt;p>&lt;strong>（1）线程创建&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>头文件包含
+#include &amp;lt;pthread.h&amp;gt;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>定义函数：&lt;/p>
+&lt;pre>&lt;code> int pthread_create(pthread_t *restrict tidp,const pthread_attr_t *restrict attr, void *(*start_rtn)(void),void *restrict arg)
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>函数说明：
+tidp：线程id
+attr：线程属性(通常为空)
+start_rtn：线程要执行的函数 &lt;br>
+arg： start_rtn的参数&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>（2）线程退出&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>头文件包含：
+#include &amp;lt;pthread.h&amp;gt;&lt;/li>
+&lt;li>定义函数：
+void pthread_exit(void * rval_ptr)&lt;/li>
+&lt;li>功能：终止调用线程Rval_ptr:线程退出返回值的指针。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>（3）线程等待&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>头文件包含：
+#include &amp;lt;pthread.h&amp;gt;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>定义函数：&lt;/p>
+&lt;pre>&lt;code> int pthread_join(pthread_t tid,void **rval_ptr)
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>功能：阻塞调用线程，直到指定的线程终止。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>函数说明：
+Tid :等待退出的线程id
+Rval_ptr：线程退出的返回值的指针&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>（4）线程标识获取&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>头文件包含：
+#include &amp;lt;pthread.h&amp;gt;&lt;/li>
+&lt;li>定义函数：
+pthread_t pthread_self(void)&lt;/li>
+&lt;li>功能：获取调用线程的 thread identifier&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;strong>（5）线程清除&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>头文件包含：
+#include &amp;lt;pthread.h&amp;gt;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>定义函数：&lt;/p>
+&lt;pre>&lt;code> void pthread_cleanup_push(void (*rtn)(void *),void *arg)
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>功能：将清除函数压入清除栈&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>函数说明：
+Rtn:清除函数
+Arg:清除函数的参数&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="3线程同步的方法">3.线程同步的方法
+&lt;/h2>&lt;p>进行多线程编程，因为无法知道哪个线程会在哪个时候对共享资源进行操作，因此让如何保护共享资源变得复杂，通过下面这些技术的使用，可以解决线程之间对资源的竞争：&lt;/p>
+&lt;blockquote>
+&lt;p>互斥量（互斥锁）Mutex
+信号灯（信号量）Semaphore
+条件变量Conditions&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="4线程的互斥">4.线程的互斥
+&lt;/h2>&lt;p>线程在取出头节点前必须要等待互斥量，如果此时有其他线程已经获得该互斥量，那么该线程将会阻塞在这里。只有等到其他线程释放掉该互斥量后，该线程才有可能得到该互斥量。互斥量从本质上说就是一把锁, 提供对共享资源的保护访问。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>（1）创建&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>在Linux中, 互斥量使用类型pthread_mutex_t表示。在使用前, 要对它进行初始化:&lt;/p>
+&lt;ul>
+&lt;li>对于静态分配的互斥量, 可以把它设置为默认属性的mutex对象PTHREAD_MUTEX_INITIALIZER&lt;/li>
+&lt;li>对于动态分配的互斥量, 在申请内存(malloc)之后, 通过pthread_mutex_init进行初始化, 并且在释放内存(free)前需要调用pthread_mutex_destroy。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>函数使用：
+头文件：
+#include &amp;lt;pthread.h&amp;gt;&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restric attr)
+int pthread_mutex_destroy(pthread_mutex_t *mutex)
+&lt;/code>&lt;/pre>
+&lt;blockquote>
+&lt;p>&lt;strong>（2）加锁&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>对共享资源的访问, 要使用互斥量进行加锁, 如果互斥量已经上了锁, 调用线程会阻塞, 直到互斥量被解锁。&lt;/p>
+&lt;blockquote>
+&lt;p>函数使用：&lt;/p>
+&lt;/blockquote>
+&lt;pre>&lt;code>int pthread_mutex_lock(pthread_mutex_t *mutex)
+int pthread_mutex_trylock(pthread_mutex_t *mutex)
+&lt;/code>&lt;/pre>
+&lt;p>返回值: 成功则返回0, 出错则返回错误编号.
+注意：trylock是非阻塞调用模式, 如果互斥量没被锁住, trylock函数将对互斥量加锁, 并获得对共享资源的访问权限; 如果互斥量被锁住了, trylock函数将不会阻塞等待而直接返回EBUSY, 表示共享资源处于忙状态。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>（3）解锁&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>在操作完成后，必须给互斥量解锁，也就是前面所说的释放。这样其他等待该锁的线程才有机会获得该锁，否则其他线程将会永远阻塞。&lt;/p>
+&lt;pre>&lt;code>int pthread_mutex_unlock(pthread_mutex_t *mutex)
+&lt;/code>&lt;/pre>
+&lt;hr>
+&lt;h2 id="5互斥pk信号量">5.互斥PK信号量
+&lt;/h2>&lt;blockquote>
+&lt;p>Mutex是一把钥匙，一个人拿了就可进入一个房间，出来的时候把钥匙交给队列的第一个。
+Semaphore是一件可以容纳N人的房间，如果人不满就可以进去，如果人满了，就要等待有人出来。对于N=1的情况，称为binary semaphore。
+Binary semaphore与Mutex的差异：&lt;/p>
+&lt;ol>
+&lt;li>mutex要由获得锁的线程来释放（谁获得，谁释放）。而semaphore可以由其它线程释放&lt;/li>
+&lt;li>初始状态可能不一样：mutex的初始值是1 ,而semaphore的初始值可能是0（或者为1）。&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="6信号量操作代码演示">6.信号量操作（代码演示）
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#include&amp;lt;stdio.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;string.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;pthread.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;stdlib.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;semaphore.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//子线程处理
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">char buf[200];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sem_t sem;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">int flag;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void *func(void *arg)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sem_wait(&amp;amp;sem); // 接收信号量
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Sem_wait()递减(锁定)sem指向的信号量。如果信号量的值大于0，则继续递减，函数立即返回。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 如果信号量当前的值为0，那么调用就会阻塞，直到信号量可以递减(即信号量的值高于0)，或者信号处理程序中断调用。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //while(strncmp(buf,&amp;#34;end&amp;#34;,3) != 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while(flag == 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;input %d char.\n&amp;#34;,strlen(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> memset(buf,0,sizeof(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_exit(NULL);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">int main(void)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int ret = -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_t th = -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sem_init(&amp;amp;sem,0,0); // 在sem指向的地址处初始化未命名的信号量
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ret = pthread_create(&amp;amp;th,NULL,func,NULL); //pthread_create()函数在调用进程中启动一个新线程,创建成功返回0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(ret != 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;pthread_create error.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;please input string,end with Enter.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while(scanf(&amp;#34;%s&amp;#34;,buf))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(!strncmp(buf,&amp;#34;end&amp;#34;,3))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;process end\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> flag = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sem_post(&amp;amp;sem); //增加（解锁）sem指向的信号量
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> break;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;input %d char .\n&amp;#34;,strlen(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> memset(buf,0,sizeof(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;wait reclaim child thread.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ret = pthread_join(th,NULL);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(ret != 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;pthread_join error.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit(-1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;reclaim child thread successfully.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="7互斥操作函数演示">7.互斥操作（函数演示）
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">#include&amp;lt;stdio.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;string.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;pthread.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#include&amp;lt;stdlib.h&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">//子线程处理
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">char buf[200];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pthread_mutex_t mutex;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">int flag;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">void *func(void *arg)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep(1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while(flag == 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_lock(&amp;amp;mutex);// 互斥加锁
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;input %d char.\n&amp;#34;,strlen(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> memset(buf,0,sizeof(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_unlock(&amp;amp;mutex); // 解锁
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_exit(NULL);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">int main(void)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int ret = -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_t th = -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_init(&amp;amp;mutex,NULL);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ret = pthread_create(&amp;amp;th,NULL,func,NULL); //pthread_create()函数在调用进程中启动一个新线程,创建成功返回0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(ret != 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;pthread_create error.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return -1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;please input string,end with Enter.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> while(1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_lock(&amp;amp;mutex);// 对互斥对象加锁锁定
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> scanf(&amp;#34;%s&amp;#34;,buf);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_unlock(&amp;amp;mutex); // 输入后解锁
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(!strncmp(buf,&amp;#34;end&amp;#34;,3))
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;process end\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> flag = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> break;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;input %d char .\n&amp;#34;,strlen(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> memset(buf,0,sizeof(buf));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;wait reclaim child thread.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ret = pthread_join(th,NULL); //pthread_join()函数等待由thread指定的线程结束。如果该线程已经终止，则pthread_join()立即返回。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(ret != 0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;pthread_join error.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit(-1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> printf(&amp;#34;reclaim child thread successfully.\n&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pthread_mutex_destroy(&amp;amp;mutex);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="8条件变量代码演示">8.条件变量（代码演示）
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include&amp;lt;stdio.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include&amp;lt;string.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include&amp;lt;pthread.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#include&amp;lt;stdlib.h&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span>&lt;span class="err">子线程处理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">char&lt;/span> &lt;span class="n">buf&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">200&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pthread_mutex_t&lt;/span> &lt;span class="n">mutex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pthread_cond_t&lt;/span> &lt;span class="n">cond&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="ne">int&lt;/span> &lt;span class="n">flag&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">void&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="k">func&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">void&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">arg&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">flag&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_mutex_lock&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="o">//&lt;/span> &lt;span class="err">互斥加锁&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_cond_wait&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">cond&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="o">//&lt;/span> &lt;span class="err">线程同步等待&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;input &lt;/span>&lt;span class="si">%d&lt;/span>&lt;span class="s2"> char.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_mutex_unlock&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="err">解锁&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="ne">int&lt;/span> &lt;span class="n">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">void&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="ne">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_t&lt;/span> &lt;span class="n">th&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_mutex_init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_cond_init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">cond&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span>&lt;span class="err">初始化条件变量&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pthread_create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="k">func&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span>&lt;span class="n">pthread_create&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="err">函数在调用进程中启动一个新线程&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="err">创建成功返回&lt;/span>&lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ret&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;pthread_create error.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;please input string,end with Enter.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">scanf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">%s&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_cond_signal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">cond&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="o">//&lt;/span> &lt;span class="err">发送信号&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">strncmp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;end&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;process end&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">flag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;input &lt;/span>&lt;span class="si">%d&lt;/span>&lt;span class="s2"> char .&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;wait reclaim child thread.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pthread_join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">th&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">NULL&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span>&lt;span class="n">pthread_join&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="err">函数等待由&lt;/span>&lt;span class="n">thread指定的线程结束&lt;/span>&lt;span class="err">。如果该线程已经终止，则&lt;/span>&lt;span class="n">pthread_join&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="err">立即返回。&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ret&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;pthread_join error.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;reclaim child thread successfully.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_mutex_destroy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pthread_cond_destroy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">cond&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="o">//&lt;/span> &lt;span class="err">条件变量销毁&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>信号量及PV操作详解</title><link>https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%8F%8Apv%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</link><pubDate>Thu, 10 Mar 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%8F%8Apv%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%8F%8Apv%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/cover.jpg" alt="Featured image of post 信号量及PV操作详解" />&lt;h2 id="信号量">信号量
+&lt;/h2>&lt;blockquote>
+&lt;ul>
+&lt;li>&lt;!-- raw HTML omitted -->一个特殊变量&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->用于进程间传递信息的一个整数值&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>定义如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">struct semaphore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> int count;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> quenue Type quenue;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;ul>
+&lt;li>&lt;!-- raw HTML omitted -->信号量说明:semaphore s;&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->对信号量可以实施的操作：初始化、P和V（P、V分别是荷兰语的test（proberen）和increment（verhogen））&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="pv操作定义">P、V操作定义
+&lt;/h2>&lt;p>&lt;!-- raw HTML omitted -->P(s)&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> s.count --; //信号量值减一
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(s.count&amp;lt;0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 该进程状态置为阻塞态；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 将该进程插入相应的等待队列s.quenue末尾；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 重新调度
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>down&lt;/code>,&lt;code>semwait&lt;/code>:也代表P操作&lt;/p>
+&lt;p>&lt;!-- raw HTML omitted -->V(s)&lt;!-- raw HTML omitted -->&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> s.ount++;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(s.count&amp;lt;=0)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 唤醒相应等待队列s.queue中等待的一个进程；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 改变其状态为就绪态，并将其插入就绪队列；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>up&lt;/code>,&lt;code>semsignal&lt;/code>:也代表V操作&lt;/p>
+&lt;blockquote>
+&lt;p>相关说明&lt;/p>
+&lt;ul>
+&lt;li>&lt;!-- raw HTML omitted -->P，V操作为原语操作&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->在信号量上定义了三个操作
+&lt;!-- raw HTML omitted -->初始化（非负数）、P操作、V操作&lt;!-- raw HTML omitted -->&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->最初提出的是二元信号量（解决互斥）
+之后，推广到一般信号量（多值）或技术信号量（解决同步）&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="用pv操作解决进程间互斥问题">用PV操作解决进程间互斥问题
+&lt;/h2>&lt;blockquote>
+&lt;ul>
+&lt;li>&lt;!-- raw HTML omitted -->分析并发进程的关键活动，划定临界区&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->设置信号量mutux，初值为1&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->在临界区前实施P(mutux)&lt;/li>
+&lt;li>&lt;!-- raw HTML omitted -->在临界区之后实施V(mutux)&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://img-blog.csdnimg.cn/9f7d7a26cf6a41048d7205423383fa64.png"
+loading="lazy"
+alt="图片演示"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>相关解释：&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>临界区&lt;/code> : 我们把并发进程中与共享变量有关的程序段称为临界区。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>信号量&lt;/code> : 信号量的值与相应资源的使用情况有关。当它的值大于0时，表示当前可用资源的数量；当它的值小于0时，其绝对值表示等待使用该资源的进程个数。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>进程的互斥&lt;/code>:是指当有若干个进程都要使用某一共享资源时，任何时刻最多只允许一个进程去使用该资源，其他要使用它的进程必须等待，直到该资源的占用着释放了该资源。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>进程的同步&lt;/code>:是指在并发进程之间存在这一种制约关系，一个进程依赖另一个进程的消息，当一个进程没有得到另一个进程的消息时应等待，直到消息到达才被唤醒。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>pv操作又称wait,signal原语。&lt;/code>
+主要是操作进程中对进程控制的信息量的加减控制。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;!-- raw HTML omitted -->&lt;code>注意：&lt;/code>在霍尔管程中,&lt;code>wait操作&lt;/code>和&lt;code>signal操作&lt;/code>用于被设计为两个可以中断的过程，而非&lt;code>原语。&lt;/code>
+&lt;!-- raw HTML omitted -->在管程中，引入一种数据结构—条件变量（仅在管程中可以被访问）。
+条件变量的两种操作：&lt;/p>
+&lt;ul>
+&lt;li>wait()操作&lt;!-- raw HTML omitted -->[阻塞调用进程]&lt;!-- raw HTML omitted -->&lt;/li>
+&lt;li>signal()操作&lt;!-- raw HTML omitted -->[释放/唤醒在条件变量上阻塞的进程]&lt;!-- raw HTML omitted -->&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>wait用法：
+wait(num),num是目标参数，wait的作用是使其（信息量）减一。
+如果信息量&amp;gt;=0，则该进程继续执行；否则该进程置为等待状态，排入等待队列。
+signal用法：
+signal(num),num是目标参数，signal的作用是使其（信息量）加一。
+如果信息量&amp;gt;0，则该进程继续执行；否则释放队列中第一个等待信号量的进程。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>本文资源来自&lt;a class="link" href="https://www.coursera.org/learn/os-pku" target="_blank" rel="noopener"
+>Operating Systems&lt;/a>
+参考：&lt;a class="link" href="https://blog.csdn.net/thebestway/article/details/105034840?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164992015416780255296134%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;amp;request_id=164992015416780255296134&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-105034840.142%5ev8%5epc_search_result_cache,157%5ev4%5econtrol&amp;amp;utm_term=wait%E5%92%8Csignal%E5%8E%9F%E8%AF%AD&amp;amp;spm=1018.2226.3001.4187" target="_blank" rel="noopener"
+>操作系统P,V(wait,signal原语)操作讲解&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>进程上下文和线程上下文</title><link>https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87/</link><pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87/</guid><description>&lt;img src="https://kurisaw.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87/cover.jpg" alt="Featured image of post 进程上下文和线程上下文" />&lt;h2 id="进程">进程
+&lt;/h2>&lt;p>&lt;code>操作系统资源分配的基本单位&lt;/code>，也就是指计算机中已执行的程序。&lt;/p>
+&lt;ul>
+&lt;li>在面向进程设计的系统（如早期的UNIX，Linux 2.4及更早的版本）中，&lt;code>进程&lt;/code>是程序的基本执行实体；&lt;/li>
+&lt;li>在面向线程设计的系统（如当代多数操作系统、Linux 2.6及更新的版本）中，进程本身不是基本执行单位，而是&lt;code>线程&lt;/code>的容器。&lt;/li>
+&lt;li>程序本身只是指令、数据及其组织形式的描述，相当于一个名词，&lt;code>进程&lt;/code>才是程序（那些指令和数据）的真正&lt;code>执行实例&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="进程上下文">进程上下文
+&lt;/h2>&lt;p>&lt;code>进程上下文&lt;/code>就是表示&lt;code>进程信息&lt;/code>的一系列东西，包括各种变量、寄存器以及进程的运行的环境。这样，当进程被切换后，下次再切换回来继续执行，能够知道原来的状态。&lt;/p>
+&lt;p>拿&lt;code>Linux进程&lt;/code>举例：
+&amp;mdash;-进程的运行环境主要包括：&lt;/p>
+&lt;blockquote>
+&lt;p>1.进程空间中的代码和数据、各种数据结构、进程堆栈和共享内存区等。
+2.环境变量：提供进程运行所需的环境信息。
+3.系统数据：进程空间中的对进程进行管理和控制所需的信息，包括进程任务结构体以及内核堆栈等。
+4.进程访问设备或者文件时的权限。
+5.各种硬件寄存器。
+6.地址转换信息。&lt;/p>
+&lt;/blockquote>
+&lt;p>由上可知，进程的运行环境是动态变化的，尤其是硬件寄存器的值以及进程控制信息是随着进程的运行而不断变化的。在Linux中把系统提供给进程的的处于动态变化的运行环境总和称为进程上下文。&lt;/p>
+&lt;h2 id="线程">线程
+&lt;/h2>&lt;p>&lt;code>操作系统能够进行运算调度的最小单位&lt;/code>。&lt;/p>
+&lt;ul>
+&lt;li>大部分情况下，它被包含在进程之中，是进程中的实际运作单位。&lt;/li>
+&lt;li>一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。&lt;/li>
+&lt;li>线程是独立调度和分派的基本单位。
+线程可以为操作系统内核调度的内核线程，如Win32线程；由用户进程自行调度的用户线程，如Linux平台的POSIX Thread；或者由内核与用户进程，如Windows 7的线程，进行混合调度。&lt;/li>
+&lt;li>同一进程中的多条线程将共享该进程中的全部系统资源，如虚拟地址空间，文件描述符和信号处理等等。但同一进程中的多个线程有各自的调用栈（call stack），自己的寄存器环境（register context），自己的线程本地存储（thread-local storage）。&lt;/li>
+&lt;/ul>
+&lt;h2 id="线程上下文">线程上下文
+&lt;/h2>&lt;p>进程的上下文的多数信息都与地址空间的描述有关。进程的上下文使用很多系统资源，而且会花费一些时间来从一个进程的上下文切换到另一个进程的上下文。&lt;code>同样的，线程也有上下文。&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>当线程被抢占时，就会发生线程之间的上下文切换。
+如果线程属于相同的进程，它们共享相同的地址空间，因为线程包含在它们所属于的进程的地址空间内。这样，进程需要恢复的多数信息对于线程而言是不需要的。尽管进程和它的线程共享了很多内容，但最为重要的是其地址空间和资源，有些信息对于线程而言是本地且唯一的，而线程的其他方面包含在进程的各个段的内部。&lt;/p>
+&lt;/blockquote>
+&lt;p>线程上下文与进程上下文对比&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>上下文内容&lt;/th>
+&lt;th>进程&lt;/th>
+&lt;th>线程&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>指向可执行文件的指针&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>栈&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>×&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>内存（数据段和堆）&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>状态&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>×&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>优先级&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>×&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>程序IO的状态&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>授予权限&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>调度信息&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>审计信息&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>文件描述符&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>文件读/写指针&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>寄存器组&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>×&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MicroPython on kurisaW</title><link>https://kurisaw.github.io/tags/micropython/</link><description>Recent content in MicroPython on kurisaW</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://kurisaw.github.io/tags/micropython/index.xml" rel="self" type="application/rss+xml"/><item><title>【NXP】LPC55S69-Micropython移植日志</title><link>https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/</link><pubDate>Mon, 06 Feb 2023 00:00:00 +0000</pubDate><guid>https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/</guid><description>&lt;img src="https://kurisaw.github.io/p/nxplpc55s69-micropython%E7%A7%BB%E6%A4%8D%E6%97%A5%E5%BF%97/cover.jpg" alt="Featured image of post 【NXP】LPC55S69-Micropython移植日志" />&lt;h2 id="简单了解micropython">简单了解Micropython
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>MicroPython 是 Python 3 编程语言的一种精简而高效的实现，它包含 Python 标准库的一个子集，并被优化为在微控制器和受限环境中运行。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>RT-Thread MicroPython 可以运行在任何搭载了 RT-Thread 操作系统并且有一定资源的嵌入式平台上。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 可以运行在有一定资源的开发板上，给你一个低层次的 Python 操作系统，可以用来控制各种电子系统。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 富有各种高级特性，比如交互式提示、任意精度整数、闭包函数、列表解析、生成器、异常处理等等。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>MicroPython 的目标是尽可能与普通 Python 兼容，使开发者能够轻松地将代码从桌面端转移到微控制器或嵌入式系统。程序可移植性很强，因为不需要考虑底层驱动，所以程序移植变得轻松和容易。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>VScode&lt;/li>
+&lt;li>Keil（v5.38.0.0）&lt;/li>
+&lt;li>RT-Thread MicroPython IDE（VScode插件搜索）&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/RT-Thread/env-windows/tree/v1.3.5" target="_blank" rel="noopener"
+>ENV v1.4.0（可点击链接下载）&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="初步移植">初步移植
+&lt;/h2>&lt;p>首先从RT-Thread官方仓库克隆master分支的仓库到本地&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061052497.png"
+loading="lazy"
+alt="image-20230206105228123"
+>&lt;/p>
+&lt;p>来到该目录：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk&lt;/code>，鼠标右键打开ENV工具，首先打开命令行菜单&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">menuconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>使能添加&lt;code>Micropython软件包&lt;/code>：&lt;code>RT-Thread Online Packages---&amp;gt;launage packages---&amp;gt;Micropython&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061100977.png"
+loading="lazy"
+alt="image-20230206110054882"
+>&lt;/p>
+&lt;p>&lt;code>Heap size&lt;/code>修改为&lt;code>20480&lt;/code>（初次分配20K，后续用户可根据需求修改），同时版本选择最新版(这里由于我选择版本时没有注意到最下方的latest版本，但是经测试并于多出的报错问题，相关的报错也可参考该文章)&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061103056.png"
+loading="lazy"
+alt="image-20230206110338978"
+>&lt;/p>
+&lt;p>进入&lt;code>Hardware Module&lt;/code>，使能&lt;code>machine uart&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061107994.png"
+loading="lazy"
+alt="image-20230206110701904"
+>&lt;/p>
+&lt;p>同时我们回到主菜单界面，进入&lt;code>Hardware Drives config---&amp;gt;on-chip Peripheral Drivers&lt;/code>，使能UART0和UART2&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061109036.png"
+loading="lazy"
+alt="image-20230206110948958"
+>&lt;/p>
+&lt;p>由于后续需要在main线程中启动Micropython运行时环境，需要增大main线程的栈大小，这里我们选择栈大小修改为8k：回到主界面&lt;code>RT-Thread Components---&amp;gt;set main thread stack size&lt;/code>修改为8192&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061151008.png"
+loading="lazy"
+alt="image-20230206115128667"
+>&lt;/p>
+&lt;p>保存退出，并使用命令下载软件包：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">pkgs --update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061153317.png"
+loading="lazy"
+alt="image-20230206115308233"
+>&lt;/p>
+&lt;p>使用ENV生成MDK工程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons --target=mdk5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061155767.png"
+loading="lazy"
+alt="image-20230206115527689"
+>&lt;/p>
+&lt;h2 id="bug修复">BUG修复
+&lt;/h2>&lt;p>双击打开&lt;code>project.uvprojx&lt;/code>，进行编译&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061157814.png"
+loading="lazy"
+alt="image-20230206115702684"
+>&lt;/p>
+&lt;p>这里由于我们的keil工程为AC6版本（如果您的编译器版本为AC5，应该不需要修改，仅猜测），需要将软件包进行修改：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk\packages\micropython-v1.13.0\SConscript&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061204757.png"
+loading="lazy"
+alt="image-20230206120429651"
+>&lt;/p>
+&lt;p>切记此时需要回到bsp目录下，重新使用ENV工具生成MDK文件，然后再回到keil重新编译工程：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scons --target=mdk5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时编译错误大大减少，只剩下三个错误：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061212323.png"
+loading="lazy"
+alt="image-20230206120743700"
+>&lt;/p>
+&lt;p>第一个错误需要在菜单中使能&lt;code>Support legacy version for compatibility&lt;/code>（目前该问题以推送至官方仓库，已被修复此问题），并重新使用ENV生成MDK工程文件&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061111567.png"
+loading="lazy"
+alt="image-20230206111143483"
+>&lt;/p>
+&lt;p>重新编译继续有报错，这里我们找不到该函数的定义，先在头文件中进行外部声明&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061212175.png"
+loading="lazy"
+alt="image-20230206121231129"
+>&lt;/p>
+&lt;p>找到头文件所在位置：&lt;code>.\rt-thread\bsp\lpc55sxx\lpc55s69_nxp_evk\packages\micropython-v1.13.0\port\mpgetcharport.h&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061215795.png"
+loading="lazy"
+alt="image-20230206121521727"
+>&lt;/p>
+&lt;p>此时就剩下最后一个错误啦，这里报错是说这个宏没有定义，通过翻阅RT-Thread库函数，确定该宏是文件系统的一个宏，且定义为整型3，具体作用可查看此&lt;a class="link" href="https://github.com/RT-Thread/rt-thread/pull/2100" target="_blank" rel="noopener"
+>PR&lt;/a>，所以解决该问题就是重新定义一下&lt;code>DFS_FD_OFFSET&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061216368.png"
+loading="lazy"
+alt="image-20230206121656320"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061220316.png"
+loading="lazy"
+alt="image-20230206122027240"
+>&lt;/p>
+&lt;p>想不到编译之后居然还有一个错误，这里参考这位开发者的&lt;a class="link" href="https://github.com/RT-Thread/rt-thread/issues/6657" target="_blank" rel="noopener"
+>issue&lt;/a>，将&lt;code>list_mem();&lt;/code>注释（此处可能是个官方BUG，后续尝试修复）&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061221642.png"
+loading="lazy"
+alt="image-20230206122146590"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061227108.png"
+loading="lazy"
+alt="image-20230206122748054"
+>&lt;/p>
+&lt;p>最后发现，终于没有错误啦！！！&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061228418.png"
+loading="lazy"
+alt="image-20230206122817350"
+>&lt;/p>
+&lt;h2 id="rt-thread-micropython环境搭建">RT-Thread Micropython环境搭建
+&lt;/h2>&lt;p>VScode扩展搜索下载RT-Thread Micropython&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061236343.png"
+loading="lazy"
+alt="image-20230206123632247"
+>&lt;/p>
+&lt;h4 id="创建工程">创建工程
+&lt;/h4>&lt;p>vscode下方导航栏点击&lt;code>创建Micropython工程&lt;/code>，创建一个新的MicroPython工程，并选择工程存放路径&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061519616.png"
+loading="lazy"
+alt="image-20230206151916502"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061521140.png"
+loading="lazy"
+alt="image-20230206152143031"
+>&lt;/p>
+&lt;h4 id="上电测试micropython">上电测试Micropython
+&lt;/h4>&lt;p>点击下方工具栏连接开发板，打开串口设备后点击复位，此时出现RT-Thread官方LOGO&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061523214.png"
+loading="lazy"
+alt="image-20230206152315131"
+>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061524180.png"
+loading="lazy"
+>&lt;/p>
+&lt;h4 id="测试示例">测试示例
+&lt;/h4>&lt;p>LPC55S69也成功移植了RT-Thread的FINSH组件，点击TAB键可查看Finsh控制台命令，我们可以看到有一个python命令行&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061541861.png"
+loading="lazy"
+alt="image-20230206154101713"
+>&lt;/p>
+&lt;h2 id="micropython测试">Micropython测试
+&lt;/h2>&lt;p>Finsh控制台输入python，转到python控制台，同时还支持&lt;code>quit()&lt;/code>、&lt;code>exit()&lt;/code>命令退回Finsh控制台&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061543769.png"
+loading="lazy"
+alt="image-20230206154310678"
+>&lt;/p>
+&lt;p>简单测试下micropython，下面使用python命令运行脚本时给了一个提示说未使能uos module&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061606460.png"
+loading="lazy"
+alt="image-20230206160622977"
+>&lt;/p>
+&lt;p>打开图形化菜单进入该路径下：&lt;code>RT-Thread online packages--&amp;gt;launage packages---&amp;gt;system module&lt;/code>，使能&lt;code>uos:basic 'operating system' services &lt;/code>&lt;/p>
+&lt;p>同时更新软件包，并使用env工具重新生成MDK，再进行编译下载，成功解决问题！&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/kurisaW/picbed/main/img/202302061627396.png"
+loading="lazy"
+alt="image-20230206162718225"
+>&lt;/p>
+&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>搭建好Micropython后，那么就可以自由发挥才能去创作自己的作品啦！&lt;/p>
+&lt;h2 id="联系">联系
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="mailto:yifang.wangyq@foxmail.com" >Email :yifang.wangyq@foxmail.com&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/kurisaW" target="_blank" rel="noopener"
+>Github Address :https://github.com/kurisaW&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://kurisaw.github.io/" target="_blank" rel="noopener"
+>My Website :https://kurisaw.github.io&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
